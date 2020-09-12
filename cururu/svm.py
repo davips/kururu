@@ -1,31 +1,34 @@
 from functools import lru_cache
-from random import choice
 
-from transf.transformer import Transformer
+from transf.datadependent import DataDependent
 from sklearn.svm import NuSVC
 
 
-class SVM(Transformer):
+class SVM(DataDependent):
     """  """
 
-    def __init__(self, train=None, **kwargs):
-        self.train = train
-        self.config = kwargs
+    def __init__(self, trdata=None, **kwargs):
+        self._trdata = trdata
+        self._config = kwargs
 
-    def _transform(self, data):
-        tr = self.train or data.trdata
+    def _transform_(self, data):
+        tr = self._trdata or data.trdata
         if tr is None:
             raise Exception(f"{self.name} needs training data at constructor or inside testing data!")
         z = self.model(tr).predict(data.X)
         return data.replace(self, z=z)
+
+    def _config_(self):
+        return self._config
+
+    def _trdata_(self):
+        return self._trdata
 
     @lru_cache()
     def model(self, data):
         nusvc = NuSVC(**self.config)
         nusvc.fit(*data.Xy)
         return nusvc
-
-
 
     """
 default = SVM(tr).transform(ts)
