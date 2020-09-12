@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from functools import lru_cache
 
 from transf.datadependent import DataDependent
@@ -7,8 +8,7 @@ from sklearn.svm import NuSVC
 class SVM(DataDependent):
     """  """
 
-    def __init__(self, trdata=None, **kwargs):
-        self._trdata = trdata
+    def __init__(self, *args, **kwargs):
         self._config = kwargs
 
     def _deptransform_(self, data, trdata):
@@ -18,8 +18,8 @@ class SVM(DataDependent):
     def _config_(self):
         return self._config
 
-    def _trdata_(self):
-        return self._trdata
+    # def _trdata_(self):
+    #     return self._trdata
 
     @lru_cache()
     def model(self, data):
