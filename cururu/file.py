@@ -10,7 +10,7 @@ from transf.transformer import Transformer
 
 
 class File(Transformer):
-    def __init__(self, name, path="./", hashes=None, **kwargs):
+    def __init__(self, name, path="./", hashes=None):
         if not path.endswith("/"):
             raise Exception("Path should end with '/'", path)
         if name.endswith(".arff"):

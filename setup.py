@@ -5,31 +5,22 @@ import cururu
 
 NAME = "cururu"
 
-
 VERSION = 0.1
-
 
 AUTHOR = 'Davi Pereira-Santos'
 
-
 AUTHOR_EMAIL = ''
 
-
 DESCRIPTION = 'Science as data transformation'
-
 
 with open('README.md', 'r') as fh:
     LONG_DESCRIPTION = fh.read()
 
-
 LICENSE = 'GPL3'
-
 
 URL = 'https://github.com/davips/cururu'
 
-
 DOWNLOAD_URL = 'https://github.com/davips/cururu/releases'
-
 
 CLASSIFIERS = ['Intended Audience :: Science/Research',
                'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
@@ -39,11 +30,9 @@ CLASSIFIERS = ['Intended Audience :: Science/Research',
                'Operating System :: Linux',
                'Programming Language :: Python :: 3.8']
 
-
 INSTALL_REQUIRES = [
     'numpy', 'sklearn', 'liac-arff'
 ]
-
 
 EXTRAS_REQUIRE = {
 }
@@ -69,4 +58,3 @@ setuptools.setup(
 )
 
 package_dir = {'': 'cururu'}  # For IDEs like Intellij to recognize the package.
-

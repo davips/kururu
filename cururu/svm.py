@@ -11,12 +11,9 @@ class SVM(DataDependent):
         self._trdata = trdata
         self._config = kwargs
 
-    def _transform_(self, data):
-        tr = self._trdata or data.trdata
-        if tr is None:
-            raise Exception(f"{self.name} needs training data at constructor or inside testing data!")
-        z = self.model(tr).predict(data.X)
-        return data.replace(self, z=z)
+    def _deptransform_(self, data, trdata):
+        z = self.model(trdata).predict(data.X)
+        return data.replace(self, truuid=trdata.uuid, z=z)
 
     def _config_(self):
         return self._config
