@@ -1,5 +1,7 @@
 from cururu.file import File
+from cururu.partition import Partition
 from cururu.pca import PCA
+from cururu.split import Split
 from cururu.svm import SVM
 from pjdata.aux.uuid import UUID
 
@@ -50,4 +52,46 @@ print(r.uuid.__str__() + "\n")
 print("PCA\t\t", pca.uuid)
 print("PCA*data\t", pca.uuid(data.uuid))
 print("data*PCA*data", data.uuid * pca.uuid(data.uuid))
+print(r.uuid)
+
+print()
+print("---------------------------")
+print()
+#
+# print("Split()")
+# data.trdata = None
+# split = Split()
+# r = split.transform(data)
+# print(r.uuid.__str__() + "\n")
+#
+# print("Split() + data.trdata")
+# split = Split()
+# data.trdata = data
+# r = split.transform(data)
+# print(r.uuid.__str__() + "\n")
+#
+# print("Split\t\t", split.uuid)
+# print("Split*data\t", split.uuid(data.uuid))
+# print("data*Split*data", data.uuid * split.uuid(data.uuid))
+# print(r.uuid)
+
+print()
+print("---------------------------")
+print()
+
+print("Partition()")
+data.trdata = None
+partition = Partition()
+r = partition.transform(data)
+print(r.uuid.__str__() + "\n")
+
+print("Partition() + data.trdata")
+partition = Partition()
+data.trdata = data
+r = partition.transform(data)
+print(r.uuid.__str__() + "\n")
+
+print("Partition\t\t", partition.uuid)
+print("Partition*data\t", partition.uuid(data.uuid))
+print("data*Partition*data", data.uuid * partition.uuid(data.uuid))
 print(r.uuid)
