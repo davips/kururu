@@ -1,7 +1,8 @@
 from functools import lru_cache
 
-from transf.datadependent import DataDependent
 from sklearn.decomposition import PCA as PCA_
+
+from cururu.base.datadependent import DataDependent
 
 
 class PCA(DataDependent):
@@ -10,7 +11,7 @@ class PCA(DataDependent):
         self.seed = seed
         self._config = {"n": n, "seed": seed}
 
-    def _deptransform_(self, data, trdata):
+    def _transform_(self, data, trdata):
         newtrdata = None
         if data.trdata:
             newtrX = self.model(trdata).transform(trdata.X)

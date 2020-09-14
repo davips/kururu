@@ -6,10 +6,10 @@ from pjdata.content.data import Data
 from pjdata.content.specialdata import NoData
 from pjdata.creation import read_arff
 from pjdata.history import History
-from transf.transformer import Transformer
+from cururu.base.dataindependent import DataIndependent
 
 
-class File(Transformer):
+class File(DataIndependent):
     def __init__(self, name, path="./", hashes=None):
         if not path.endswith("/"):
             raise Exception("Path should end with '/'", path)

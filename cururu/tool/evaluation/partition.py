@@ -2,11 +2,11 @@ from functools import lru_cache
 
 from sklearn.model_selection import StratifiedShuffleSplit, StratifiedKFold, LeaveOneOut
 
-from cururu.split import Split
-from transf.transformer import Transformer
+from cururu.tool.evaluation.split import Split
+from cururu.base.dataindependent import DataIndependent
 
 
-class Partition(Transformer):
+class Partition(DataIndependent):
     def __init__(self, mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y"):
         config = locals().copy()
         del config["self"]

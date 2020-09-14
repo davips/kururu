@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from functools import lru_cache
 
-from transf.datadependent import DataDependent
+from cururu.base.datadependent import DataDependent
 from sklearn.svm import NuSVC
 
 
@@ -11,7 +11,7 @@ class SVM(DataDependent):
     def __init__(self, *args, **kwargs):
         self._config = kwargs
 
-    def _deptransform_(self, data, trdata):
+    def _transform_(self, data, trdata):
         z = self.model(trdata).predict(data.X)
         return data.replace(self, truuid=trdata.uuid, z=z)
 

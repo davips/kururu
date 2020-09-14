@@ -1,7 +1,7 @@
-from transf.transformer import Transformer
+from cururu.base.dataindependent import DataIndependent
 
 
-class Split(Transformer):
+class Split(DataIndependent):
     """  """
 
     def __init__(self, mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y", _tridxs=None, _tsidxs=None):
