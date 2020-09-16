@@ -1,8 +1,8 @@
-from cururu.file import File
-from cururu.partition import Partition
-from cururu.pca import PCA
-from cururu.split import Split
-from cururu.svm import SVM
+from cururu.tool.dataflow.file import File
+from cururu.tool.evaluation.partition import Partition
+from cururu.tool.enhancement.pca import PCA
+from cururu.tool.evaluation.split import Split
+from cururu.tool.learning.supervised.classification.svm import SVM
 from pjdata.aux.uuid import UUID
 
 data = File("iris.arff").transform()
@@ -79,19 +79,22 @@ print()
 print("---------------------------")
 print()
 
-print("Partition()")
-data.trdata = None
-partition = Partition()
-r = partition.transform(data)
-print(r.uuid.__str__() + "\n")
+# print("Partition()")
+# data.trdata = None
+# partition = Partition()
+# r = partition.transform(data)
+# print(r.uuid.__str__() + "\n")
+#
+# print("Partition() + data.trdata")
+# partition = Partition()
+# data.trdata = data
+# r = partition.transform(data)
+# print(r.uuid.__str__() + "\n")
+#
+# print("Partition\t\t", partition.uuid)
+# print("Partition*data\t", partition.uuid(data.uuid))
+# print("data*Partition*data", data.uuid * partition.uuid(data.uuid))
+# print(r.uuid)
 
-print("Partition() + data.trdata")
-partition = Partition()
-data.trdata = data
-r = partition.transform(data)
-print(r.uuid.__str__() + "\n")
-
-print("Partition\t\t", partition.uuid)
-print("Partition*data\t", partition.uuid(data.uuid))
-print("data*Partition*data", data.uuid * partition.uuid(data.uuid))
-print(r.uuid)
+r = PCA * SVM
+print(r)
