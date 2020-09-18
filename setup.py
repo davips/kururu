@@ -1,9 +1,8 @@
-"""Setup for cururu package."""
 import setuptools
 
-import cururu
+import kururu
 
-NAME = "cururu"
+NAME = "kururu"
 
 VERSION = 0.1
 
@@ -18,9 +17,9 @@ with open('README.md', 'r') as fh:
 
 LICENSE = 'GPL3'
 
-URL = 'https://github.com/davips/cururu'
+URL = 'https://github.com/davips/kururu'
 
-DOWNLOAD_URL = 'https://github.com/davips/cururu/releases'
+DOWNLOAD_URL = 'https://github.com/davips/kururu/releases'
 
 CLASSIFIERS = ['Intended Audience :: Science/Research',
                'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
@@ -57,4 +56,4 @@ setuptools.setup(
     url=URL,
 )
 
-package_dir = {'': 'cururu'}  # For IDEs like Intellij to recognize the package.
+package_dir = {'': 'kururu'}  # For IDEs like Intellij to recognize the package.

@@ -1,7 +1,7 @@
 from abc import ABC
 
-from cururu.mixin.operators import withOperators
-from cururu.mixin.sampling import withSampling
+from kururu.mixin.operators import withOperators
+from kururu.mixin.sampling import withSampling
 from transf.dataindependent import DataIndependent_
 
 

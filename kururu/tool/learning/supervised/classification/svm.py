@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from functools import lru_cache
 
-from cururu.base.datadependent import DataDependent
+from kururu.base.datadependent import DataDependent
 from sklearn.svm import NuSVC
 
 

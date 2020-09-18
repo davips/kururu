@@ -1,4 +1,4 @@
-from cururu.base.dataindependent import DataIndependent
+from kururu.base.dataindependent import DataIndependent
 
 
 class Split(DataIndependent):

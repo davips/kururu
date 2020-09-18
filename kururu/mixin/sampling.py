@@ -2,7 +2,7 @@ import json
 from functools import cached_property
 from random import choice
 
-from pjdata.content.data import Data
+from aiuna.content.data import Data
 
 
 class withSampling:

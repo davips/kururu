@@ -1,2 +1,2 @@
-# cururu
+# kururu
 Machine learning transformers

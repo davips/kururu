@@ -1,12 +1,12 @@
 import json
 from functools import cached_property
 
-from pjdata.aux.uuid import UUID
-from pjdata.content.data import Data
-from pjdata.content.specialdata import NoData
-from pjdata.creation import read_arff
-from pjdata.history import History
-from cururu.base.dataindependent import DataIndependent
+from aiuna.aux.uuid import UUID
+from aiuna.content.data import Data
+from aiuna.content.specialdata import NoData
+from aiuna.creation import read_arff
+from aiuna.history import History
+from kururu.base.dataindependent import DataIndependent
 
 
 class File(DataIndependent):
