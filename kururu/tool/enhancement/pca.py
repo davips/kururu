@@ -2,7 +2,7 @@ from functools import lru_cache
 
 from sklearn.decomposition import PCA as PCA_
 
-from kururu.base.datadependent import DataDependent
+from akangatu.datadependent import DataDependent
 
 
 class PCA(DataDependent):

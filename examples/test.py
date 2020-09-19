@@ -3,7 +3,7 @@ from kururu.tool.evaluation.partition import Partition
 from kururu.tool.enhancement.pca import PCA
 from kururu.tool.evaluation.split import Split
 from kururu.tool.learning.supervised.classification.svm import SVM
-from aiuna.aux.uuid import UUID
+from cruipto.uuid import UUID
 
 data = File("iris.arff").transform()
 

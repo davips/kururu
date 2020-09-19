@@ -3,7 +3,7 @@ from functools import lru_cache
 from sklearn.model_selection import StratifiedShuffleSplit, StratifiedKFold, LeaveOneOut
 
 from kururu.tool.evaluation.split import Split
-from kururu.base.dataindependent import DataIndependent
+from akangatu.dataindependent import DataIndependent
 
 
 class Partition(DataIndependent):

@@ -1,12 +1,12 @@
 import json
 from functools import cached_property
 
-from aiuna.aux.uuid import UUID
+from cruipto.uuid import UUID
 from aiuna.content.data import Data
 from aiuna.content.specialdata import NoData
 from aiuna.creation import read_arff
 from aiuna.history import History
-from kururu.base.dataindependent import DataIndependent
+from akangatu.dataindependent import DataIndependent
 
 
 class File(DataIndependent):
@@ -35,7 +35,9 @@ class File(DataIndependent):
 
     @cached_property
     def data(self):
-        file_hashes, data_, _, _, uuids = read_arff(self.fullname)
+        data_ = read_arff(self.fullname)[0]
+        uuids = data_.uuids
+        file_hashes = {k: v.id for k, v in uuids.items()}
         if self._hashes:
             if self._hashes != file_hashes:
                 raise Exception(f"Provided hashes f{self._hashes} differs from hashes of file content: " f"{file_hashes}!")
