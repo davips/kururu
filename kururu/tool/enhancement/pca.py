@@ -28,3 +28,9 @@ class PCA(DataDependent):
         pca = PCA_(n_components=self.n, random_state=self.seed)
         pca.fit(data.X)
         return pca
+
+
+# l = []
+# for i in range(1, 128):
+#     l.append(round(pow(1.05, i)))
+# print(sorted(list(set(l))))

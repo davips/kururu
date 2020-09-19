@@ -1,21 +1,22 @@
 from kururu.tool.dataflow.file import File
 from kururu.tool.enhancement.pca import PCA
 from kururu.tool.learning.supervised.classification.svm import SVM
+from kururu.tool.manipulation.slice import Slice
 
 data = File("iris.arff").transform()
 print("iiiiiiiiiiiiiiiiii", data.id)
 
-print("SVM()(trdata)")
+print("default p/ treinar depois com data externo:  SVM()(trdata)")
 svm = SVM()
 r = svm(data).transform(data)
 print(r.uuid.__str__() + "\n")
 
-print("SVM(trdata)")
-svm = SVM(data)
-r = svm.transform(data)
+print("default treinado:  SVM(trdata)")
+model = SVM(data)
+r = model.transform(data)
 print(r.uuid.__str__() + "\n")
 
-print("SVM() + data.trdata")
+print("default p/ treinar depois com data interno:  SVM() + data.trdata")
 svm = SVM()
 data.trdata = data
 r = svm.transform(data)
@@ -46,6 +47,7 @@ pca = PCA()
 data.trdata = data
 r = pca.transform(data)
 print(r.uuid.__str__() + "\n")
+data.trdata = None
 
 print("PCA\t\t", pca.uuid)
 print("PCA*data\t", pca.uuid(data.uuid))
@@ -96,3 +98,9 @@ print()
 
 r = PCA * SVM
 print(r)
+
+d = (SVM(data) * Slice()).transform(data)
+print(d.X)
+print(d.history)
+
+print(PCA.sample())

@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from functools import lru_cache
 
 from akangatu.datadependent import DataDependent
@@ -8,7 +7,7 @@ from sklearn.svm import NuSVC
 class SVM(DataDependent):
     """  """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # TODO :params and defaults
         self._config = kwargs
 
     def _transform_(self, data, trdata):
@@ -17,9 +16,6 @@ class SVM(DataDependent):
 
     def _config_(self):
         return self._config
-
-    # def _trdata_(self):
-    #     return self._trdata
 
     @lru_cache()
     def model(self, data):
@@ -49,8 +45,7 @@ SVM(tr, ...).transform(ts)  ->  configured
 
 SVM(tr).sample()            ->  random
 SVM(tr, ...).sample()       ->  partially configured/random
-
-SVM()                       ->  lambda  
+  
 SVM()(tr).transform(ts)     ->  default
 SVM().sample()              ->  SVM(...)
 SVM().sample()(tr)          ->  random
@@ -58,4 +53,9 @@ SVM(...)                    ->  lambda
 SVM(...)(tr).transform(tr)  ->  configured
 SVM(...)(tr).sample(ts)     ->  partially configured/random
 
+Todo transformer transforma o data passado (externo).
+Alguns dependem do data interno (trdata) como dado de entrada.
+Para alterar dado interno, há dois modificadores: Inner e Both
+Inner(NR()) -> aplica no trdata [mas transforma ambos! histórico: InnerNR muda o de fora e NR o de dentro]
+Both(PCA()) -> aplica em ambos, mas treina sempre no interno [histórico: BothPCA muda externo e PCA muda interno] 
     """
