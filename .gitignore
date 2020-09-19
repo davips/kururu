@@ -132,3 +132,4 @@ dmypy.json
 *.iml
 *.arff
 out/
+*.kra
