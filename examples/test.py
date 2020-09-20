@@ -1,5 +1,5 @@
+from aiuna.file import File
 from kururu.tool.dataflow.autoins import AutoIns
-from kururu.tool.dataflow.file import File
 from kururu.tool.enhancement.pca import PCA1
 from kururu.tool.learning.supervised.classification.svm import SVM
 from kururu.tool.manipulation.slice import Slice
@@ -22,6 +22,7 @@ model = SVM(data)
 r = model.transform(data)
 print("svm\t\t", svm.id)
 print("model\t", model.id)
+print("inner\t", Ins(data).uuid )
 print("inner*svm\t", Ins(data).uuid * SVM().uuid)
 print("data*inner*svm", data.uuid * Ins(data).uuid * SVM().uuid)
 print(r.id + "\n")
@@ -39,6 +40,7 @@ print(r.id + "\n")
 print()
 print("---------------------------")
 print()
+data = File("iris.arff").transform()
 
 print("PCA()(inner)")
 data.inner = None
