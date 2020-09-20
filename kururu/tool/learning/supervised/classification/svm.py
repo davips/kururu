@@ -3,6 +3,7 @@ from functools import lru_cache
 import ring
 
 from aiuna.config import globalcache
+from aiuna.content.data import Data
 from akangatu.datadependent import DataDependent
 from sklearn.svm import NuSVC
 
@@ -13,7 +14,7 @@ class SVM(DataDependent):
     def __init__(self, *args, **kwargs):  # TODO :params and defaults
         self._config = kwargs
 
-    def _transform_(self, data):
+    def _transform_(self, data: Data):
         z = self.model(data.inner).predict(data.X)
         return data.replace(self, z=z)
 
@@ -62,7 +63,6 @@ Para alterar dado interno, há dois modificadores: Inner e Both
 Inner(NR()) -> aplica no trdata [mas transforma ambos! histórico: InnerNR muda o de fora e NR o de dentro]
 Both(PCA()) -> aplica em ambos, mas treina sempre no interno [histórico: BothPCA muda externo e PCA muda interno] 
     """
-
 
 # x = 0.00001
 # l = []

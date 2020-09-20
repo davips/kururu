@@ -1,6 +1,6 @@
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.dataflow.file import File
-from kururu.tool.enhancement.pca import PCA
+from kururu.tool.enhancement.pca import PCA1
 from kururu.tool.learning.supervised.classification.svm import SVM
 from kururu.tool.manipulation.slice import Slice
 from transf._ins import Ins
@@ -42,17 +42,17 @@ print()
 
 print("PCA()(inner)")
 data.inner = None
-pca = PCA()
+pca = PCA1()
 r = pca(data).transform(data)
 print(r.uuid.__str__() + "\n")
 
 print("PCA(inner)")
-pca = PCA(data)
+pca = PCA1(data)
 r = pca.transform(data)
 print(r.uuid.__str__() + "\n")
 
 print("PCA() + data.inner")
-pca = PCA()
+pca = PCA1()
 data.inner = data
 r = pca.transform(data)
 print(r.uuid.__str__() + "\n")
@@ -105,19 +105,19 @@ print()
 # print("data*Partition*data", data.uuid * partition.uuid(data.uuid))
 # print(r.uuid)
 
-r = PCA * SVM
+r = PCA1 * SVM
 print(type(r), r)
 
 d = (SVM(data) * Slice()).transform(data)
 print(d.X)
 print(d.history)
 
-print(PCA.sample())
+print(PCA1.sample())
 
 import numpy as np
 
 np.random.seed(2)
-p = PCA(data).sample()
+p = PCA1(data).sample()
 print(p, data.X.shape[1])
 d = p.transform(data)
 tr = d.inner

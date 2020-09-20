@@ -25,3 +25,6 @@ class withPartitioning:
     def partitionings(self, data):
         X, y = data.Xy  # TODO: add other scenarios beyond classification?
         return list(self.algorithm.split(X=X, y=y))
+
+    def _config_(self):
+        return self._config

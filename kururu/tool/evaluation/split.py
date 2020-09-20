@@ -33,7 +33,7 @@ class Split1(DataIndependent, withPartitioning):
         return self._config
 
 
-class Split(asMacro, DataIndependent, withPartitioning):
+class Split(withPartitioning, asMacro, DataIndependent):
     def __init__(self, i=0, mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y", _indices=None):
         config = locals().copy()
         del config["self"]
@@ -44,3 +44,4 @@ class Split(asMacro, DataIndependent, withPartitioning):
     def _transformer_(self):
         print(self.held)
         return EnsureNoInner * AutoIns * In(Split1(step="train", **self.held)) * Split1(step="test", **self.held)
+

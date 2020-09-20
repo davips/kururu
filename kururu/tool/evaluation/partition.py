@@ -10,7 +10,7 @@ from akangatu.dataindependent import DataIndependent
 from transf.absdata import AbsData
 
 
-class Partition(DataIndependent, withPartitioning):
+class Partition(withPartitioning, DataIndependent):
     def __init__(self, mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y"):
         config = locals().copy()
         del config["self"]
@@ -30,6 +30,3 @@ class Partition(DataIndependent, withPartitioning):
                 yield wk.transform(data)
 
         return data.replace(self, stream=gen())
-
-    def _config_(self):
-        return self._config
