@@ -8,4 +8,5 @@ from kururu.tool.learning.supervised.classification.svm import SVM2
 wk = File("abalone3.arff") * Binarize * Split * PCA(n=3) * SVM2 * Metric2(["accuracy", "history"])
 
 data = wk.transform()
-print("iiiiiiiiiiiiiiiiii\n", data.inner.r, data.r, data.history)
+print("train:\n", data.inner.r, list(data.inner.history.clean))
+print("test:\n", data.r, list(data.history.clean))
