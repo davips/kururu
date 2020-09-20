@@ -31,7 +31,9 @@ class File(DataIndependent):
         return config
 
     def _uuid_(self):  # override uuid to exclude file name/path from identity
-        return UUID(json.dumps({"name": self.name, "path": self.context, "hashes": self.hashes}, sort_keys=True).encode())
+        return UUID(json.dumps({"name": self.name, "path": self.context, "hashes": self.hashes}, ensure_ascii=False, sort_keys=True).encode())
+
+    # TODO: check all json dumps
 
     @cached_property
     def data(self):
