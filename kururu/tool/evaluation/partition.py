@@ -28,9 +28,11 @@ class Partition(DataIndependent):
     def _transform_(self, data):
         """"""
         idxs = self.partitionings(data)
+        # REMINDER: Partition faz data virar data com stream; e nesse stream vem data transformado e com inner.
         for i in range(self.splits):
-            s = Split(**self.config, _tridxs=idxs[i][0], _tsidxs=idxs[i][1])
-            raise NotImplemented
+            trainS = Split(**self.config, _indices=idxs[i][0])
+            testS = Split(**self.config, _indices=idxs[i][1])
+
 
     def _config_(self):
         return self._config
