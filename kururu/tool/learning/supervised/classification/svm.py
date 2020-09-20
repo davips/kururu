@@ -1,5 +1,8 @@
 from functools import lru_cache
 
+import ring
+
+from aiuna.config import globalcache
 from akangatu.datadependent import DataDependent
 from sklearn.svm import NuSVC
 
@@ -17,7 +20,7 @@ class SVM(DataDependent):
     def _config_(self):
         return self._config
 
-    @lru_cache()
+    @globalcache
     def model(self, data):
         nusvc = NuSVC(**self.config)
         nusvc.fit(*data.Xy)

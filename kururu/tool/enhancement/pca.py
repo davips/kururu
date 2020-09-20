@@ -1,7 +1,9 @@
 from functools import lru_cache
 
+import ring
 from sklearn.decomposition import PCA as PCA_
 
+from aiuna.config import globalcache
 from akangatu.datadependent import DataDependent
 
 
@@ -18,7 +20,7 @@ class PCA(DataDependent):
     def _config_(self):
         return self._config
 
-    @lru_cache()
+    @globalcache
     def model(self, data):
         pca = PCA_(n_components=self.n, random_state=self.seed)
         pca.fit(data.X)
