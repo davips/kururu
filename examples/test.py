@@ -2,7 +2,7 @@ from kururu.tool.dataflow.file import File
 from kururu.tool.enhancement.pca import PCA
 from kururu.tool.learning.supervised.classification.svm import SVM
 from kururu.tool.manipulation.slice import Slice
-from transf._insert import Insert
+from transf._ins import Ins
 
 data = File("iris.arff").transform()
 print("iiiiiiiiiiiiiiiiii", data.id)
@@ -12,8 +12,8 @@ svm = SVM()
 r = svm(data).transform(data)
 print("svm\t\t", svm.id)
 print("svm(data)\t", svm(data).id)
-print("inner*svm\t", Insert(data).uuid * svm.uuid)
-print("data*inner*svm", data.uuid * Insert(data).uuid * svm.uuid)
+print("inner*svm\t", Ins(data).uuid * svm.uuid)
+print("data*inner*svm", data.uuid * Ins(data).uuid * svm.uuid)
 print(r.id + "\n")
 
 print("default treinado:  SVM(inner)")
@@ -21,13 +21,13 @@ model = SVM(data)
 r = model.transform(data)
 print("svm\t\t", svm.id)
 print("model\t", model.id)
-print("inner*svm\t", Insert(data).uuid * SVM().uuid)
-print("data*inner*svm", data.uuid * Insert(data).uuid * SVM().uuid)
+print("inner*svm\t", Ins(data).uuid * SVM().uuid)
+print("data*inner*svm", data.uuid * Ins(data).uuid * SVM().uuid)
 print(r.id + "\n")
 
 print("default p/ treinar depois com data interno:  SVM() + data.inner")
 print("svm\t\t", svm.uuid)
-data = Insert(data).transform(data)
+data = Ins(data).transform(data)
 print("data com inner\t", data.id)
 print("data*svm", data.uuid * svm.uuid)
 svm = SVM()
