@@ -2,6 +2,8 @@ import numpy as np
 from sklearn.metrics import accuracy_score
 
 from akangatu.dataindependent import DataIndependent
+from akangatu.macro import asMacro
+from akangatu.operator.unary.inop import In
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from transf.absdata import AbsData
 
@@ -48,3 +50,8 @@ class Metric(DataIndependent, withFunctionInspection):
     @staticmethod
     def _fun_history(data, target, prediction):
         return len(list(data.history))
+
+
+class Metric2(asMacro, Metric):
+    def _transformer_(self):
+        return Metric(**self.held) * In(Metric(**self.held))

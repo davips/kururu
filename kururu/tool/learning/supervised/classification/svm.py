@@ -1,11 +1,12 @@
-from functools import lru_cache
-
-import ring
+from sklearn.svm import NuSVC
 
 from aiuna.config import globalcache
 from aiuna.content.data import Data
 from akangatu.datadependent import DataDependent
-from sklearn.svm import NuSVC
+from akangatu.macro import asMacro
+from akangatu.operator.unary.inop import In
+from kururu.tool.dataflow.autoins import AutoIns
+from kururu.tool.dataflow.delin import DelIn
 
 
 class SVM(DataDependent):
@@ -26,6 +27,18 @@ class SVM(DataDependent):
         nusvc = NuSVC(**self.config)
         nusvc.fit(*data.Xy)
         return nusvc
+
+
+class SVM2(asMacro, SVM):
+    def _transformer_(self):
+        return SVM(**self.held) * In(AutoIns * SVM(**self.held) * DelIn)
+
+    # x = 0.00001
+    # l = []
+    # for i in range(128):
+    #     x = x * 1.1
+    #     l.append(x)
+    # print(l)
 
     """
 default = SVM(tr).transform(ts)
@@ -63,10 +76,3 @@ Para alterar dado interno, há dois modificadores: Inner e Both
 Inner(NR()) -> aplica no trdata [mas transforma ambos! histórico: InnerNR muda o de fora e NR o de dentro]
 Both(PCA()) -> aplica em ambos, mas treina sempre no interno [histórico: BothPCA muda externo e PCA muda interno] 
     """
-
-# x = 0.00001
-# l = []
-# for i in range(128):
-#     x = x * 1.1
-#     l.append(x)
-# print(l)
