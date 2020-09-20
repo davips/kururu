@@ -1,3 +1,4 @@
+from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.dataflow.file import File
 from kururu.tool.enhancement.pca import PCA
 from kururu.tool.learning.supervised.classification.svm import SVM
@@ -27,7 +28,8 @@ print(r.id + "\n")
 
 print("default p/ treinar depois com data interno:  SVM() + data.inner")
 print("svm\t\t", svm.uuid)
-data = Ins(data).transform(data)
+data2 = AutoIns().transform(data)
+data = data2
 print("data com inner\t", data.id)
 print("data*svm", data.uuid * svm.uuid)
 svm = SVM()
@@ -104,7 +106,7 @@ print()
 # print(r.uuid)
 
 r = PCA * SVM
-print(r)
+print(type(r), r)
 
 d = (SVM(data) * Slice()).transform(data)
 print(d.X)

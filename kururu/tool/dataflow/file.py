@@ -1,12 +1,12 @@
 import json
 from functools import cached_property
 
-from cruipto.uuid import UUID
 from aiuna.content.data import Data
 from aiuna.content.specialdata import NoData
 from aiuna.creation import read_arff
 from aiuna.history import History
 from akangatu.dataindependent import DataIndependent
+from cruipto.uuid import UUID
 
 
 class File(DataIndependent):
@@ -31,7 +31,7 @@ class File(DataIndependent):
         return config
 
     def _uuid_(self):  # override uuid to exclude file name/path from identity
-        return UUID(json.dumps(self.hashes).encode())
+        return UUID(json.dumps({"name": self.name, "path": self.context, "hashes": self.hashes}, sort_keys=True).encode())
 
     @cached_property
     def data(self):
@@ -44,17 +44,7 @@ class File(DataIndependent):
         else:
             self._hashes = file_hashes
 
-        return Data(
-            history=History([self]),
-            failure=None,
-            frozen=False,
-            hollow=False,
-            stream=None,
-            storage_info=None,
-            uuid=UUID() * self.uuid,
-            uuids=uuids,
-            **data_.matrices
-        )
+        return Data(uuid=UUID() * self.uuid, uuids=uuids, history=History([self]), **data_.matrices)
 
     @cached_property
     def hashes(self):
