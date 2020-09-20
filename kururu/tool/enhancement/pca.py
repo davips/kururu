@@ -11,14 +11,9 @@ class PCA(DataDependent):
         self.seed = seed
         self._config = {"n": n, "seed": seed}
 
-    def _transform_(self, data, trdata):
-        newtrdata = None
-        if data.trdata:
-            newtrX = self.model(trdata).transform(trdata.X)
-            newtrdata = trdata.replace(self, trdata.uuid, X=newtrX)
-
-        newX = self.model(trdata).transform(data.X)
-        return trdata.replace(self, trdata.uuid, trdata=newtrdata, X=newX)
+    def _transform_(self, data):
+        newX = self.model(data.inner).transform(data.X)
+        return data.replace(self, X=newX)
 
     def _config_(self):
         return self._config

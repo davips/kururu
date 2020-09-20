@@ -10,9 +10,9 @@ class SVM(DataDependent):
     def __init__(self, *args, **kwargs):  # TODO :params and defaults
         self._config = kwargs
 
-    def _transform_(self, data, trdata):
-        z = self.model(trdata).predict(data.X)
-        return data.replace(self, truuid=trdata.uuid, z=z)
+    def _transform_(self, data):
+        z = self.model(data.inner).predict(data.X)
+        return data.replace(self, z=z)
 
     def _config_(self):
         return self._config
@@ -59,3 +59,11 @@ Para alterar dado interno, há dois modificadores: Inner e Both
 Inner(NR()) -> aplica no trdata [mas transforma ambos! histórico: InnerNR muda o de fora e NR o de dentro]
 Both(PCA()) -> aplica em ambos, mas treina sempre no interno [histórico: BothPCA muda externo e PCA muda interno] 
     """
+
+
+# x = 0.00001
+# l = []
+# for i in range(128):
+#     x = x * 1.1
+#     l.append(x)
+# print(l)
