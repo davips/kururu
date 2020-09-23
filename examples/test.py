@@ -1,16 +1,15 @@
+from aiuna import config
 from aiuna.file import File
 from cruipto.uuid import UUID
 from kururu.tool.dataflow.autoins import AutoIns
-from kururu.tool.enhancement.pca import PCA1
-from kururu.tool.learning.supervised.classification.svm import SVM
+from kururu.tool.enhancement.pca import PCA1, PCA
+from kururu.tool.learning.supervised.classification.svm import SVM, SVM2
 from kururu.tool.manipulation.slice import Slice
 from transf._ins import Ins
 
 data = File("iris.arff").transform()
 print("iris", data.id)
 print("iden", UUID.identity)
-
-exit()
 
 print("default p/ treinar depois com data externo:  SVM()(inner)")
 svm = SVM()
@@ -37,9 +36,11 @@ data2 = AutoIns().transform(data)
 data = data2
 print("data com inner\t", data.id)
 print("data*svm", data.uuid * svm.uuid)
-svm = SVM()
+svm = SVM2()
 r = svm.transform(data)
-print(r.id + "\n")
+config.SHORT_HISTORY=not False
+print(r.id + "\n", r.history)
+print("***********************************************")
 
 print()
 print("---------------------------")
