@@ -1,5 +1,5 @@
 from akangatu.dataindependent import DataIndependent
-from akangatu.macro import asMacro
+from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.dataflow.ensurenoinner import EnsureNoInner

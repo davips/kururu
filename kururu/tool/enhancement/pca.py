@@ -3,7 +3,7 @@ from sklearn.decomposition import PCA as PCA_
 from aiuna.config import globalcache
 from aiuna.content.data import Data
 from akangatu.datadependent import DataDependent
-from akangatu.macro import asMacro
+from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.dataflow.delin import DelIn

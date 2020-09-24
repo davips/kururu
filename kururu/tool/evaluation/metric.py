@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.metrics import accuracy_score
 
 from akangatu.dataindependent import DataIndependent
-from akangatu.macro import asMacro
+from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from transf.absdata import AbsData
