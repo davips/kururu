@@ -42,6 +42,6 @@ class Split(withPartitioning, asMacro, DataIndependent):
         super().__init__(mode, config)
 
     def _transformer_(self):
-        print(self.held)
+        print("held:", self.held)
         return EnsureNoInner * AutoIns * In(Split1(step="train", **self.held)) * Split1(step="test", **self.held)
 
