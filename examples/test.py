@@ -77,48 +77,48 @@ print(r.uuid)
 print()
 print("---------------------------")
 print()
-#
-# print("Split()")
-# data.inner = None
-# split = Split()
-# r = split.transform(data)
-# print(r.uuid.__str__() + "\n")
-#
-# print("Split() + data.inner")
-# split = Split()
-# data.inner = data
-# r = split.transform(data)
-# print(r.uuid.__str__() + "\n")
-#
-# print("Split\t\t", split.uuid)
-# print("Split*data\t", split.uuid(data.uuid))
-# print("data*Split*data", data.uuid * split.uuid(data.uuid))
-# print(r.uuid)
+
+print("Split()")
+data.inner = None
+split = Split()
+r = split.transform(data)
+print(r.uuid.__str__() + "\n")
+
+print("Split() + data.inner")
+split = Split()
+r = split.transform(data)
+print(r.uuid.__str__() + "\n")
+
+print("Split\t\t", split.uuid)
+print("Split*data\t", split.uuid(data.uuid))
+print("data*Split*data", data.uuid * split.uuid(data.uuid))
+print(r.uuid)
 
 print()
 print("---------------------------")
 print()
 
-# print("Partition()")
-# data.inner = None
-# partition = Partition()
-# r = partition.transform(data)
-# print(r.uuid.__str__() + "\n")
-#
-# print("Partition() + data.inner")
-# partition = Partition()
-# data.inner = data
-# r = partition.transform(data)
-# print(r.uuid.__str__() + "\n")
-#
-# print("Partition\t\t", partition.uuid)
-# print("Partition*data\t", partition.uuid(data.uuid))
-# print("data*Partition*data", data.uuid * partition.uuid(data.uuid))
-# print(r.uuid)
+print("Partition()")
+data.inner = None
+partition = Partition()
+r = partition.transform(data)
+print(r.uuid.__str__() + "\n")
+
+print("Partition() + data.inner")
+partition = Partition()
+data.inner = data
+r = partition.transform(data)
+print(r.uuid.__str__() + "\n")
+
+print("Partition\t\t", partition.uuid)
+print("Partition*data\t", partition.uuid(data.uuid))
+print("data*Partition*data", data.uuid * partition.uuid(data.uuid))
+print(r.uuid)
 
 r = PCA1 * SVM
 print(type(r), r)
 
+data.inner = None
 d = (SVM(data) * Slice()).transform(data)
 print(d.X)
 print(d.history)
