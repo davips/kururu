@@ -1,7 +1,5 @@
-from aiuna import config
 from aiuna.file import File
 from cruipto.uuid import UUID
-from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.enhancement.pca import PCA1, PCA
 from kururu.tool.evaluation.metric import Metric, Metric2
 from kururu.tool.evaluation.partition import Partition
