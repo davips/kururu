@@ -12,7 +12,7 @@ from kururu.tool.dataflow.delin import DelIn
 class SVM(DataDependent):
     """  """
 
-    def __init__(self, *args, **kwargs):  # TODO :params and defaults
+    def __init__(self, **kwargs):  # TODO :params and defaults
         self._config = kwargs
 
     def _transform_(self, data: Data):
