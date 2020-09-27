@@ -3,11 +3,11 @@ from sklearn.preprocessing import OneHotEncoder
 
 from aiuna.content.data import Data
 from aiuna.creation import nominal_idxs
-from akangatu.dataindependent import DataIndependent
+from akangatu.distep import DIStep
 
 
-class Binarize(DataIndependent):  # TODO: other fields
-    def _transform_(self, data: Data):
+class Binarize(DIStep):  # TODO: other fields
+    def _process_(self, data: Data):
         data_nominal_idxs = nominal_idxs(data.Xt)
         encoder = OneHotEncoder()
         newmatrices = {}

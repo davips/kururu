@@ -1,5 +1,5 @@
 # kururu
-Machine learning transformers
+Machine learning
 
 
 

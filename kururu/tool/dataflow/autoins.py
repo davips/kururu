@@ -1,11 +1,12 @@
 from akangatu import Ins
-from akangatu.dataindependent import DataIndependent
-from transf.transformer import Transformer
+from akangatu.distep import DIStep
+from transf.step import Step
 
 
-class AutoIns(DataIndependent):
-    def _transform_(self, data):
-        return Transformer.makeupuuid(Ins(data), self.uuid).transform(data)
+class AutoIns(DIStep):
+    def _process_(self, data):
+        # return Step.makeupuuid(Ins(), self.uuid).process(data)
+        return Step.makeupuuid(Ins(data), self.uuid).process(data)
 
     def _config_(self):
         return {}

@@ -1,21 +1,20 @@
-from sklearn.decomposition import PCA as PCA_
-
 from aiuna.config import globalcache
 from aiuna.content.data import Data
-from akangatu.datadependent import DataDependent
 from akangatu.abs.mixin.macro import asMacro
+from akangatu.ddstep import DDStep
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.dataflow.delin import DelIn
+from sklearn.decomposition import PCA as PCA_
 
 
-class PCA1(DataDependent):
+class PCA1(DDStep):
     def __init__(self, n=2, seed=0):
         self.n = n
         self.seed = seed
         self._config = {"n": n, "seed": seed}
 
-    def _transform_(self, data: Data):
+    def _process_(self, data: Data):
         newX = self.model(data.inner).transform(data.X)
         return data.replace(self, X=newX)
 
@@ -30,7 +29,7 @@ class PCA1(DataDependent):
 
 
 class PCA(asMacro, PCA1):
-    def _transformer_(self):
+    def _step_(self):
         return PCA1(**self.held) * In(AutoIns * PCA1(**self.held) * DelIn)
 
 # l = []

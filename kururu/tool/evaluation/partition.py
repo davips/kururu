@@ -6,18 +6,18 @@ from sklearn.model_selection import StratifiedShuffleSplit, StratifiedKFold, Lea
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.evaluation.mixin.partitioning import withPartitioning
 from kururu.tool.evaluation.split import Split1
-from akangatu.dataindependent import DataIndependent
+from akangatu.distep import DIStep
 from transf.absdata import AbsData
 
 
-class Partition(withPartitioning, DataIndependent):
+class Partition(withPartitioning, DIStep):
     def __init__(self, mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y"):
         config = locals().copy()
         del config["self"]
         del config["__class__"]
         super().__init__(mode, config)
 
-    def _transform_(self, data: AbsData):
+    def _process_(self, data: AbsData):
         """"""
         idxs = self.partitionings(data)
 
@@ -27,6 +27,6 @@ class Partition(withPartitioning, DataIndependent):
                 trainS = Split1(i, "train", **self.config, _indices=idxs[i][0])
                 testS = Split1(i, "test", **self.config, _indices=idxs[i][1])
                 wk = AutoIns * In(trainS) * testS
-                yield wk.transform(data)
+                yield wk.process(data)
 
         return data.replace(self, stream=gen())

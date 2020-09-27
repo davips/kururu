@@ -1,4 +1,4 @@
-from akangatu.dataindependent import DataIndependent
+from akangatu.distep import DIStep
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
@@ -7,7 +7,7 @@ from kururu.tool.evaluation.mixin.partitioning import withPartitioning
 from transf.absdata import AbsData
 
 
-class Split1(DataIndependent, withPartitioning):
+class Split1(DIStep, withPartitioning):
     """  """
 
     def __init__(self, i=0, step="train", mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y", _indices=None):
@@ -20,7 +20,7 @@ class Split1(DataIndependent, withPartitioning):
         self.i = i
         self.istep = 0 if step == "train" else 1
 
-    def _transform_(self, data: AbsData):
+    def _process_(self, data: AbsData):
         if self._indices is None:
             self._indices = self.partitionings(data)[self.i][self.istep]
 
@@ -33,7 +33,7 @@ class Split1(DataIndependent, withPartitioning):
         return self._config
 
 
-class Split(withPartitioning, asMacro, DataIndependent):
+class Split(withPartitioning, asMacro, DIStep):
     def __init__(self, i=0, mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y", _indices=None):
         config = locals().copy()
         del config["self"]
@@ -41,7 +41,7 @@ class Split(withPartitioning, asMacro, DataIndependent):
         del config["_indices"]
         super().__init__(mode, config)
 
-    def _transformer_(self):
-        print("held:", self.held)
+    def _step_(self):
+        # print("held:", self.held)
         return EnsureNoInner * AutoIns * In(Split1(step="train", **self.held)) * Split1(step="test", **self.held)
 

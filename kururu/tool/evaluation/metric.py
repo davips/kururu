@@ -1,14 +1,14 @@
 import numpy as np
 from sklearn.metrics import accuracy_score
 
-from akangatu.dataindependent import DataIndependent
+from akangatu.distep import DIStep
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from transf.absdata import AbsData
 
 
-class Metric(DataIndependent, withFunctionInspection):
+class Metric(DIStep, withFunctionInspection):
     """Metric over a field.
 
     Developer: new metrics can be added just by following the pattern '_fun_xxxxx'
@@ -32,7 +32,7 @@ class Metric(DataIndependent, withFunctionInspection):
         self.selected = [self.function_from_name[name] for name in functions]
         self._config = {"functions": functions, "target": target, "prediction": prediction}
 
-    def _transform_(self, data: AbsData):
+    def _process_(self, data: AbsData):
         newr = np.array([f(data, self.target, self.prediction) for f in self.selected])
         return data.replace(self, r=newr)
 
@@ -53,5 +53,5 @@ class Metric(DataIndependent, withFunctionInspection):
 
 
 class Metric2(asMacro, Metric):
-    def _transformer_(self):
+    def _step_(self):
         return Metric(**self.held) * In(Metric(**self.held))

@@ -8,7 +8,7 @@ from kururu.tool.learning.supervised.classification.svm import SVM, SVM2
 from kururu.tool.manipulation.slice import Slice
 from transf._ins import Ins
 
-data = File("iris.arff").transform()
+data = File("iris.arff").data
 print("iris", data.id)
 print("iden", UUID.identity)
 for transf in [SVM(), SVM2(), File("iris.arff"), Metric2(), Metric(), PCA(), PCA1(), Split(), Split1(), Partition(), Slice(), Ins(data)]:
