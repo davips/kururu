@@ -1,30 +1,25 @@
-from sklearn.svm import NuSVC
+from abc import ABC, abstractmethod
 
-from akangatu.abs.mixin.macro import asMacro
-from akangatu.operator.unary.inop import In
-from kururu.tool.dataflow.autoins import AutoIns
-from kururu.tool.dataflow.delin import DelIn
-from kururu.tool.learning.supervised.abs.predictor import Predictor
+from aiuna.config import globalcache
+from aiuna.content.data import Data
+from akangatu.ddstep import DDStep
 
 
-class SVM(Predictor):
+class Predictor(DDStep, ABC):
     """  """
 
-    def __init__(self, **kwargs):  # TODO :params and defaults
-        self._config = kwargs
+    def _process_(self, data: Data):
+        z = self.model(data.inner).predict(data.X)
+        return data.replace(self, z=z)
 
-    def _config_(self):
-        return self._config
+    @globalcache
+    def model(self, data):
+        return self._model_(data)
 
+    @abstractmethod
     def _model_(self, data):
-        nusvc = NuSVC(**self.config)
-        nusvc.fit(*data.Xy)
-        return nusvc
+        pass
 
-
-class SVM2(asMacro, SVM):
-    def _step_(self):
-        return SVM(**self.held) * In(AutoIns * SVM(**self.held) * DelIn)
 
     # x = 0.00001
     # l = []
