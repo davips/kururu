@@ -39,11 +39,11 @@ class Metric(DIStep, withFunctionInspection):
 
     @staticmethod
     def _fun_error(data, target, prediction):
-        return 1 - accuracy_score(data.field(target, "metric"), data.field(prediction, "metric"))
+        return 1 - accuracy_score(data.field(target, context="Metric"), data.field(prediction, context="Metric"))
 
     @staticmethod
     def _fun_accuracy(data, target, prediction):
-        return accuracy_score(data.field(target, "metric"), data.field(prediction, "metric"))
+        return accuracy_score(data.field(target, context="Metric"), data.field(prediction, context="Metric"))
 
     @staticmethod
     def _fun_history(data, target, prediction):
@@ -52,4 +52,5 @@ class Metric(DIStep, withFunctionInspection):
 
 class Metric2(asMacro, Metric):
     def _step_(self):
-        return Metric(**self.held) * In(Metric(**self.held))
+        metric = Metric(**self.held)
+        return metric * In(metric)

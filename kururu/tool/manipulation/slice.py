@@ -9,7 +9,7 @@ class Slice(DIStep):
         self.fields = fields.split(",")
 
     def _process_(self, data):
-        newfields = {k: data.field(k, self)[self.first:self.last + 1] for k in self.fields}
+        newfields = {k: data.field(k, context=self)[self.first:self.last + 1] for k in self.fields}
         return data.replace(self, **newfields)
 
     def _config_(self):

@@ -9,17 +9,14 @@ from sklearn.decomposition import PCA as PCA_
 
 
 class PCA1(DDStep):
-    def __init__(self, n=2, seed=0):
+    def __init__(self, inner=None, n=2, seed=0):
         self.n = n
         self.seed = seed
-        self._config = {"n": n, "seed": seed}
+        super().__init__(inner, {"n": n, "seed": seed})
 
     def _process_(self, data: Data):
         newX = self.model(data.inner).transform(data.X)
         return data.replace(self, X=newX)
-
-    def _config_(self):
-        return self._config
 
     @globalcache
     def model(self, data):
@@ -30,7 +27,8 @@ class PCA1(DDStep):
 
 class PCA(asMacro, PCA1):
     def _step_(self):
-        return PCA1(**self.held) * In(AutoIns * PCA1(**self.held) * DelIn)
+        pca = PCA1(**self.held)
+        return pca * In(AutoIns * pca * DelIn)
 
 # l = []
 # for i in range(1, 128):

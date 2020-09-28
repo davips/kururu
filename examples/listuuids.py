@@ -8,14 +8,22 @@ from kururu.tool.manipulation.slice import Slice
 from transf._ins import Ins
 
 data = File("iris.arff").data
+# data = Ins(data).process(data)
 # print("------------------")
 # data = (File("iris.arff") * Split).data
 # steps = [SVM(), SVM2()] #, Metric2(), Metric(), PCA(), PCA1(), Split(), Split1(), Partition(), Slice(), Ins(data)]
-steps = [SVM(data), SVM2(data)] #, Metric2(), Metric(), PCA(), PCA1(), Split(), Split1(), Partition(), Slice(), Ins(data)]
+steps = [PCA(data) * SVM2() * Metric2(), SVM2(data) * Metric2(), Split(), Split1(), Partition(), Slice(), Ins(data)]
 
 for step in steps:
-    print(step.name.rjust(25, " "), end="   ")
-    print(step.id, end="   ")
+    print(step.longname.rjust(25, " "), end="  ")
+    print(step.id, end="  ")
 
     res = step.process(data)
-    print(data.uuid * step.uuid, res.uuid)
+    # if not data.inner or not callable(step):
+    print("data.inner", data.uuid * step.uuid, res.uuid, data.uuid * step.uuid == res.uuid, end="  ")
+    print(res.matrices.keys(), end="  ")
+    print(res.inner and res.inner.matrices.keys())
+    # else:
+    #     print("   (data)", Ins(data).process(data).uuid * step.uuid, res.uuid, Ins(data).process(data).uuid * step.uuid == res.uuid)
+    #     print(" esperado ", Ins(data).process(data).uuid, "*", step.uuid, "=", Ins(data).process(data).uuid * step.uuid)
+    #     print(" ocorrido ", data.uuid, "*", step.uuid, "=", res.uuid)
