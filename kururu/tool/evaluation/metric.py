@@ -30,14 +30,12 @@ class Metric(DIStep, withFunctionInspection):
         self.functions = functions
         self.target, self.prediction = target, prediction
         self.selected = [self.function_from_name[name] for name in functions]
-        self._config = {"functions": functions, "target": target, "prediction": prediction}
+        config = {"functions": functions, "target": target, "prediction": prediction}
+        super().__init__(config)
 
     def _process_(self, data: AbsData):
         newr = np.array([f(data, self.target, self.prediction) for f in self.selected])
         return data.replace(self, r=newr)
-
-    def _config_(self):
-        return self._config
 
     @staticmethod
     def _fun_error(data, target, prediction):
