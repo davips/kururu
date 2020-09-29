@@ -1,6 +1,4 @@
-from akangatu.abs.mixin.macro import asMacro
 from akangatu.distep import DIStep
-from akangatu.operator.unary.inop import In
 from transf.absdata import AbsData
 
 

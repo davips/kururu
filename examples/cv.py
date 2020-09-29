@@ -13,3 +13,5 @@ wk = File("abalone3.arff") * Binarize * Partition(splits=3) * Map(pipe) * Summ2 
 data = wk.data
 print("train:\n", data.Si)
 print("test:\n", data.S, list(data.history.clean))
+
+# cache e streamcache?   cache seria como summ, que finaliza usando Accumulator
