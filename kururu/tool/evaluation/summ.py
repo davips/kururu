@@ -7,25 +7,24 @@ from akangatu.innerchecking import EnsureNoInner
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
+from kururu.tool.manipulation.copy import Copy
 from kururu.tool.stream.accumulator import Accumulator
 from transf.absdata import AbsData
 
-
-# REMINDER: Summ é como o Split1 que sempre processa o dado em que é aplicado (ora como treino, ora como teste;
-# mudado por parâmetro),
-# distinto de PCA/SVM que são como Split, mas sempre esperam um dado interno (até dentro do interno) e não dependem
-# do parâmetro que caracteriza o tipo de produção (treino ou teste).
-# Assim, Summ representa dois passos distintos: ISumm e OSumm.
 
 class Summ(DIStep, withFunctionInspection):
     # Yes, we use "mutable" defaults because (it is immutable here and) better to show what to expect from the method.
     # ...and lists are more confortable to write/read than tuples.
     # noinspection PyDefaultArgument
-    def __init__(self, field="R", functions=["mean"]):
-        super().__init__({"field": field, "functions": functions})
+    def __init__(self, stage="test", field="R", functions=["mean"]):
+        super().__init__({"stage": stage, "field": field, "functions": functions})
         self.functions = functions
         self.selected = [self.function_from_name[name] for name in functions]
         self.field = field
+        if stage not in ["train", "test"]:
+            print("Unknown stage:", stage)
+            exit()
+        self.stage = stage
 
     def _process_(self, data: AbsData):
         if data.stream is None:
@@ -34,8 +33,11 @@ class Summ(DIStep, withFunctionInspection):
             exit()
 
         def step_func(data_, acc):
-            print("fffffffffff", data_.field(self.field, context=self).shape)
-            return data_, linalghelper.mat2vec(data_.field(self.field, context=self))
+            if self.stage == "train":
+                v = data_.inner.field(self.field, context=self)
+            else:
+                v = data_.field(self.field, context=self)
+            return data_, linalghelper.mat2vec(v)
 
         def end_func(acc):
             return [array(f(acc)) for f in self.selected]
@@ -50,6 +52,8 @@ class Summ(DIStep, withFunctionInspection):
 
 class Summ2(asMacro, Summ):
     def _step_(self):
-        external = Summ(**self.held)
-        internal = In(Summ(**self.held))
-        return EnsureNoInner * AutoIns * external * internal
+        train = Summ(stage="train", **self.held)
+        test = Summ(stage="test", **self.held)
+        return EnsureNoInner * train * Copy("S", "Si") * test
+
+    # REMINDER: loop infinito no uuid ou json pode indicar presença de classe no config

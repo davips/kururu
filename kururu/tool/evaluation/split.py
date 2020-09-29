@@ -10,7 +10,7 @@ from transf.absdata import AbsData
 class Split1(DIStep, withPartitioning):
     """  """
 
-    def __init__(self, i=0, stage="train", mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y", _indices=None):
+    def __init__(self, i=0, stage="test", mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y", _indices=None):
         config = locals().copy()
         del config["self"]
         del config["_indices"]

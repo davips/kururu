@@ -32,6 +32,6 @@ class Reduce(DIStep):
         return data.replace(self, stream=None)
 
 
-class Reduce2(asMacro, Reduce):
-    def _step_(self):
-        return Reduce * In(Reduce)
+# class Reduce2(asMacro, Reduce):
+#     def _step_(self):
+#         return Reduce * In(Reduce)  # REMINDER: talvez um dia faça sentido

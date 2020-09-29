@@ -24,14 +24,12 @@ class Metric(DIStep, withFunctionInspection):
         Name of the matrix to be measured.
     """
 
-    def __init__(self, functions=None, target="Y", prediction="Z"):
-        if functions is None:
-            functions = ["accuracy"]
+    def __init__(self, functions=["accuracy"], target="Y", prediction="Z"):  # TODO:change all default prameters to "mutable"
+        config = {"functions": functions, "target": target, "prediction": prediction}
+        super().__init__(config)
         self.functions = functions
         self.target, self.prediction = target, prediction
         self.selected = [self.function_from_name[name] for name in functions]
-        config = {"functions": functions, "target": target, "prediction": prediction}
-        super().__init__(config)
 
     def _process_(self, data: AbsData):
         newr = np.array([f(data, self.target, self.prediction) for f in self.selected])
