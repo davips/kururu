@@ -1,4 +1,5 @@
 from aiuna.file import File
+from kururu.tool.communication.cache import Cache
 from kururu.tool.enhancement.binarize import Binarize
 from kururu.tool.enhancement.pca import PCA
 from kururu.tool.evaluation.metric import Metric2
@@ -9,7 +10,7 @@ from kururu.tool.stream.map import Map
 from kururu.tool.stream.reduce import Reduce
 
 pipe = PCA(n=3) * SVM2 * Metric2(["accuracy", "history"])
-wk = File("abalone3.arff") * Binarize * Partition(splits=3) * Map(pipe) * Summ2 * Reduce
+wk = File("abalone3.arff") * Cache(Binarize * Partition(splits=3) * Map(pipe) * Summ2 * Reduce)
 data = wk.data
 print("train:\n", data.Si)
 print("test:\n", data.S, list(data.history.clean))
