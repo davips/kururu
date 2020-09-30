@@ -10,9 +10,10 @@ from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspecti
 from kururu.tool.manipulation.copy import Copy
 from kururu.tool.stream.accumulator import Accumulator
 from transf.absdata import AbsData
+from transf.mixin.fixedparam import asFixedParam
 
 
-class Summ(DIStep, withFunctionInspection):
+class Summ(asFixedParam, DIStep, withFunctionInspection):
     # Yes, we use "mutable" defaults because (it is immutable here and) better to show what to expect from the method.
     # ...and lists are more confortable to write/read than tuples.
     # noinspection PyDefaultArgument

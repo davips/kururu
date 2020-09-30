@@ -4,9 +4,10 @@ from kururu.tool.evaluation.mixin.partitioning import withPartitioning
 from kururu.tool.evaluation.split import Split1
 from akangatu.distep import DIStep
 from transf.absdata import AbsData
+from transf.mixin.fixedparam import asFixedParam
 
 
-class Partition(withPartitioning, DIStep):
+class Partition(asFixedParam, withPartitioning, DIStep):
     def __init__(self, mode="cv", splits=10, test_size=0.3, seed=0, fields="X,Y"):
         config = locals().copy()
         del config["self"]
@@ -28,3 +29,4 @@ class Partition(withPartitioning, DIStep):
             print()
 
         return data.replace(self, stream=gen())
+

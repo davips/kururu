@@ -12,6 +12,7 @@ from kururu.tool.stream.reduce import Reduce
 pipe = PCA(n=3) * SVM2 * Metric2(["accuracy", "history"])
 wk = File("abalone3.arff") * Cache(Binarize * Partition(splits=3) * Map(pipe) * Summ2 * Reduce)
 data = wk.data
+# data = wk.sample().data
 print("train:\n", data.Si)
 print("test:\n", data.S, list(data.history.clean))
 
