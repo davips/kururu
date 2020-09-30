@@ -9,7 +9,7 @@ from kururu.tool.learning.supervised.classification.svm import SVM2
 from kururu.tool.stream.map import Map
 from kururu.tool.stream.reduce import Reduce
 
-pipe = PCA(n=3) * SVM2 * Metric2(["accuracy", "history"])
+pipe = PCA(n=3) * SVM2(C=1) * Metric2(["accuracy", "history"])
 wk = File("abalone3.arff") * Cache(Binarize * Partition(splits=3) * Map(pipe) * Summ2 * Reduce)
 data = wk.data
 # data = wk.sample().data
