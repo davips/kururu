@@ -1,4 +1,4 @@
-from sklearn.svm import NuSVC
+from sklearn.svm import SVC
 
 from aiuna.config import globalcache
 from akangatu.abs.mixin.macro import asMacro
@@ -16,7 +16,7 @@ class SVM(Predictor):
 
     @globalcache
     def _model_(self, data):
-        nusvc = NuSVC(**self.config)
+        nusvc = SVC(**self.config)
         nusvc.fit(*data.Xy)
         return nusvc
 
