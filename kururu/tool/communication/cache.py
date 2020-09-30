@@ -1,6 +1,7 @@
 import traceback
 
 from akangatu.container import Container1
+from tatu.pickleserver import PickleServer
 from tatu.storage import Storage
 from transf.absdata import AbsData
 
@@ -17,6 +18,7 @@ class Cache(Container1):
         # Process if still needed  ----------------------------------
         if output_data is None:
             try:
+                # REMINDER: exit_on_error=False is to allow storage to cleanup after an error
                 output_data = self.step.process(data, exit_on_error=False)
             except:
                 self.storage.unlock(hollow)
