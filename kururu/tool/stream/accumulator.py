@@ -43,15 +43,16 @@ class Accumulator(Iterator):
         acc = self.start.copy()
         try:
             for data in self.iterator:
+                dic={"data":data}
                 if not self.stream_exception:
-                    data, step = self.step_func(data, acc)
+                    dic = self.step_func(data, acc)
                     # if step is XXXXX:
                     #     self.stream_exception = True
                     # else:
-                    if step is not None:
+                    if dic["inc"] is not None:
                         # REMINDER: doesn't need to be thread-safe, since processing of iterator is always sequential
-                        acc.append(step)
-                yield data
+                        acc.append(dic["inc"])
+                yield dic["data"]
         finally:
             if not self.stream_exception:
                 self._result = self.end_func(acc)

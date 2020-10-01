@@ -31,7 +31,7 @@ class Cache(Container1):
         # newstream = zip(self.step.workers, data.stream)
         # iterator = Accumulator(newstream, start=[], step_func=step_func, end_func=end_func)
         # return data.replace([], stream=iterator)
-        return self.cached(self.step, data)  # , stream=iterator)
+        return self.cached(self.step, data)
 
     def cached(self, worker, data):
         hollow = data.hollow(worker)

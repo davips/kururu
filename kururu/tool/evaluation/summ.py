@@ -38,7 +38,7 @@ class Summ(asFixedParam, DIStep, withFunctionInspection):
                 v = data_.inner.field(self.field, context=self)
             else:
                 v = data_.field(self.field, context=self)
-            return data_, linalghelper.mat2vec(v)
+            return {"data": data_, "inc": linalghelper.mat2vec(v)}
 
         def end_func(acc):
             return [array(f(acc)) for f in self.selected]
