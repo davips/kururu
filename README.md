@@ -68,6 +68,6 @@ https://github.com/davips/mysql2csv
 
 2020
 
-Python project where previous attempts and ideias were implemented in, but still missing consistency and incidentally still sounding a bit complex
+Python project where previous attempts and evolving ideias were tested
 
 https://github.com/davips/pjml-may_archived
