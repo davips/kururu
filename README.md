@@ -11,6 +11,8 @@
 We encourage people to contribute by creating their own repository, using this (and/or other related ones) as a dependence.
 The software architecture was planned taking that into account, providing clear interface-classes to guide the implementer.
 
+# Grants
+
 # History
 The novel ideias presented here are a result of a years-long process of drafts, thinking, trial/error and rewrittings from scratch in several languages from Delphi, passing through Haskell, Java and Scala to Python. The fundamental concepts were lightly borrowed from basic category theory concepts like algebraic data structures that permeate many recent tendencies in programming language design, data flow specification, among others. 
 
