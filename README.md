@@ -10,8 +10,8 @@
 
 
 # Contribution
-One of tha ways one can contribute is by creating their own repository, using this (and/or other related ones) as a dependence.
-The software architecture was planned taking that into account, providing clear interface-classes to guide the implementer.
+One of the ways one can contribute is by creating their own repository, using this (and/or other related ones) as a dependence. Monkey-patch can be used if one needs to integrate a module inside the same class tree used here.
+The software architecture was planned taking that into account, providing clear interface-classes to guide the implementer, and several levels of niceties across the repositories to avoid an excess of functionalities being inherited.
 
 
 # Grants
