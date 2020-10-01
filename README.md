@@ -20,54 +20,20 @@ The novel ideias presented here are a result of a years-long process of drafts, 
 
 For code (and academic) details refer to the following projects (few of them are usable by now):
 
-2003
+2003  [TUPI imaging: there was no widespread use of git at this time / retroactive repo yet to be created]
 
-[TUPI imaging: there was no widespread use of git at this time / retroactive repo yet to be created]
+2006  [Multicore NN: there was no widespread use of git at this time / retroactive repo yet to be created]
 
-2006
+2013  Functional language parser/interpreter  https://github.com/davips/lamdheal-j
 
-[Multicore NN: there was no widespread use of git at this time / retroactive repo yet to be created]
+2014  Machine learning library including Weka algorithms, optimized immutable data structure and models, hand-made BLAS/LAPACK neural networks, transparent distributed processing (in conjunction with active-learning-scala), plotting, evaluation, early replicability   https://github.com/davips/mls
 
-2013
+2015  Active learning library   https://github.com/davips/active-learning-scala
 
-Functional language parser/interpreter
+2016  Thesis and dataset generation and visualization   https://github.com/davips/tese    https://github.com/davips/knowledge-boundary    https://github.com/davips/image2arff
 
-https://github.com/davips/lamdheal-j
+2018  Gaussian processses   https://github.com/davips/surface
 
-2014
+2019  Client to generate reports from stored results  https://github.com/davips/mysql2csv
 
-Machine learning library including Weka algorithms, optimized immutable data structure and models, hand-made BLAS/LAPACK neural networks, transparent distributed processing (in conjunction with active-learning-scala), plotting, evaluation, early replicability
-
-https://github.com/davips/mls
-
-2015
-
-Active learning library
-
-https://github.com/davips/active-learning-scala
-
-2016
-
-Thesis and dataset generation and visualization
-
-https://github.com/davips/tese
-https://github.com/davips/knowledge-boundary
-https://github.com/davips/image2arff
-
-2018
-
-Gaussian processses
-
-https://github.com/davips/surface
-
-2019
-
-Client to generate reports from stored results
-
-https://github.com/davips/mysql2csv
-
-2020
-
-Python project where previous attempts and evolving ideias were tested
-
-https://github.com/davips/pjml-may_archived
+2020  Python project where previous attempts and evolving ideias were tested    https://github.com/davips/pjml-may_archived
