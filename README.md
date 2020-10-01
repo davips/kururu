@@ -1,5 +1,7 @@
 # kururu Data Science
 
+<a title="CostaPPPR / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:Sapo_Cururu-DISC_1328.jpg"><img width="512" alt="Sapo Cururu-DISC 1328" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Sapo_Cururu-DISC_1328.jpg/512px-Sapo_Cururu-DISC_1328.jpg"></a>
+
 # Installation
 
 # Examples
