@@ -12,7 +12,7 @@ from transf._ins import Ins
 
 print(File("iris.arff").data)
 wf = File("iris.arff") * Split(mode="holdout") * SVM2() * Metric2()
-data4 = wf.tr()
+data4 = wf.data
 print("met", data4.r, data4.inner.r)
 
 
