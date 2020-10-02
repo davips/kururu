@@ -52,6 +52,6 @@ class Explain(Container1):
             fig, axs = ExplainGraph.plot(explanation.explain())
             # plt.savefig(f'iris_x_{",".join(data.Xd)}_m-lime_kde.svg')
             plt.show()  # pip install PyQt5==5.12.2  # plotlib is currently using agg, which is a non-GUI backend, so canno
-            fig, axs = ExplainGraph.plot_errors(explanation)
+            # fig, axs = ExplainGraph.plot_errors(explanation)
 
         return data

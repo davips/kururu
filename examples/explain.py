@@ -1,7 +1,7 @@
 from aiuna.file import File
 from kururu.tool.communication.report import Report
 from kururu.tool.dataflow.rank import Rank
-from kururu.tool.dataflow.sort import Sort
+from kururu.tool.dataflow.sort import Sort, Sortr
 from kururu.tool.evaluation.split import Split
 from kururu.tool.evaluation.uncertainty import Margin
 from kururu.tool.learning.supervised.classification.svm import SVM
@@ -15,9 +15,9 @@ wk = (File("iris.arff")
             SVM(C=1, probability=True)
             * Margin
             * Copy("X", "Q")
-            * Sort("U,Q")
+            * Sortr("U,Q")
             * Report(">> $Q")
-            * Slice(-1, -1, "Q")
+            * Slice(0, 1, "Q")
             * Report(">>>> $Q")
         )
       )

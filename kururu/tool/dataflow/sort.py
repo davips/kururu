@@ -6,14 +6,15 @@ from transf.absdata import AbsData
 class Sort(DIStep):
     """Sort all provided matrices by a column(or row) of the first one."""
 
-    def __init__(self, fields="U,X", byindex=0, along="rows"):
-        super().__init__({"fields": fields, "index": byindex, "by": along})
+    def __init__(self, fields="U,X", byindex=0, reverse=False, along="rows"):
+        super().__init__({"fields": fields, "index": byindex, "reverse": reverse, "by": along})
         self.fields = fields.split(",")
         self.along = along
         self.byindex = byindex
+        self.reverse = reverse
         if along not in ["rows", "cols"]:
-            print(self.name, f"Unknown type of entry to rank: by='{along}'. Should be 'rows' or 'cols'.")
-            exit()
+            print(self.name, f"Unknown type of entry to sort: by='{along}'. Should be 'rows' or 'cols'.")
+            exit()  # TODO: generalize these checkings/errors
 
     def _process_(self, data: AbsData):
         M = data.field(self.fields[0], context=self)
@@ -21,6 +22,9 @@ class Sort(DIStep):
             indices = M[:, self.byindex].argsort()
         else:
             indices = M[self.byindex, :].argsort()
+
+        if self.reverse:
+            indices = indices[::-1]
 
         dic = {}
         for field in self.fields:
@@ -31,3 +35,9 @@ class Sort(DIStep):
                 dic[field] = M[:, indices]
 
         return data.replace(self, **dic)
+
+
+class Sortr(Sort):
+    """Shortcut for Sort(..., reverse=True)"""
+    def __init__(self, fields="U,X", byindex=0, along="rows"):
+        super().__init__(fields, byindex, True, along)
