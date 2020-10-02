@@ -19,7 +19,7 @@ class Reduce(asParamLess, DIStep):
             exit()
 
         failures = []  # TODO:checar se falhados estão sendo tratados/interrompidos no Step (caso geral)
-        print("começa")
+        print("começa redu")
         for d in data.stream:
             print("consome", d.id)
             if d.failure:

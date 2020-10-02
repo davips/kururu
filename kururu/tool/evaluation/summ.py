@@ -1,3 +1,5 @@
+from itertools import repeat
+
 from numpy import mean, array
 
 from aiuna.mixin import linalghelper
@@ -9,6 +11,7 @@ from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from kururu.tool.manipulation.copy import Copy
 from kururu.tool.stream.accumulator import Accumulator
+from noop import NoOp
 from transf.absdata import AbsData
 from transf.mixin.fixedparam import asFixedParam
 

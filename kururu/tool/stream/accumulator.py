@@ -30,14 +30,14 @@ class Accumulator(Iterator):
 
     @property
     def result(self):
-        # if self.stream_exception:
-        #     raise InterruptedStreamException
-        # try:
+        if self.stream_exception:
+            raise InterruptedStreamException
+        try:
             return self._result
-        # except AttributeError as e:
-        #     print("Stream not consumed!\nHINT: The result of summarizers are only accessible after Reduce.")
-        #     exit()
-        #     # raise e from None
+        except AttributeError as e:
+            print("Stream not consumed!\nHINT: The result of summarizers are only accessible after Reduce.")
+            exit()
+            # raise e from None
 
     def __iter__(self):
         acc = self.start.copy()
@@ -49,7 +49,7 @@ class Accumulator(Iterator):
                     # if step is XXXXX:
                     #     self.stream_exception = True
                     # else:
-                    if dic["inc"] is not None:
+                    if "inc" in dic:
                         # REMINDER: doesn't need to be thread-safe, since processing of iterator is always sequential
                         acc.append(dic["inc"])
                 yield dic["data"]
