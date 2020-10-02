@@ -29,7 +29,7 @@ class Cache(Container1):
                 # REMINDER: exit_on_error=False is to allow storage to cleanup after an error
                 output_data = self.step.process(data, exit_on_error=False)
             except:
-                # self.storage.unlock(hollow)
+                self.storage.unlock(hollow)
                 traceback.print_exc()
                 exit(0)
             # TODO: quando grava um frozen, é preciso marcar isso dealguma forma
