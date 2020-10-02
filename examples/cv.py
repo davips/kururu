@@ -11,7 +11,7 @@ from kururu.tool.stream.map import Map
 from kururu.tool.stream.reduce import Reduce
 
 pipe = PCA(n=3) * SVM2(C=1) * Metric2(["accuracy", "history"])
-wk = File("abalone3.arff") * Binarize * Partition(splits=3) * Map(Cache(pipe)) * Summ2 * Reduce
+wk = File("abalone3.arff") * Binarize * Partition(splits=3) * Map(Cache(pipe) * Report("$r {inner.r}")) * Summ2 * Reduce
 data = wk.data
 # data = wk.sample().data
 print("train:\n", data.Si)
