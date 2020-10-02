@@ -9,8 +9,10 @@ class Predictor(DDStep, ABC):
     """  """
 
     def _process_(self, data: Data):
-        z = self.model(data.inner).predict(data.X)
-        return data.replace(self, z=z)
+        dic = {"Z": self.model(data.inner).predict(data.X)}
+        if "probability" in self.config and self.config["probability"]:
+            dic["P"] = self.model(data.inner).predict_proba(data.X)
+        return data.replace(self, **dic)
 
     @globalcache
     def model(self, data):
@@ -19,7 +21,6 @@ class Predictor(DDStep, ABC):
     @abstractmethod
     def _model_(self, data):
         pass
-
 
     # x = 0.00001
     # l = []
