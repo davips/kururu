@@ -21,7 +21,7 @@ class Partition(asFixedParam, withPartitioning, DIStep):
         # REMINDER: Partition faz data virar data com stream; e nesse stream vem data transformado e com inner.
         def gen():
             for i in range(self.splits):
-                print("partition", i, end="   ")
+                # print("partition", i, end="   ")
                 trainS = Split1(i, "train", **self.config, _indices=idxs[i][0])
                 testS = Split1(i, "test", **self.config, _indices=idxs[i][1])
                 wk = AutoIns * In(trainS) * testS

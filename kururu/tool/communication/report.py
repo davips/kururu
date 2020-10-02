@@ -5,9 +5,10 @@ from akangatu.distep import DIStep
 from cruipto.util import flatten
 from transf.absdata import AbsData
 from transf.mixin.fixedparam import asFixedParam
+from transf.mixin.noop import asNoOp
 
 
-class Report(asFixedParam, DIStep):
+class Report(asNoOp, asFixedParam, DIStep):
     """Report printer.
 
     Syntax:
