@@ -4,7 +4,7 @@ from kururu.tool.evaluation.mixin.partitioning import withPartitioning
 from kururu.tool.evaluation.split import Split1
 from akangatu.distep import DIStep
 from transf.absdata import AbsData
-from transf.mixin.fixedparam import asFixedParam
+from akangatu.abs.mixin.fixedparam import asFixedParam
 
 
 class Partition(asFixedParam, withPartitioning, DIStep):

@@ -6,7 +6,7 @@ from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from transf.absdata import AbsData
-from transf.mixin.fixedparam import asFixedParam
+from akangatu.abs.mixin.fixedparam import asFixedParam
 
 
 class Metric(asFixedParam, DIStep, withFunctionInspection):

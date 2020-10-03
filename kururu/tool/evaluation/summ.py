@@ -13,7 +13,7 @@ from kururu.tool.manipulation.copy import Copy
 from kururu.tool.stream.accumulator import Accumulator
 from noop import NoOp
 from transf.absdata import AbsData
-from transf.mixin.fixedparam import asFixedParam
+from akangatu.abs.mixin.fixedparam import asFixedParam
 
 
 class Summ(asFixedParam, DIStep, withFunctionInspection):

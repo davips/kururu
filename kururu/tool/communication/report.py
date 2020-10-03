@@ -4,7 +4,7 @@ import numpy as np
 from akangatu.distep import DIStep
 from cruipto.util import flatten
 from transf.absdata import AbsData
-from transf.mixin.fixedparam import asFixedParam
+from akangatu.abs.mixin.fixedparam import asFixedParam
 from transf.mixin.noop import asNoOp
 
 
@@ -13,7 +13,7 @@ class Report(asNoOp, asFixedParam, DIStep):
 
     Syntax:
     $r prints 'r'
-    {attr} prints the Data object attr, e.g.: {failure}
+    {attr} prints the Data object attr, e.g.: {failure} or {history^name}
     """
 
     # TODO: Which matrix are prioritary by default?

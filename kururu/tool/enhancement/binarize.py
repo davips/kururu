@@ -4,7 +4,7 @@ from sklearn.preprocessing import OneHotEncoder
 from aiuna.content.data import Data
 from aiuna.creation import nominal_idxs
 from akangatu.distep import DIStep
-from transf.mixin.paramless import asParamLess
+from akangatu.abs.mixin.paramless import asParamLess
 
 
 class Binarize(asParamLess, DIStep):  # TODO: other fields

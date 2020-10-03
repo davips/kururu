@@ -1,6 +1,6 @@
 from akangatu.distep import DIStep
 from transf.absdata import AbsData
-from transf.mixin.paramless import asParamLess
+from akangatu.abs.mixin.paramless import asParamLess
 
 
 class Margin(asParamLess, DIStep):
