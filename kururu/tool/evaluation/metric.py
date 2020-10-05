@@ -6,10 +6,10 @@ from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from transf.absdata import AbsData
-from transf.mixin.fixedparam import asFixedParam
+from transf.mixin.unitset import asUnitset
 
 
-class Metric(asFixedParam, DIStep, withFunctionInspection):
+class Metric(asUnitset, DIStep, withFunctionInspection):
     """Metric over a field.
 
     Developer: new metrics can be added just by following the pattern '_fun_xxxxx'
