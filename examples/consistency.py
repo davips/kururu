@@ -1,5 +1,5 @@
 from aiuna.file import File
-from akangatu.delimiter import Begin, End
+from akangatu.abs.delimiter import Begin, End
 from akangatu.rev import Rev
 from cruipto.uuid import UUID
 from kururu.tool.enhancement.pca import PCA1, PCA
