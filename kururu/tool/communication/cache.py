@@ -10,20 +10,26 @@ from transf.absdata import AbsData
 
 class Cache(Container1):
     """Cache cannot handle stream, if any."""
-    # REMINDER: ele processaria em cada worker e depois o step interno tentaria processar de novo,
+    # REMINDER: com stream ele processaria em cada worker e depois o step interno tentaria processar de novo,
     # i.e. o cache criaria um stream pra competir com o oficial
 
-    pickle = Pickle()
-    sqlite = SQLite()
-    amnesia = Amnesia()
+    pickle = None
+    sqlite = None
+    amnesia = None
 
     def __init__(self, step, storage="sqlite", seed=0):  # TODO: what todo with seed here?
         super().__init__(step, {"seed": seed, "storage": storage})
         if storage == "pickle":
+            if self.pickle is None:
+                self.pickle = Pickle()
             self.storage = self.pickle
         elif storage == "sqlite":
+            if self.sqlite is None:
+                self.sqlite = SQLite()
             self.storage = self.sqlite
         elif storage == "amnesia":
+            if self.amnesia is None:
+                self.amnesia = Amnesia()
             self.storage = self.amnesia
         elif isinstance(storage, Persistence):
             self.storage = storage
@@ -38,7 +44,7 @@ class Cache(Container1):
                 "Partition) and Reduce.")
 
         hollow = data.hollow(self.step)
-        output_data = self.storage.fetch(hollow, lock=True)  #TODO: restore inner
+        output_data = self.storage.fetch(hollow, lock=True)  # TODO: restore inner
 
         # Process if still needed  ----------------------------------
         if output_data is None:
@@ -52,4 +58,13 @@ class Cache(Container1):
             # TODO: quando grava um frozen, é preciso marcar isso dealguma forma
             #  para que seja devidamente reconhecido como tal na hora do fetch.
             self.storage.store(output_data, check_dup=False)
+
+        # print(data.id)
+        # print(hollow.id)
+        # print(output_data.id)
+        # print("..................")
+        # print(data.inner.id)
+        # print(hollow.inner.id)
+        # print(output_data.inner.id)
+        # print('------------------------')
         return output_data

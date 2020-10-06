@@ -1,14 +1,10 @@
-from akangatu.innerchecking import EnsureNoInner
-from akangatu import Insert
 from akangatu.distep import DIStep
+from akangatu.innerchecking import EnsureNoInner
 from kururu.tool.dataflow.delstream import DelStream
-from transf.step import Step
+from transf.mixin.config import asConfigLess
 
 
-class AutoIns(DIStep):
-    def __init__(self):
-        super().__init__({})
-
+class AutoIns(asConfigLess, DIStep):
     def _process_(self, data):
         EnsureNoInner().process(data)
         inner = DelStream().process(data)  # blank stream to avoid confusion

@@ -1,11 +1,9 @@
 from akangatu.distep import DIStep
 from transf.absdata import AbsData
+from transf.mixin.config import asConfigLess
 
 
-class DelStream(DIStep):
-    def __init__(self):
-        super().__init__({})
-
+class DelStream(asConfigLess, DIStep):
     def _process_(self, data: AbsData):
         return data.replace(self, stream=None)
 

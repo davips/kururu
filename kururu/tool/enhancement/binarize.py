@@ -4,10 +4,10 @@ from sklearn.preprocessing import OneHotEncoder
 from aiuna.content.data import Data
 from aiuna.creation import nominal_idxs
 from akangatu.distep import DIStep
-from akangatu.abs.mixin.paramless import asParamLess
+from transf.mixin.config import asConfigLess
 
 
-class Binarize(asParamLess, DIStep):  # TODO: other fields
+class Binarize(asConfigLess, DIStep):  # TODO: other fields
     def _process_(self, data: Data):
         data_nominal_idxs = nominal_idxs(data.Xt)
         encoder = OneHotEncoder()

@@ -7,7 +7,7 @@ from akangatu.distep import DIStep
 from cruipto.util import flatten
 from transf.absdata import AbsData
 from transf.mixin.noop import asNoOp
-from transf.mixin.unitset import asUnitset
+from transf.mixin.config import asUnitset
 
 
 class AbsLog(asUnitset, DIStep, ABC):
