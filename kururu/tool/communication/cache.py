@@ -2,7 +2,7 @@ import traceback
 
 from akangatu.container import Container1
 from tatu.amnesia import Amnesia
-from tatu.persistence import Persistence
+from tatu.storage import Storage
 from tatu.pickle_ import Pickle
 from tatu.sql.sqlite import SQLite
 from transf.absdata import AbsData
@@ -31,7 +31,7 @@ class Cache(Container1):
             if self.amnesia is None:
                 self.amnesia = Amnesia()
             self.storage = self.amnesia
-        elif isinstance(storage, Persistence):
+        elif isinstance(storage, Storage):
             self.storage = storage
         else:
             print("Unknown storage:", self.storage)
