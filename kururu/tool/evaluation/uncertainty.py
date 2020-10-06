@@ -1,9 +1,9 @@
 from akangatu.distep import DIStep
 from transf.absdata import AbsData
-from akangatu.abs.mixin.paramless import asParamLess
+from transf.mixin.config import asConfigLess
 
 
-class Margin(asParamLess, DIStep):
+class Margin(asConfigLess, DIStep):
     def _process_(self, data: AbsData):
         P = data.field("P", context=self).copy()
         P.sort()
@@ -12,6 +12,6 @@ class Margin(asParamLess, DIStep):
         return data.replace(self, U=U)
 
 
-class Entropy(asParamLess, DIStep):
+class Entropy(asConfigLess, DIStep):
     def _process_(self, data: AbsData):
         raise NotImplemented
