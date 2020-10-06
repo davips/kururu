@@ -3,7 +3,7 @@ import traceback
 from akangatu.container import Container1
 from tatu.amnesia import Amnesia
 from tatu.persistence import Persistence
-from tatu.pickle import Pickle
+from tatu.pickle_ import Pickle
 from tatu.sql.sqlite import SQLite
 from transf.absdata import AbsData
 
