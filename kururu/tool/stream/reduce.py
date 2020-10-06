@@ -1,9 +1,9 @@
 from akangatu.distep import DIStep
 from transf.absdata import AbsData
-from akangatu.abs.mixin.paramless import asParamLess
+from transf.mixin.config import asConfigLess
 
 
-class Reduce(asParamLess, DIStep):
+class Reduce(asConfigLess, DIStep):
     def _process_(self, data: AbsData):
         # TODO: centralizar logs usando essas tecnologias :
 
