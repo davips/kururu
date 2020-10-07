@@ -10,7 +10,10 @@ from transf.mixin.config import asUnitset
 
 
 class Metric(asUnitset, DIStep, withFunctionInspection):
-    """Metric over a field.
+    """Metric over fields.
+
+    Only the-higher-the-better functions in Metric, but can be negated:
+    '-accuracy' -> 'accuracy' * -1
 
     Developer: new metrics can be added just by following the pattern '_fun_xxxxx'
     where xxxxx is the name of the new metric.
@@ -25,6 +28,7 @@ class Metric(asUnitset, DIStep, withFunctionInspection):
         Name of the matrix to be measured.
     """
 
+    # noinspection PyDefaultArgument
     def __init__(self, functions=["accuracy"], target="Y", prediction="Z"):  # TODO:change all default prameters to "mutable"
         config = {"functions": functions, "target": target, "prediction": prediction}
         super().__init__(config)
@@ -37,16 +41,12 @@ class Metric(asUnitset, DIStep, withFunctionInspection):
         return data.replace(self, r=newr)
 
     @staticmethod
-    def _fun_error(data, target, prediction):
-        return 1 - accuracy_score(data.field(target, context="Metric"), data.field(prediction, context="Metric"))
-
-    @staticmethod
     def _fun_accuracy(data, target, prediction):
         return accuracy_score(data.field(target, context="Metric"), data.field(prediction, context="Metric"))
 
     @staticmethod
     def _fun_history(data, target, prediction):
-        return len(list(data.history))
+        return -len(list(data.history))
 
 
 class Metric2(asMacro, Metric):

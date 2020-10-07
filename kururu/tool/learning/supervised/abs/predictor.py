@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from aiuna.config import globalcache
+from transf.config import globalcache
 from aiuna.content.data import Data
 from akangatu.ddstep import DDStep
 

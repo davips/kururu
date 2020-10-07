@@ -1,6 +1,6 @@
 from sklearn.model_selection import StratifiedKFold, LeaveOneOut, StratifiedShuffleSplit
 
-from aiuna.config import globalcache
+from transf.config import globalcache
 
 
 class withPartitioning:

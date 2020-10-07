@@ -1,6 +1,5 @@
 from sklearn.svm import SVC
 
-from aiuna.config import globalcache
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
