@@ -3,7 +3,7 @@ from akangatu.distep import DIStep
 
 class Copy(DIStep):
     def __init__(self, fromfield="Y", tofield="Z"):
-        """Lazy, i.e. stream-friendly"""
+        """Lazy, i.e. stream-friendly"""  # REMINDER: being lazy is needed when, e.g., chaining two or more Summs
         config = locals().copy()
         del config["self"]
         if "__class__" in config:

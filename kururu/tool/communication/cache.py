@@ -9,7 +9,10 @@ from transf.absdata import AbsData
 
 
 class Cache(Container1):
-    """Cache cannot handle stream, if any."""
+    """Cache cannot handle stream, if any.
+
+    Cache triggers strictness on fields when self.step.process() needs to be called
+    (but not when they just come from storage, which would activate the other type of lazyness, the storage one)."""
     # REMINDER: com stream ele processaria em cada worker e depois o step interno tentaria processar de novo,
     # i.e. o cache criaria um stream pra competir com o oficial
 
