@@ -1,4 +1,4 @@
-# kururu Data Science
+# kururu - data science in the classroom
 
 <a title="CostaPPPR / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:Sapo_Cururu-DISC_1328.jpg"><img width="256" alt="Sapo Cururu-DISC 1328" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Sapo_Cururu-DISC_1328.jpg/256px-Sapo_Cururu-DISC_1328.jpg"></a>
 
@@ -10,8 +10,8 @@
 
 
 # Contribution
-Nothing clear yet, but one of the ways one can contribute is by creating their own repository (to be listed here as a partner), using this (and/or other related ones) as a dependence. Monkey-patch can be used if one needs to integrate a module inside the same class tree used here.
-The software architecture was planned taking that into account, providing clear interface-classes to guide the implementer, and several levels of niceties across the repositories to avoid an excess of functionalities being inherited.
+Nothing clear yet, but one of the ways one can contribute is by creating their own repository (to be listed here as a partner), using this (and/or other related ones) as a dependence. Monkey-patch can be used if one needs to urgently integrate a module inside the same class tree used here.
+The software architecture was planned taking that into account, providing clear interface-classes to guide the implementer, and several levels of increasing niceties across the repositories to avoid an excess of functionalities being inherited.
 
 
 # Grants
