@@ -46,7 +46,7 @@ class Cache(Container1):
                 "Cache cannot handle stream.\nHINT: use Map(Cache(...)) or cache enclosing the expander (e.g. "
                 "Partition) and Reduce.")
 
-        hollow = data.hollow(self.step)
+        hollow = self.step << data
         output_data = self.storage.fetch(hollow, lock=True)  # TODO: restore inner
 
         # Process if still needed  ----------------------------------
