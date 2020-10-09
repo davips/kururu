@@ -71,3 +71,6 @@ class Cache(Container1):
         # print(output_data.inner.id)
         # print('------------------------')
         return output_data
+
+    def _uuid_(self):
+        return self.step.uuid
