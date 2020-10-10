@@ -18,6 +18,11 @@ class PCA1(DDStep):
         newX = self.model(data.inner).transform(data.X)
         return data.update(self, X=newX)
 
+    def translate(self, exception, data):
+        msg = str(exception)
+        if "n_components=" in msg and "must be between 0 and min(n_samples, n_features)=" in msg:
+            return f"n:{self.n} > Xw{data.Xw} or n:{self.n} > Xh{data.Xh}"
+
     @globalcache
     def model(self, data):
         pca = PCA_(n_components=self.n, random_state=self.seed)
