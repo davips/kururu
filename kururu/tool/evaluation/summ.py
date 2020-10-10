@@ -47,7 +47,7 @@ class Summ(asFixedParam, DIStep, withFunctionInspection):
             return [array(f(acc)) for f in self.selected]
 
         iterator = Accumulator(data.stream, start=[], step_func=step_func, end_func=end_func)
-        return data.replace(self, stream=iterator, S=lambda: iterator.result)
+        return data.update(self, stream=iterator, S=lambda: iterator.result)
 
     @staticmethod
     def _fun_mean(values):

@@ -10,4 +10,4 @@ class Hand(DIStep):
 
     def _process_(self, data: AbsData):
         dic = {self.field: value}
-        return data.replace(self, **dic)
+        return data.update(self, **dic)

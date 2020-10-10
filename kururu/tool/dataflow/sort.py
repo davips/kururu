@@ -34,7 +34,7 @@ class Sort(DIStep):
             else:
                 dic[field] = M[:, indices]
 
-        return data.replace(self, **dic)
+        return data.update(self, **dic)
 
 
 class Sortr(Sort):

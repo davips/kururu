@@ -9,5 +9,5 @@ class NR(DIStep):
     def _process_(self, data: AbsData):
         # newX = ...
         # data...
-        # return data.replace(self, X=newX)
+        # return data.update(self, X=newX)
         pass

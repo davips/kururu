@@ -25,4 +25,4 @@ class Rank(DIStep):
                 dic["r" + field] = (rankdata(M, axis=0) - 1).astype(int)
             else:
                 dic["r" + field] = (rankdata(M, axis=1) - 1).astype(int)
-        return data.replace(self, **dic)
+        return data.update(self, **dic)

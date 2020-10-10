@@ -8,4 +8,4 @@ class Let(DIStep):
 
     def _process_(self, data: AbsData):
         dic = {self.field: self.value}
-        return data.replace(self, **dic)
+        return data.update(self, **dic)

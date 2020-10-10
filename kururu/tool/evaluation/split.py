@@ -34,7 +34,7 @@ class Split1(DIStep, withPartitioning):
         newmatrices = {}
         for f in self.fields:
             newmatrices[f] = data.field(f, context=self)[self._indices]
-        return data.replace(self, **newmatrices)
+        return data.update(self, **newmatrices)
 
 
 class Split(withPartitioning, asMacro, DIStep):

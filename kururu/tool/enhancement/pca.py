@@ -16,7 +16,7 @@ class PCA1(DDStep):
 
     def _process_(self, data: Data):
         newX = self.model(data.inner).transform(data.X)
-        return data.replace(self, X=newX)
+        return data.update(self, X=newX)
 
     @globalcache
     def model(self, data):
