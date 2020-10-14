@@ -16,29 +16,22 @@ class Cache(Container1):
     # REMINDER: com stream ele processaria em cada worker e depois o step interno tentaria processar de novo,
     # i.e. o cache criaria um stream pra competir com o oficial
 
-    pickle = None
-    sqlite = None
-    amnesia = None
+    storages = {}
 
     def __init__(self, step, storage="sqlite", seed=0):  # TODO: what todo with seed here?
         super().__init__(step, {"seed": seed, "storage": storage})
         if storage == "pickle":
-            if self.pickle is None:
-                self.pickle = Pickle()
-            self.storage = self.pickle
+            storage = Pickle()
         elif storage == "sqlite":
-            if self.sqlite is None:
-                self.sqlite = SQLite()
-            self.storage = self.sqlite
+            storage = SQLite()
         elif storage == "amnesia":
-            if self.amnesia is None:
-                self.amnesia = Amnesia()
-            self.storage = self.amnesia
-        elif isinstance(storage, Storage):
-            self.storage = storage
-        else:
+            storage = Amnesia()
+        elif not isinstance(storage, Storage):
             print("Unknown storage:", self.storage)
             exit()
+        if storage.id not in self.storages:
+            self.storages[storage.id] = storage
+        self.storage = self.storages[storage.id]
 
     def _process_(self, data: AbsData):
         if data.stream:
