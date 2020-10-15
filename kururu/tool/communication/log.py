@@ -2,10 +2,10 @@ import re
 from abc import ABC
 
 import numpy as np
+from aiuna.content.data import Data
 
 from akangatu.distep import DIStep
 from cruipto.util import flatten
-from transf.absdata import AbsData
 from transf.mixin.noop import asNoOp
 from transf.mixin.config import asUnitset
 
@@ -69,6 +69,6 @@ class AbsLog(asUnitset, DIStep, ABC):
 class Log(asNoOp, AbsLog):
     """Same as Report, but invisible in History"""
 
-    def _process_(self, data: AbsData):  # overriding Report, to be invisible
+    def _process_(self, data: Data):  # overriding Report, to be invisible
         print(self._interpolate(self.text, data))
         return data

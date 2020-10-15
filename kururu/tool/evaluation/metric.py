@@ -1,11 +1,11 @@
 import numpy as np
+from aiuna.content.data import Data
 from sklearn.metrics import accuracy_score
 
 from akangatu.distep import DIStep
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
-from transf.absdata import AbsData
 from transf.mixin.config import asUnitset
 
 
@@ -36,7 +36,7 @@ class Metric(asUnitset, DIStep, withFunctionInspection):
         self.target, self.prediction = target, prediction
         self.selected = [self.function_from_name[name] for name in functions]
 
-    def _process_(self, data: AbsData):
+    def _process_(self, data: Data):
         newr = np.array([f(data, self.target, self.prediction) for f in self.selected])
         return data.update(self, r=newr)
 

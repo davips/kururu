@@ -21,8 +21,8 @@ for step in steps:
     res = step.process(data)
     # if not data.inner or not callable(step):
     print("data.inner", data.uuid * step.uuid, res.uuid, data.uuid * step.uuid == res.uuid, end="  ")
-    print(res.matrices.keys(), end="  ")
-    print(res.inner and res.inner.matrices.keys())
+    print(res.fields, end="  ")
+    print(res.inner and res.inner.fields)
     # else:
     #     print("   (data)", Ins(data).process(data).uuid * step.uuid, res.uuid, Ins(data).process(data).uuid * step.uuid == res.uuid)
     #     print(" esperado ", Ins(data).process(data).uuid, "*", step.uuid, "=", Ins(data).process(data).uuid * step.uuid)

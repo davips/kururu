@@ -1,10 +1,10 @@
+from aiuna.content.data import Data
 from akangatu.distep import DIStep
-from transf.absdata import AbsData
 from transf.mixin.config import asConfigLess
 
 
 class DelStream(asConfigLess, DIStep):
-    def _process_(self, data: AbsData):
+    def _process_(self, data: Data):
         return data.update(self, stream=None)
 
 # TODO : Lift()   stream from inner to outer.

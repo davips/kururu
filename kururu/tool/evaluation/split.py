@@ -1,10 +1,10 @@
+from aiuna.content.data import Data
 from akangatu.distep import DIStep
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
 from akangatu.innerchecking import EnsureNoInner
 from kururu.tool.evaluation.mixin.partitioning import withPartitioning
-from transf.absdata import AbsData
 
 
 class Split1(DIStep, withPartitioning):
@@ -27,7 +27,7 @@ class Split1(DIStep, withPartitioning):
         withPartitioning.__init__(self, mode, config)
         DIStep.__init__(self, config)
 
-    def _process_(self, data: AbsData):
+    def _process_(self, data: Data):
         if self._indices is None:
             self._indices = self.partitionings(data)[self.i][self.istep]
 
