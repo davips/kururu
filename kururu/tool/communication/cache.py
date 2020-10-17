@@ -15,6 +15,12 @@ class Cache(Container1):
     (but not when they just come from storage, which would activate the other type of lazyness, the storage one)."""
     # REMINDER: com stream ele processaria em cada worker e depois o step interno tentaria processar de novo,
     # i.e. o cache criaria um stream pra competir com o oficial
+    # Pra ficar mais claro: o cache precisa *conter*
+    # NOVA solução: o cache não pode prever o resultado do worker no stream (ou pode?),
+    # mas pode prever o uuid resultante e assim ter o que colocar num field streamed e pode enxertar mini caches sobre cada worker;
+    #  No Accumulator().end_func() pode storar o data contenedor propriamente
+    # Assim, stream poderia ser outro campo string por virgulas no SQL.
+    # Pra facilitar, os streamers poderiam fornecer um meio de enxertar conteiner neles.
 
     storages = {}
 
@@ -35,9 +41,8 @@ class Cache(Container1):
 
     def _process_(self, data: AbsData):
         if data.stream:
-            print(
-                "Cache cannot handle stream.\nHINT: use Map(Cache(...)) or cache enclosing the expander (e.g. "
-                "Partition) and Reduce.")
+            # TODO ver papel e repensar essa restrição
+            print("Cache cannot handle stream.\nHINT: use Map(Cache(...)) or cache enclosing both the expander (e.g. Partition) and Reduce.")
 
         hollow = self.step << data
         output_data = self.storage.fetch(hollow, lock=True)  # TODO: restore inner
@@ -51,8 +56,7 @@ class Cache(Container1):
                 self.storage.unlock(hollow)
                 traceback.print_exc()
                 exit(0)
-            # TODO: quando grava um frozen, é preciso marcar isso dealguma forma
-            #  para que seja devidamente reconhecido como tal na hora do fetch.
+            # TODO: confirmar que failure/timeout/? são gravados e recuperados
             self.storage.store(output_data, check_dup=False)
 
         # print(data.id)
