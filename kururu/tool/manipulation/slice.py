@@ -22,4 +22,4 @@ class Slice(DIStep):
             newfields = {k: data.field(k, context=self)[first].reshape(1, -1) for k in self.fields}
         else:
             newfields = {k: data.field(k, context=self)[first:last + 1] for k in self.fields}
-        return data.replace(self, **newfields)
+        return data.update(self, **newfields)

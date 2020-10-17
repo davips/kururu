@@ -28,7 +28,7 @@ class Reduce(asConfigLess, DIStep):
         # print("terminou")
         if failures:
             data = data.failed([], "; ".join(failures))
-        return data.replace(self, stream=None)
+        return data.update(self, stream=None)
 
 
 # class Reduce2(asMacro, Reduce):

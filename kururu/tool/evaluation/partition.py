@@ -28,5 +28,5 @@ class Partition(asFixedParam, withPartitioning, DIStep):
                 yield wk.process(data)
             print()
 
-        return data.replace(self, stream=gen())
+        return data.update(self, stream=gen())
 

@@ -9,7 +9,7 @@ class Margin(asConfigLess, DIStep):
         P.sort()
         U = P[:, 1] - P[:, 0]
         # print(P.shape, U.shape)
-        return data.replace(self, U=U)
+        return data.update(self, U=U)
 
 
 class Entropy(asConfigLess, DIStep):

@@ -12,7 +12,7 @@ class Predictor(DDStep, ABC):
         dic = {"Z": self.model(data.inner).predict(data.X)}
         if "probability" in self.config and self.config["probability"]:
             dic["P"] = self.model(data.inner).predict_proba(data.X)
-        return data.replace(self, **dic)
+        return data.update(self, **dic)
 
     @globalcache
     def model(self, data):

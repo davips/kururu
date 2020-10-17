@@ -1,11 +1,11 @@
 import traceback
 
+from aiuna.content.data import Data
 from akangatu.container import Container1
 from tatu.amnesia import Amnesia
 from tatu.storage import Storage
 from tatu.pickle_ import Pickle
 from tatu.sql.sqlite import SQLite
-from transf.absdata import AbsData
 
 
 class Cache(Container1):
@@ -39,7 +39,7 @@ class Cache(Container1):
             self.storages[storage.id] = storage
         self.storage = self.storages[storage.id]
 
-    def _process_(self, data: AbsData):
+    def _process_(self, data: Data):
         if data.stream:
             # TODO ver papel e repensar essa restrição
             print("Cache cannot handle stream.\nHINT: use Map(Cache(...)) or cache enclosing both the expander (e.g. Partition) and Reduce.")

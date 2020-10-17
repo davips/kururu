@@ -9,4 +9,4 @@ class Map(Container1):
             print(f"{self.name} needs a Data object containing a stream.")
             print("Missing stream inside", data.id)
             exit()
-        return data.replace(self, stream=map(self.step.process, data.stream))
+        return data.update(self, stream=map(self.step.process, data.stream))

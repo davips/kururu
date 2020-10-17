@@ -19,4 +19,4 @@ class Binarize(asConfigLess, DIStep):  # TODO: other fields
             num = np.delete(data.field("X", context=self), data_nominal_idxs, axis=1).astype(float)
             newmatrices["X"] = np.column_stack((nom, num))
 
-        return data.replace(self, **newmatrices)
+        return data.update(self, **newmatrices)

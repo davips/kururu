@@ -13,4 +13,4 @@ class Copy(DIStep):
 
     def _process_(self, data):
         newmatrices = {self.tofield: lambda: data.field(self.fromfield, context=self)}
-        return data.replace(self, **newmatrices)
+        return data.update(self, **newmatrices)
