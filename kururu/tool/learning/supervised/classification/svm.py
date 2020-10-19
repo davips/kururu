@@ -25,9 +25,10 @@ class SVM2(asMacro, SVM):
         svm = SVM(**self.held)
         return svm * In(AutoIns * svm * DelIn)
 
-    # x = 0.00001
-    # l = []
-    # for i in range(128):
-    #     x = x * 1.1
-    #     l.append(x)
-    # print(l)
+# x = 0.00001
+# l = []
+# for i in range(28):
+#     x = x * 1.777
+#     l.append(x)
+# print(max(l))
+# print(l)
