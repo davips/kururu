@@ -30,14 +30,13 @@ class Metric(asUnitset, DIStep, withFunctionInspection):
 
     # noinspection PyDefaultArgument
     def __init__(self, functions=["accuracy"], target="Y", prediction="Z"):  # TODO:change all default prameters to "mutable"
-        config = {"functions": functions, "target": target, "prediction": prediction}
-        super().__init__(config)
+        super().__init__(functions=functions,target=target,prediction=prediction)
         self.functions = functions
         self.target, self.prediction = target, prediction
         self.selected = [self.function_from_name[name] for name in functions]
 
     def _process_(self, data: Data):
-        newr = np.array([f(data, self.target, self.prediction) for f in self.selected])
+        newr = lambda: np.array([f(data, self.target, self.prediction) for f in self.selected])
         return data.update(self, r=newr)
 
     @staticmethod

@@ -4,8 +4,10 @@ from akangatu.distep import DIStep
 
 class Slice(DIStep):
     """Select rows(or columns) inside a given interval, including limits."""
+
     def __init__(self, first=0, last=5, fields="X,Y"):
-        super().__init__({"first": first, "last": last, "fields": fields})  # REMINDER: super call with locals lead to infinite loop
+        # REMINDER: super call with locals lead to infinite loop
+        super().__init__(first=first, last=last, fields=fields)
         self.first, self.last = first, last
         self.fields = fields.split(",")
 

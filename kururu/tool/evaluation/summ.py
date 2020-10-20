@@ -16,7 +16,7 @@ class Summ(asFixedParam, DIStep, withFunctionInspection):
     # ...and lists are more confortable to write/read than tuples.
     # noinspection PyDefaultArgument
     def __init__(self, stage="test", field="R", functions=["mean"]):
-        super().__init__({"stage": stage, "field": field, "functions": functions})
+        super().__init__(stage=stage, field=field, functions=functions)
         self.functions = functions
         self.selected = [self.function_from_name[name] for name in functions]
         self.field = field

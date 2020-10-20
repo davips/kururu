@@ -12,7 +12,7 @@ class Partition(asFixedParam, withPartitioning, DIStep):
         config = locals().copy()
         del config["self"]
         withPartitioning.__init__(self, mode, config)
-        DIStep.__init__(self, config)
+        DIStep.__init__(self, **config)
 
     def _process_(self, data: AbsData):
         """"""

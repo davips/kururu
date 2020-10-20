@@ -15,7 +15,7 @@ class AbsLog(asUnitset, DIStep, ABC):
 
     # TODO: Which matrix are prioritary by default?
     def __init__(self, text="Default log r=$r"):
-        super().__init__({"text": text})
+        super().__init__(text=text)
         self.text = text
 
     @classmethod

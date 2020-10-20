@@ -9,9 +9,9 @@ class Predictor(DDStep, ABC):
     """  """
 
     def _process_(self, data: Data):
-        dic = {"Z": self.model(data.inner).predict(data.X)}
+        dic = {"Z": lambda: self.model(data.inner).predict(data.X)}
         if "probability" in self.config and self.config["probability"]:
-            dic["P"] = self.model(data.inner).predict_proba(data.X)
+            dic["P"] = lambda: self.model(data.inner).predict_proba(data.X)
         return data.update(self, **dic)
 
     @globalcache

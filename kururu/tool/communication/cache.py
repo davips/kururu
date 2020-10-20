@@ -25,7 +25,7 @@ class Cache(Container1):
     storages = {}
 
     def __init__(self, step, storage="sqlite", seed=0):  # TODO: what todo with seed here?
-        super().__init__(step, {"seed": seed, "storage": storage})
+        super().__init__(step, seed=seed, storage=storage)
         if storage == "pickle":
             storage = Pickle()
         elif storage == "sqlite":

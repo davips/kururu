@@ -11,7 +11,7 @@ class SVM(Predictor):
     """  """
 
     def __init__(self, inner=None, **kwargs):  # TODO :params and defaults
-        super().__init__(inner, config=kwargs)
+        super().__init__(inner, **kwargs)
 
     def _model_(self, data):
         nusvc = SVC(**self.config)

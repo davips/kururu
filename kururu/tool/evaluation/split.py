@@ -25,7 +25,7 @@ class Split1(DIStep, withPartitioning):
             exit()
 
         withPartitioning.__init__(self, mode, config)
-        DIStep.__init__(self, config)
+        DIStep.__init__(self, **config)
 
     def _process_(self, data: Data):
         if self._indices is None:
@@ -43,7 +43,7 @@ class Split(withPartitioning, asMacro, DIStep):
         del config["self"]
         del config["_indices"]
         withPartitioning.__init__(self, mode, config)
-        DIStep.__init__(self, config)
+        DIStep.__init__(self, **config)
 
     def _step_(self):
         # print("held:", self.held)

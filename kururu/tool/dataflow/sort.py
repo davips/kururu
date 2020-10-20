@@ -7,7 +7,7 @@ class Sort(DIStep):
     """Sort all provided matrices by a column(or row) of the first one."""
 
     def __init__(self, fields="U,X", byindex=0, reverse=False, along="rows"):
-        super().__init__({"fields": fields, "index": byindex, "reverse": reverse, "by": along})
+        super().__init__(fields=fields, byindex=byindex, reverse=reverse, along=along)
         self.fields = fields.split(",")
         self.along = along
         self.byindex = byindex

@@ -12,7 +12,7 @@ class PCA1(DDStep):
     def __init__(self, inner=None, n=2, seed=0):
         self.n = n
         self.seed = seed
-        super().__init__(inner, {"n": n, "seed": seed})
+        super().__init__(inner, n=n, seed=seed)
 
     def _process_(self, data: Data):
         newX = self.model(data.inner).transform(data.X)
