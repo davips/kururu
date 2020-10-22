@@ -40,34 +40,14 @@ class Cache(Container1):
         self.storage = self.storages[storage.id]
 
     def _process_(self, data: Data):
-        if data.stream:
-            # TODO ver papel e repensar essa restrição
-            print("Cache cannot handle stream.\nHINT: use Map(Cache(...)) or cache enclosing both the expander (e.g. Partition) and Reduce.")
+        # TODO ver no papel como fazer mini Caches p/ stream (se é versdade)
+        planned = data >> self.step
+        fetched = self.storage.lazyfetch(planned, lock=True)
+        if fetched:
+            return fetched
+        return self.storage.lazystore(planned)
 
-        hollow = self.step << data
-        output_data = self.storage.fetch(hollow, lock=True)  # TODO: restore inner
-
-        # Process if still needed  ----------------------------------
-        if output_data is None:
-            try:
-                # REMINDER: exit_on_error=False is to allow storage to cleanup after an error
-                output_data = self.step.process(data, exit_on_error=False)
-            except:
-                self.storage.unlock(hollow)
-                traceback.print_exc()
-                exit(0)
-            # TODO: confirmar que failure/timeout/? são gravados e recuperados
-            self.storage.store(output_data, check_dup=False)
-
-        # print(data.id)
-        # print(hollow.id)
-        # print(output_data.id)
-        # print("..................")
-        # print(data.inner.id)
-        # print(hollow.inner.id)
-        # print(output_data.inner.id)
-        # print('------------------------')
-        return output_data
+    # TODO dar unlock() no data.getitem se exception
 
     def _uuid_(self):
         return self.step.uuid

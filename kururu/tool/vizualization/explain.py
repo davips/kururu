@@ -6,8 +6,7 @@
 # from melime.explainers.explainer import Explainer
 # from melime.explainers.visualizations.plot_importance import ExplainGraph
 # from melime.generators.kde_gen import KDEGen
-# from transf.absdata import AbsData
-#
+# #
 #
 # class Explain(Container1):
 #     # noinspection PyDefaultArgument
@@ -16,7 +15,7 @@
 #         # TODO: dar opção de selecionar a classe mais forte, mas depende de passar o modelo (issue no melime?)
 #         self.class_index = class_index
 #
-#     def _process_(self, data: AbsData):
+#     def _process_(self, data):
 #         classifier = self.step
 #         while isinstance(classifier, Chain):
 #             classifier = classifier.steps[0]

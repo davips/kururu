@@ -15,7 +15,7 @@ class PCA1(DDStep):
         super().__init__(inner, n=n, seed=seed)
 
     def _process_(self, data: Data):
-        newX = self.model(data.inner).transform(data.X)
+        newX = lambda: self.model(data.inner).transform(data.X)
         return data.update(self, X=newX)
 
     def translate(self, exception, data):

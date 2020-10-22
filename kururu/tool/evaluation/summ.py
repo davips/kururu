@@ -7,7 +7,6 @@ from akangatu.innerchecking import EnsureNoInner
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from kururu.tool.manipulation.copy import Copy
 from kururu.tool.stream.internal.accumulator import Accumulator
-from transf.absdata import AbsData
 from akangatu.abs.mixin.fixedparam import asFixedParam
 
 
@@ -25,7 +24,7 @@ class Summ(asFixedParam, DIStep, withFunctionInspection):
             exit()
         self.stage = stage
 
-    def _process_(self, data: AbsData):
+    def _process_(self, data):
         if data.stream is None:
             print(f"{self.name} needs a Data object containing a stream.")
             print("Missing stream inside", data.id)

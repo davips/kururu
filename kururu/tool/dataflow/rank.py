@@ -1,6 +1,4 @@
 from scipy.stats import rankdata
-from transf.absdata import AbsData
-
 from akangatu.distep import DIStep
 
 
@@ -16,7 +14,7 @@ class Rank(DIStep):
             print(self.name, f"Unknown type of entry to rank: by='{along}'. Should be 'rows' or 'cols'.")
             exit()
 
-    def _process_(self, data: AbsData):
+    def _process_(self, data):
         dic = {}
         for field in self.fields:
             def result():

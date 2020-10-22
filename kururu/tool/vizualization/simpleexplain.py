@@ -4,8 +4,7 @@
 # from melime.explainers.explainer import Explainer
 # from melime.explainers.visualizations.plot_importance import ExplainGraph
 # from melime.generators.kde_gen import KDEGen
-# from transf.absdata import AbsData
-# from transf.mixin.noop import asNoOp
+# # from transf.mixin.noop import asNoOp
 #
 #
 # # TODO: simplify this class to be independent of the prediction of syntetic examples.
@@ -16,7 +15,7 @@
 #         # TODO: dar opção de selecionar a classe mais forte, mas depende de passar o modelo (issue no melime?)
 #         self.class_index = class_index
 #
-#     def _process_(self, data: AbsData):
+#     def _process_(self, data):
 #         inner = data.inner
 #         generator = KDEGen(verbose=True).fit(inner.X)
 #         # TODO: model_predict depende do modelo pra predizer em exemplos artificiais

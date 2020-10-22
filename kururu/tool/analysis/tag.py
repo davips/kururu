@@ -1,8 +1,7 @@
 # import threading
 #
 # from akangatu.abs.container import Container1
-# from transf.absdata import AbsData
-# from transf.mixin.noop import asNoOp
+# # from transf.mixin.noop import asNoOp
 #
 #
 # class Tag(asNoOp, Container1):
@@ -24,7 +23,7 @@
 #         self.alias = alias
 #         self.used = False
 #
-#     def _process_(self, data: AbsData):
+#     def _process_(self, data):
 #         if self.used:
 #             print("Cannot reuse a Tag step! Used with:", self.input.id, self.output.id)
 #             exit()

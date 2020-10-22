@@ -3,7 +3,6 @@ from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.evaluation.mixin.partitioning import withPartitioning
 from kururu.tool.evaluation.split import Split1
 from akangatu.distep import DIStep
-from transf.absdata import AbsData
 from akangatu.abs.mixin.fixedparam import asFixedParam
 
 
@@ -14,7 +13,7 @@ class Partition(asFixedParam, withPartitioning, DIStep):
         withPartitioning.__init__(self, mode, config)
         DIStep.__init__(self, **config)
 
-    def _process_(self, data: AbsData):
+    def _process_(self, data):
         """"""
         idxs = self.partitionings(data)
 

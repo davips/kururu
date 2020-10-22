@@ -9,12 +9,18 @@ from kururu.tool.evaluation.summ import Summ2, Summ
 from kururu.tool.learning.supervised.classification.svm import SVM2
 from kururu.tool.stream.map import Map
 from kururu.tool.stream.reduce import Reduce
+from tatu.sql.sqlite import SQLite
 
-pipe = PCA(n=3) * SVM2(C=1) * Metric2(["accuracy", "history"])
-wk = File("abalone3.arff") * Binarize * Partition(splits=3) * Map(Cache(pipe) * Report("$r {inner.r}")) * Summ2 * Reduce
-data = wk.data
-# data = wk.sample().data
-print("train:\n", data.Si)
-print("test:\n", data.S, list(data.history.clean))
-
-# cache e streamcache?   cache seria como summ, que finaliza usando Accumulator
+f = File("abalone3.arff")
+SQLite().delete_data(f.data, check_existence=False)
+d = Cache(f).data
+print(d.Y)
+#
+# pipe = PCA(n=3) * SVM2(C=1) * Metric2(["accuracy", "history"])
+# wk = File("abalone3.arff") * Binarize * Partition(splits=3) * Map(Cache(pipe) * Report("$r {inner.r}")) * Summ2 * Reduce
+# data = wk.data
+# # data = wk.sample().data
+# print("train:\n", data.Si)
+# print("test:\n", data.S, list(data.history.clean))
+#
+# # cache e streamcache?   cache seria como summ, que finaliza usando Accumulator

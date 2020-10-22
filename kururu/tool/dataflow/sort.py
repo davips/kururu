@@ -1,7 +1,4 @@
 from akangatu.distep import DIStep
-from transf.absdata import AbsData
-
-
 # TODO: create Numpy step:  Numpy(method="sort", fromfield="A", tofield="B")
 class Sort(DIStep):
     """Sort all provided matrices by a column(or row) of the first one."""
@@ -16,7 +13,7 @@ class Sort(DIStep):
             print(self.name, f"Unknown type of entry to sort: by='{along}'. Should be 'rows' or 'cols'.")
             exit()  # TODO: generalize these checkings/errors
 
-    def _process_(self, data: AbsData):
+    def _process_(self, data):
         M = data.field(self.fields[0], context=self)
         if self.along == "rows":
             indices = M[:, self.byindex].argsort()

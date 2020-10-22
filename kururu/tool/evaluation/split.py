@@ -21,19 +21,21 @@ class Split1(DIStep, withPartitioning):
         elif stage == "test":
             self.istep = 1
         else:
-            print("Unknown stage:",stage)
+            print("Unknown stage:", stage)
             exit()
 
         withPartitioning.__init__(self, mode, config)
         DIStep.__init__(self, **config)
 
     def _process_(self, data: Data):
-        if self._indices is None:
-            self._indices = self.partitionings(data)[self.i][self.istep]
+        def indices():
+            if self._indices is None:
+                self._indices = self.partitionings(data)[self.i][self.istep]
+            return self._indices
 
         newmatrices = {}
         for f in self.fields:
-            newmatrices[f] = data.field(f, context=self)[self._indices]
+            newmatrices[f] = (lambda f: lambda: data[f][indices()])(f)
         return data.update(self, **newmatrices)
 
 
