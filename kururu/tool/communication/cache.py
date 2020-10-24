@@ -38,14 +38,14 @@ class Cache(Container1):
         if storage.id not in self.storages:
             self.storages[storage.id] = storage
         self.storage = self.storages[storage.id]
-
-    def _process_(self, data: Data):
-        # TODO ver no papel como fazer mini Caches p/ stream (se é versdade)
-        planned = data >> self.step
-        fetched = self.storage.lazyfetch(planned, lock=True)
-        if fetched:
-            return fetched
-        return self.storage.lazystore(planned)
+    ???? ver se vai haver cache container. o único motivo seria caso a montagem dos campos lazy tenha muito overhead
+    # def _process_(self, data: Data):
+    #     # TODO ver no papel como fazer mini Caches p/ stream (se é versdade)
+    #     planned = data >> self.step
+    #     fetched = self.storage.lazyfetch(planned, lock=True)
+    #     if fetched:
+    #         return fetched
+    #     return self.storage.lazystore(planned)
 
     # TODO dar unlock() no data.getitem se exception
 

@@ -19,10 +19,10 @@ for step in steps:
     print(step.id, end="  ")
 
     res = step.process(data)
-    # if not data.inner or not callable(step):
+    # if not data.hasinner or not callable(step):
     print("data.inner", data.uuid * step.uuid, res.uuid, data.uuid * step.uuid == res.uuid, end="  ")
     print(res.field_funcs_m, end="  ")
-    print(res.inner and res.inner.field_funcs_m)
+    print(res.hasinner and res.inner.field_funcs_m)
     # else:
     #     print("   (data)", Ins(data).process(data).uuid * step.uuid, res.uuid, Ins(data).process(data).uuid * step.uuid == res.uuid)
     #     print(" esperado ", Ins(data).process(data).uuid, "*", step.uuid, "=", Ins(data).process(data).uuid * step.uuid)

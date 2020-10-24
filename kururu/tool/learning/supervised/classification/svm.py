@@ -1,9 +1,9 @@
 from sklearn.svm import SVC
 
+from aiuna.delete import Del
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
-from kururu.tool.dataflow.delin import DelIn
 from kururu.tool.learning.supervised.abs.predictor import Predictor
 
 
@@ -23,7 +23,7 @@ class SVM2(asMacro, SVM):
     def _step_(self):
         # print("svm hjhhhhhhhhhhhh", self.held)
         svm = SVM(**self.held)
-        return svm * In(AutoIns * svm * DelIn)
+        return svm * In(AutoIns * svm * Del("inner"))
 
 # x = 0.00001
 # l = []

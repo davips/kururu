@@ -37,7 +37,7 @@ for transf in [SVM(), SVM2(), File("iris.arff"), Metric2(), Metric(), PCA(), PCA
     if callable(transf):
         data.inner=data
     else:
-        data.inner=None
+        data.inner=?????????
 
     dat = None if isinstance(transf, File) else data
     d = t.tr(dat)

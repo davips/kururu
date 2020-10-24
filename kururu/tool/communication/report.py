@@ -9,3 +9,5 @@ class Report(asMarker, AbsLog):
         $r prints 'r'
         {attr} prints the Data object attr, e.g.: {failure}
         """
+
+    #TODO altera Data (pondo output?) ou uuid=identity ?

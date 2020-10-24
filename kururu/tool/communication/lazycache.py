@@ -7,9 +7,10 @@ from tatu.amnesia import Amnesia
 from tatu.storage import Storage
 from tatu.pickle_ import Pickle
 from tatu.sql.sqlite import SQLite
+from transf.mixin.noop import asNoOp
 
 
-class LCache(DIStep):
+class LCache(asNoOp, DIStep):
     storages = {}
 
     def __init__(self, storage="sqlite", seed=0):  # TODO: what todo with seed here?
@@ -27,9 +28,13 @@ class LCache(DIStep):
             self.storages[storage.id] = storage
         self.storage = self.storages[storage.id]
 
+
     def _process_(self, data: Data):
-        # TODO ver no papel como fazer mini Caches p/ stream (se é versdade)
+        global c
         print("bef fetch")
+        if c > 0:
+            raise Exception()
+        c += 1
         fetched = self.storage.lazyfetch(data, lock=True)
         print("aft fetch")
         if fetched:
@@ -41,5 +46,4 @@ class LCache(DIStep):
 
     # TODO dar unlock() no data.getitem se exception
 
-    def _uuid_(self):
-        return self.step.uuid
+c = 0

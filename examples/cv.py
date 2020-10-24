@@ -10,20 +10,23 @@ from kururu.tool.evaluation.summ import Summ2, Summ
 from kururu.tool.learning.supervised.classification.svm import SVM2
 from kururu.tool.stream.map import Map
 from kururu.tool.stream.reduce import Reduce
+from tatu.sql.mysql import MySQL
 from tatu.sql.sqlite import SQLite
 
 f = File("abalone3.arff")
-SQLite().delete_data(f.data, check_existence=False)
+# SQLite().delete_data(f.data, check_existence=False)
+my = MySQL(db="tatu:kururu@localhost/tatu")
 
 d = f.data
-print("antes:\n", list(d.history ^ "name"))
-d = (f * LCache).data
-print("depois:\n", list(d.history))
-print("depois:\n", list(d.history ^ "name"))
+print("antes:\n", list(d.history ^ "id"), d.id)
+print(d.Y[:2])
 
 print('---------------')
-print(d)
-print(d.Y)
+d = (Binarize*LCache(my)).process(d)
+print("depois:\n", list(d.history ^ "name"))
+
+# print(d)
+print(d.Y[:2])
 exit()
 
 print("---------------- ========================= +++++++++++++++++++++++++++++")
