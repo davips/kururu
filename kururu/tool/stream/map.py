@@ -1,4 +1,6 @@
 from akangatu.container import Container1
+
+
 class Map(Container1):
 
     def _process_(self, data):
@@ -6,4 +8,4 @@ class Map(Container1):
             print(f"{self.name} needs a Data object containing a stream.")
             print("Missing stream inside", data.id)
             exit()
-        return data.update(self, stream=map(self.step.process, data.stream))
+        return data.update(self, stream=lambda: map(self.step.process, data.stream))

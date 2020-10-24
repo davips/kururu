@@ -1,5 +1,6 @@
 from aiuna.file import File
 from kururu.tool.communication.cache import Cache
+from kururu.tool.communication.lazycache import LCache
 from kururu.tool.communication.report import Report
 from kururu.tool.enhancement.binarize import Binarize
 from kururu.tool.enhancement.pca import PCA
@@ -13,14 +14,24 @@ from tatu.sql.sqlite import SQLite
 
 f = File("abalone3.arff")
 SQLite().delete_data(f.data, check_existence=False)
-d = Cache(f).data
+
+d = f.data
+print("antes:\n", list(d.history ^ "name"))
+d = (f * LCache).data
+print("depois:\n", list(d.history))
+print("depois:\n", list(d.history ^ "name"))
+
+print('---------------')
+print(d)
 print(d.Y)
-#
-# pipe = PCA(n=3) * SVM2(C=1) * Metric2(["accuracy", "history"])
-# wk = File("abalone3.arff") * Binarize * Partition(splits=3) * Map(Cache(pipe) * Report("$r {inner.r}")) * Summ2 * Reduce
-# data = wk.data
-# # data = wk.sample().data
-# print("train:\n", data.Si)
-# print("test:\n", data.S, list(data.history.clean))
-#
-# # cache e streamcache?   cache seria como summ, que finaliza usando Accumulator
+exit()
+
+print("---------------- ========================= +++++++++++++++++++++++++++++")
+pipe = PCA(n=3) * SVM2(C=1) * Metric2(["accuracy", "history"])
+wk = File("abalone3.arff") * Binarize * Partition(splits=3) * Map(pipe * Report("$r {inner.r}")) * Summ2 * Reduce
+data = wk.data
+# data = wk.sample().data
+print("train:\n", data.Si)
+print("test:\n", data.S, list(data.history ^ "name"))
+
+# cache e streamcache?   cache seria como summ, que finaliza usando Accumulator
