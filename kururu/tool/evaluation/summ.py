@@ -1,6 +1,6 @@
 from numpy import mean, array
 
-from aiuna.mixin import linalghelper
+import linalghelper
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.distep import DIStep
 from akangatu.innerchecking import EnsureNoInner
@@ -40,8 +40,8 @@ class Summ(asFixedParam, DIStep, withFunctionInspection):
         def end_func(acc):
             return [array(f(acc)) for f in self.selected]
 
-        iterator = Accumulator(data.stream, start=[], step_func=step_func, end_func=end_func)
-        return data.update(self, stream=iterator, S=lambda: iterator.result)
+        iterator = Accumulator(lambda: data.stream, start=[], step_func=step_func, end_func=end_func)
+        return data.update(self, stream=lambda: iterator, S=lambda: iterator.result)
 
     @staticmethod
     def _fun_mean(values):

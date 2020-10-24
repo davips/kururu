@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from typing import Callable, Iterator, Tuple
+from typing import Iterator
 
-from aiuna.content.data import Data
+from linalghelper import islazy
 
 
 @dataclass
@@ -41,6 +41,7 @@ class Accumulator(Iterator):
 
     def __iter__(self):
         acc = self.start.copy()
+        self.iterator = self.iterator() if islazy(self.iterator) else self.iterator
         try:
             for data in self.iterator:
                 dic={"data":data}
