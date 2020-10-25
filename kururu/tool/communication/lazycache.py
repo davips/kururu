@@ -13,8 +13,8 @@ from transf.mixin.noop import asNoOp
 class LCache(asNoOp, DIStep):
     storages = {}
 
-    def __init__(self, storage="sqlite", seed=0):  # TODO: what todo with seed here?
-        super().__init__(seed=seed, storage=storage)
+    def __init__(self, storage="sqlite", eager_store=True, seed=0):  # TODO: what todo with seed here?
+        super().__init__(storage=storage, eager_store=eager_store, seed=seed)
         if storage == "pickle":
             storage = Pickle()
         elif storage == "sqlite":
@@ -27,6 +27,7 @@ class LCache(asNoOp, DIStep):
         if storage.id not in self.storages:
             self.storages[storage.id] = storage
         self.storage = self.storages[storage.id]
+        self.eager_store=eager_store
 
 
     def _process_(self, data: Data):
@@ -35,12 +36,12 @@ class LCache(asNoOp, DIStep):
         if c > 0:
             raise Exception()
         c += 1
-        fetched = self.storage.lazyfetch(data, lock=True)
+        fetched = self.storage.fetch(data, lock=True)
         print("aft fetch")
         if fetched:
             return fetched
         print("bef store")
-        ret = self.storage.lazystore(data)
+        ret = self.storage.store(data, lazy=not self.eager_store)
         print("aft store")
         return ret
 

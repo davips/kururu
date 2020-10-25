@@ -21,14 +21,16 @@ print("antes:\n", list(d.history ^ "id"), d.id)
 print(d.Y[:2])
 
 print('---------------')
-d = (Binarize*LCache(my)).process(d)
+d = d >> LCache(my)
+d.Y
 print("depois:\n", list(d.history ^ "name"))
 
 # print(d)
 print(d.Y[:2])
 
-d = my.lazyfetch(d.id)
-print(d.history^"name")
+d = my.fetch("1bUciDgvngsL1qwuBwVBB0R", lazy=False)
+print(d.history^"name", d.Y)
+# print(d.arff("nome", "desc"))
 exit()
 
 print("---------------- ========================= +++++++++++++++++++++++++++++")
