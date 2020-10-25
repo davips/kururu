@@ -1,5 +1,4 @@
 from aiuna.file import File
-from kururu.tool.communication.cache import Cache
 from kururu.tool.communication.lazycache import LCache
 from kururu.tool.communication.report import Report
 from kururu.tool.enhancement.binarize import Binarize
