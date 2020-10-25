@@ -6,7 +6,7 @@ from akangatu.distep import DIStep
 from akangatu.innerchecking import EnsureNoInner
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from kururu.tool.manipulation.copy import Copy
-from kururu.tool.stream.accumulator import Accumulator
+from kururu.tool.stream.internal.accumulator import Accumulator
 from transf.absdata import AbsData
 from akangatu.abs.mixin.fixedparam import asFixedParam
 

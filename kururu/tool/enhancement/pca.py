@@ -36,6 +36,6 @@ class PCA(asMacro, PCA1):
         return pca * In(AutoIns * pca * DelIn)
 
 # l = []
-# for i in range(1, 128):
-#     l.append(round(pow(1.05, i)))
+# for i in range(1, 28):
+#     l.append(round(pow(1.2, i)))
 # print(sorted(list(set(l))))
