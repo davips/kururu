@@ -26,6 +26,9 @@ print("depois:\n", list(d.history ^ "name"))
 
 # print(d)
 print(d.Y[:2])
+
+d = my.lazyfetch(d.id)
+print(d.history^"name")
 exit()
 
 print("---------------- ========================= +++++++++++++++++++++++++++++")
