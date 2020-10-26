@@ -17,7 +17,8 @@ my = MySQL(db="tatu:kururu@localhost/tatu")
 sq = SQLite()
 
 f = File("iris.arff")
-print(f.data.id)
+print(f.data.Xt)
+exit()
 my.store(f.data)
 
 
