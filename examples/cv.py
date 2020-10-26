@@ -18,8 +18,7 @@ sq = SQLite()
 
 f = File("iris.arff")
 print(f.data.Xt)
-exit()
-my.store(f.data)
+# my.store(f.data)
 
 
 
