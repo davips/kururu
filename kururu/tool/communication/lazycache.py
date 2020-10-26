@@ -41,7 +41,7 @@ class LCache(asNoOp, DIStep):
         if fetched:
             return fetched
         print("bef store")
-        ret = self.storage.store(data, lazy=not self.eager_store)
+        ret = self.storage.store(data, unlock=True, lazy=not self.eager_store)
         print("aft store")
         return ret
 

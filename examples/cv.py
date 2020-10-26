@@ -12,10 +12,15 @@ from kururu.tool.stream.reduce import Reduce
 from tatu.sql.mysql import MySQL
 from tatu.sql.sqlite import SQLite
 
-f = File("abalone3.arff")
 # SQLite().delete_data(f.data, check_existence=False)
 my = MySQL(db="tatu:kururu@localhost/tatu")
 sq = SQLite()
+
+f = File("iris.arff")
+print(f.data.id)
+my.store(f.data)
+
+
 
 d = f.data
 print("antes:\n", list(d.history ^ "id"), d.id)
@@ -29,7 +34,7 @@ print("depois:\n", list(d.history ^ "name"))
 # print(d)
 print(d.Y[:2])
 
-d = my.fetch("1bUciDgvngsL1qwuBwVBB0R", lazy=False)
+d = my.fetch("3l9bSwFwL0TsSztkDb0iuVQ", lazy=False)
 print(d.history^"name", d.Y)
 # print(d.arff("nome", "desc"))
 exit()
