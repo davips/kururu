@@ -15,6 +15,7 @@ from tatu.sql.sqlite import SQLite
 f = File("abalone3.arff")
 # SQLite().delete_data(f.data, check_existence=False)
 my = MySQL(db="tatu:kururu@localhost/tatu")
+sq = SQLite()
 
 d = f.data
 print("antes:\n", list(d.history ^ "id"), d.id)
