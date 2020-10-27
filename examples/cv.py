@@ -12,12 +12,16 @@ from kururu.tool.stream.reduce import Reduce
 from tatu.sql.mysql import MySQL
 from tatu.sql.sqlite import SQLite
 
+f = File("iris.arff")
+
 # SQLite().delete_data(f.data, check_existence=False)
-my = MySQL(db="tatu:kururu@localhost/tatu")
+my = MySQL(db="tatu:kururu@localhost/tatu",threaded=False)
+my.open()
+print(my.fetch(f.data.id, lazy=False).Xd)
+exit()
 sq = SQLite()
 
-f = File("iris.arff")
-print(f.data.Xt)
+print(f.data.Xd)
 # my.store(f.data)
 
 
