@@ -36,7 +36,7 @@ class LCache(asNoOp, DIStep):
         if c > 0:
             raise Exception()
         c += 1
-        fetched = self.storage.fetch(data, lock=True)
+        fetched = self.storage.fetch(data, lock=True,lazy=False)
         print("aft fetch")
         if fetched:
             return fetched

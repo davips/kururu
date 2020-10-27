@@ -17,18 +17,27 @@ f = File("iris.arff")
 # SQLite().delete_data(f.data, check_existence=False)
 my = MySQL(db="tatu:kururu@localhost/tatu",threaded=False)
 my.open()
-print(my.fetch(f.data.id, lazy=False).Xd)
-exit()
-sq = SQLite()
-
-print(f.data.Xd)
 # my.store(f.data)
+print(my.fetch(f.data.id, lazy=False).history^"name")
+exit()
+#
 
 
 
+
+
+
+#
+# sq = SQLite()
+#
+# print(f.data.Xd)
+# # my.store(f.data)
+#
+#
+#
 d = f.data
-print("antes:\n", list(d.history ^ "id"), d.id)
-print(d.Y[:2])
+# print("antes:\n", list(d.history ^ "id"), d.id)
+# print(d.Y[:2])
 
 print('---------------')
 d = d >> LCache(my)
