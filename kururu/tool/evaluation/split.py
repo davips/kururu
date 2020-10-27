@@ -1,9 +1,9 @@
 from aiuna.content.data import Data
 from akangatu.distep import DIStep
 from akangatu.abs.mixin.macro import asMacro
+from akangatu.fieldchecking import Forbid
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
-from akangatu.innerchecking import EnsureNoInner
 from kururu.tool.evaluation.mixin.partitioning import withPartitioning
 
 
@@ -51,4 +51,4 @@ class Split(withPartitioning, asMacro, DIStep):
         # print("held:", self.held)
         internal = In(Split1(stage="train", **self.held))
         external = Split1(stage="test", **self.held)
-        return EnsureNoInner * AutoIns * external * internal
+        return Forbid("inner") * AutoIns * external * internal

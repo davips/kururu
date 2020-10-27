@@ -1,6 +1,7 @@
 from aiuna.file import File
 from kururu.tool.communication.lazycache import LCache
 from kururu.tool.communication.report import Report
+from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.enhancement.binarize import Binarize
 from kururu.tool.enhancement.pca import PCA
 from kururu.tool.evaluation.metric import Metric2
@@ -17,7 +18,7 @@ f = File("iris.arff")
 # SQLite().delete_data(f.data, check_existence=False)
 my = MySQL(db="tatu:kururu@localhost/tatu",threaded=False)
 my.open()
-# my.store(f.data)
+my.store(f.data >> AutoIns * PCA)
 print(my.fetch(f.data.id, lazy=False).history^"name")
 exit()
 #

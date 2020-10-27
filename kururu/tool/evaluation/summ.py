@@ -3,7 +3,7 @@ from numpy import mean, array
 import linalghelper
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.distep import DIStep
-from akangatu.innerchecking import EnsureNoInner
+from akangatu.fieldchecking import Forbid
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from kururu.tool.manipulation.copy import Copy
 from kururu.tool.stream.internal.accumulator import Accumulator
@@ -52,6 +52,6 @@ class Summ2(asMacro, Summ):
     def _step_(self):
         train = Summ(stage="train", **self.held)
         test = Summ(stage="test", **self.held)
-        return EnsureNoInner * train * Copy("S", "Si") * test
+        return Forbid("inner") * train * Copy("S", "Si") * test
 
     # REMINDER: loop infinito no uuid ou json pode indicar presença de classe no config
