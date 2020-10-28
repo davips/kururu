@@ -19,7 +19,8 @@ f = File("iris.arff")
 my = MySQL(db="tatu:kururu@localhost/tatu",threaded=False)
 my.open()
 my.store(f.data >> AutoIns * PCA)
-print(my.fetch(f.data.id, lazy=False).history^"name")
+print((f.data >> AutoIns * PCA).id)
+print(my.fetch((f.data >> AutoIns * PCA).id, lazy=False).history^"name", (f.data >> AutoIns * PCA).id)
 exit()
 #
 
