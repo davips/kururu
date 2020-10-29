@@ -1,6 +1,6 @@
 
 from aiuna.file import File
-from kururu.tool.communication.lazycache import LCache
+from kururu.tool.communication.lazycache import Cache
 from kururu.tool.communication.report import Report
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.enhancement.binarize import Binarize
@@ -48,7 +48,7 @@ d = f.data
 # print(d.Y[:2])
 
 print('---------------')
-d = d >> LCache(my)
+d = d >> Cache(my)
 d.Y
 print("depois:\n", list(d.history ^ "name"))
 
