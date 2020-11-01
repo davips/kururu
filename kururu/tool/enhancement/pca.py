@@ -21,7 +21,7 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 
-from aiuna.delete import Del
+from aiuna.step.delete import Del
 from transf.config import globalcache
 from aiuna.content.data import Data
 from akangatu.abs.mixin.macro import asMacro

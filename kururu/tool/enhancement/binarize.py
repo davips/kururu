@@ -25,7 +25,7 @@ import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 
 from aiuna.content.data import Data
-from aiuna.creation import nominal_idxs
+from aiuna.content.creation import nominal_idxs
 from akangatu.distep import DIStep
 from transf.mixin.config import asConfigLess
 

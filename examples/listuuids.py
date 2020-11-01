@@ -1,4 +1,4 @@
-from aiuna.file import File
+from aiuna.step.file import File
 from kururu.tool.enhancement.pca import PCA1, PCA
 from kururu.tool.evaluation.metric import Metric, Metric2
 from kururu.tool.evaluation.partition import Partition

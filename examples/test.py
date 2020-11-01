@@ -1,4 +1,4 @@
-from aiuna.file import File
+from aiuna.step.file import File
 from cruipto.uuid import UUID
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.dataflow.delin import DelIn
