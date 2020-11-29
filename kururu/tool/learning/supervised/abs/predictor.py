@@ -32,17 +32,26 @@ class Predictor(DDStep, ABC):
     """  """
 
     def _process_(self, data: Data):
-        dic = {"Z": lambda: self.model(data.inner).predict(data.X)}
+        matrices = {"Z": lambda: self.model(data.inner).predict(data.X)}
         if "probability" in self.config and self.config["probability"]:
-            dic["P"] = lambda: self.model(data.inner).predict_proba(data.X)
-        return data.update(self, **dic)
+            matrices["P"] = lambda: self.model(data.inner).predict_proba(data.X)
+        return data.update(self, **matrices)
 
     @globalcache
     def model(self, data):
-        return self._model_(data)
+        """Predictor model induced on the training set.
+
+        This cached method is needed because the so called "model" is called more than once inside process()."""
+        model = self.algorithm
+        model.fit(*data.Xy)
+        return model
+
+    @property
+    def algorithm(self):
+        return self._algorithm_func()()
 
     @abstractmethod
-    def _model_(self, data):
+    def _algorithm_func(self):
         pass
 
     # x = 0.00001

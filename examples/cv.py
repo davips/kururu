@@ -3,16 +3,15 @@ from aiuna.step.file import File
 from kururu.tool.communication.lazycache import Cache
 from kururu.tool.communication.report import Report
 from kururu.tool.dataflow.autoins import AutoIns
-from kururu.tool.enhancement.binarize import Binarize
-from kururu.tool.enhancement.pca import PCA
+from kururu.tool.enhancement.attribute.binarize import Binarize
+from kururu.tool.enhancement.attribute.pca import PCA
 from kururu.tool.evaluation.metric import Metric2
 from kururu.tool.evaluation.partition import Partition
-from kururu.tool.evaluation.summ import Summ2, Summ
+from kururu.tool.evaluation.summ import Summ2
 from kururu.tool.learning.supervised.classification.svm import SVM2
 from kururu.tool.stream.map import Map
 from kururu.tool.stream.reduce import Reduce
 from tatu.sql.mysql import MySQL
-from tatu.sql.sqlite import SQLite
 
 f = File("iris.arff")
 

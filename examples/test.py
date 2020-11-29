@@ -2,7 +2,7 @@ from aiuna.step.file import File
 from cruipto.uuid import UUID
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.dataflow.delin import DelIn
-from kururu.tool.enhancement.pca import PCA1
+from kururu.tool.enhancement.attribute.pca import PCA1
 from kururu.tool.evaluation.metric import Metric2, Metric
 from kururu.tool.evaluation.partition import Partition
 from kururu.tool.evaluation.split import Split

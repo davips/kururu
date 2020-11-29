@@ -73,7 +73,7 @@ class Cache(asNoOp, DIStep):
         print("aft store")
         return ret
 
-    # TODO dar unlock() no data.getitem se exception
+    # TODO dar tatu.unlock() dentro do data.getitem se ocorrer alguma exception que interrompa o cacheamento
 
 
 c = 0

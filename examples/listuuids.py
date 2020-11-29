@@ -1,9 +1,9 @@
 from aiuna.step.file import File
-from kururu.tool.enhancement.pca import PCA1, PCA
-from kururu.tool.evaluation.metric import Metric, Metric2
+from kururu.tool.enhancement.attribute.pca import PCA
+from kururu.tool.evaluation.metric import Metric2
 from kururu.tool.evaluation.partition import Partition
 from kururu.tool.evaluation.split import Split, Split1
-from kururu.tool.learning.supervised.classification.svm import SVM, SVM2
+from kururu.tool.learning.supervised.classification.svm import SVM2
 from kururu.tool.manipulation.slice import Slice
 from transf._ins import Ins
 

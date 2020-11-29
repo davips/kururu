@@ -53,7 +53,7 @@ CLASSIFIERS = ['Intended Audience :: Science/Research',
                'Programming Language :: Python :: 3.8']
 
 INSTALL_REQUIRES = [
-    'numpy', 'sklearn', 'liac-arff'
+    'numpy', 'sklearn', 'liac-arff', 'imblearn'
 ]
 
 EXTRAS_REQUIRE = {

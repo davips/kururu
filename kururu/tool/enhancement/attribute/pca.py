@@ -21,36 +21,38 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 
-from sklearn.svm import SVC
+from sklearn.decomposition import PCA as PCA_
 
 from aiuna.step.delete import Del
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
-from kururu.tool.learning.supervised.abs.predictor import Predictor
+from kururu.tool.enhancement.attribute.abs.transformer import Transformer
+from transf.config import globalcache
 
 
-class SVM(Predictor):
-    """  """
+class PCA1(Transformer):
+    def __init__(self, inner=None, n=2, seed=0):
+        self.n = n
+        self.seed = seed
+        super().__init__(inner, n=n, seed=seed)
 
-    def __init__(self, inner=None, probability=False, **kwargs):  # TODO complete params explicitly and defaults
-        super().__init__(inner, probability=probability, **kwargs)
+    def translate(self, exception, data):
+        msg = str(exception)
+        if "n_components=" in msg and "must be between 0 and min(n_samples, n_features)=" in msg:
+            return f"n:{self.n} > Xw{data.Xw} or n:{self.n} > Xh{data.Xh}"
 
-    def _algorithm_func(self):
-        tmp = self.config.copy()
-        del tmp["probability"]
-        return lambda: SVC(**tmp)
+    @globalcache
+    def _algorithm(self, data):
+        return PCA_(n_components=self.n, random_state=self.seed)
 
 
-class SVM2(asMacro, SVM):
+class PCA(asMacro, PCA1):
     def _step_(self):
-        svm = SVM(**self.held)
-        return svm * In(AutoIns * svm * Del("inner"))
+        pca = PCA1(**self.held)
+        return pca * In(AutoIns * pca * Del("inner"))
 
-# x = 0.00001
 # l = []
-# for i in range(28):
-#     x = x * 1.777
-#     l.append(x)
-# print(max(l))
-# print(l)
+# for i in range(1, 28):
+#     l.append(round(pow(1.2, i)))
+# print(sorted(list(set(l))))

@@ -20,37 +20,5 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
+#
 
-from sklearn.svm import SVC
-
-from aiuna.step.delete import Del
-from akangatu.abs.mixin.macro import asMacro
-from akangatu.operator.unary.inop import In
-from kururu.tool.dataflow.autoins import AutoIns
-from kururu.tool.learning.supervised.abs.predictor import Predictor
-
-
-class SVM(Predictor):
-    """  """
-
-    def __init__(self, inner=None, probability=False, **kwargs):  # TODO complete params explicitly and defaults
-        super().__init__(inner, probability=probability, **kwargs)
-
-    def _algorithm_func(self):
-        tmp = self.config.copy()
-        del tmp["probability"]
-        return lambda: SVC(**tmp)
-
-
-class SVM2(asMacro, SVM):
-    def _step_(self):
-        svm = SVM(**self.held)
-        return svm * In(AutoIns * svm * Del("inner"))
-
-# x = 0.00001
-# l = []
-# for i in range(28):
-#     x = x * 1.777
-#     l.append(x)
-# print(max(l))
-# print(l)
