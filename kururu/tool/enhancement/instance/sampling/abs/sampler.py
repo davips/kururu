@@ -44,19 +44,16 @@
 
 from abc import ABC, abstractmethod
 
-from akangatu.ddstep import DDStep
 from transf.config import globalcache
 
+from akangatu.distep import DIStep
 
-class Sampler(DDStep, ABC):
-    """Base class for Step classes that have a resample method, e.g., PCA and resampling (currently only X,y)."""
 
-    def __init__(self, **config):
-        super().__init__(**config)
-
+class Sampler(DIStep, ABC):
+    """Base class for Step classes that have a resample method (currently applied only to X,y)."""
     def _process_(self, data):
-        matrices = {"X": lambda: self.sampled(data.inner)[0],
-                    "Y": lambda: self.sampled(data.inner)[1]}
+        matrices = {"X": lambda: self.sampled(data)[0],
+                    "Y": lambda: self.sampled(data)[1]}
         return data.update(self, **matrices)
 
     @globalcache
@@ -64,16 +61,7 @@ class Sampler(DDStep, ABC):
         """Sampled version of matrices.
 
         This cached method is needed because more than one matrix is calculated lazily inside process()."""
-        return self.model(data.inner).resample(*data.Xy)
-
-    @globalcache
-    def model(self, data):
-        """Sampler based on the training set..
-
-        This cached method is needed because the so called "model" is called more than once inside process()."""
-        model = self.algorithm
-        model.fit(*data.Xy)
-        return model
+        return self.algorithm.fit_resample(*data.Xy)
 
     @property
     def algorithm(self):

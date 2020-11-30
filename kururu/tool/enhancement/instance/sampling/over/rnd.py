@@ -22,18 +22,33 @@
 #  Relevant employers or funding agencies will be notified accordingly.
 #
 
-from imblearn.under_sampling import RandomUnderSampler as RUS
+from imblearn.over_sampling import RandomOverSampler as imbROS
 
+from akangatu.abs.mixin.macro import asMacro
+from akangatu.ddstep import DDStep
+from akangatu.operator.unary.inop import In
 from kururu.tool.enhancement.instance.sampling.abs.sampler import Sampler
 
 
-class RUndS(Sampler):
-    """Reduce the occurrence of all classes so as to be equal to the amount of instances in the minority class (defult behavior)."""
-    def __init__(self, strategy='not minority', replacement=False, seed=0):
-        super().__init__(strategy=strategy, replacement=replacement, seed=seed)
+class ROS_(Sampler):
+    """Increase number of instances of all classes so as to be equal to the amount of instances in the majority class
+    (default behavior)."""
+
+    def __init__(self, strategy="not majority", seed=0):
+        super().__init__(strategy=strategy, seed=seed)
         self.strategy = strategy
-        self.replacement = replacement
         self.seed = seed
 
-    def _algorithm_(self):
-        return RUS(sampling_strategy=self.strategy, replacement=self.replacement, random_state=self.seed)
+    def _algorithm_func(self):
+        return lambda: imbROS(sampling_strategy=self.strategy, random_state=self.seed)
+
+
+class ROS(asMacro, DDStep):
+    """Apply random over sampling to process inner data instead of using the outer data."""
+    def __init__(self, inner=None, strategy="not majority", seed=0):
+        DDStep.__init__(self, inner, strategy=strategy, seed=seed)
+        self.strategy = strategy
+        self.seed = seed
+
+    def _step_(self):
+        return In(ROS_(**self.held))

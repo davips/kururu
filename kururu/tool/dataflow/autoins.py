@@ -26,6 +26,7 @@ from transf.mixin.config import asConfigLess
 
 
 class AutoIns(asConfigLess, DIStep):
+    """Insert a data as the inner of itself."""
     def _process_(self, data):
         # Forbid("inner").process(data)
         # # inner = lambda: Del("stream").process(data)  # blank stream to avoid confusion with two pointers to the same iterator

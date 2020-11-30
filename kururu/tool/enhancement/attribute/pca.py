@@ -21,7 +21,7 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 
-from sklearn.decomposition import PCA as PCA_
+from sklearn.decomposition import PCA as PCAsk
 
 from aiuna.step.delete import Del
 from akangatu.abs.mixin.macro import asMacro
@@ -31,7 +31,11 @@ from kururu.tool.enhancement.attribute.abs.transformer import Transformer
 from transf.config import globalcache
 
 
-class PCA1(Transformer):
+class PCAo(Transformer):
+    """Reduce dimensionality by PCA. Use inner data as "training" data, but transform only the outer data.
+
+    Hint: use PCA to transform both inner and outer data."""
+
     def __init__(self, inner=None, n=2, seed=0):
         self.n = n
         self.seed = seed
@@ -43,14 +47,20 @@ class PCA1(Transformer):
             return f"n:{self.n} > Xw{data.Xw} or n:{self.n} > Xh{data.Xh}"
 
     @globalcache
-    def _algorithm(self, data):
-        return PCA_(n_components=self.n, random_state=self.seed)
+    def _algorithm_func(self):
+        return PCAsk(n_components=self.n, random_state=self.seed)
 
 
-class PCA(asMacro, PCA1):
+class PCAb(asMacro, PCAo):
+    """Apply PCA to transform both inner and outer data. Inner data is used as "training" data."""
+
     def _step_(self):
-        pca = PCA1(**self.held)
+        pca = PCAo(**self.held)
         return pca * In(AutoIns * pca * Del("inner"))
+
+
+PCA = PCAb
+
 
 # l = []
 # for i in range(1, 28):

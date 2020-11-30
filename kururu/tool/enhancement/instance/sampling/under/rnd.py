@@ -20,40 +20,30 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
+#
 
-from aiuna.step.delete import Del
-from sklearn.svm import SVC
+from imblearn.under_sampling import RandomUnderSampler as imbRUS
 
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
-from kururu.tool.dataflow.autoins import AutoIns
-from kururu.tool.learning.supervised.abs.predictor import Predictor
+from kururu.tool.enhancement.instance.sampling.abs.sampler import Sampler
 
 
-class SVMo(Predictor):
-    """  """
+class RUS_(Sampler):
+    """Reduce the occurrence of all classes so as to be equal to the amount of instances in the minority class
+    (default behavior)."""
 
-    def __init__(self, inner=None, probability=False, **kwargs):  # TODO complete params explicitly and defaults
-        super().__init__(inner, probability=probability, **kwargs)
+    def __init__(self, strategy='not minority', replacement=False, seed=0):
+        super().__init__(strategy=strategy, replacement=replacement, seed=seed)
+        self.strategy = strategy
+        self.replacement = replacement
+        self.seed = seed
 
     def _algorithm_func(self):
-        tmp = self.config.copy()
-        del tmp["probability"]
-        return lambda: SVC(**tmp)
+        return lambda: imbRUS(sampling_strategy=self.strategy, replacement=self.replacement, random_state=self.seed)
 
 
-SVM = SVMo
-
-
-class SVMb(asMacro, SVMo):
+class RUS(asMacro, RUS_):
+    """Apply random under sampling to process inner data instead of using the outer data."""
     def _step_(self):
-        svm = SVM(**self.held)
-        return svm * In(AutoIns * svm * Del("inner"))
-
-# x = 0.00001
-# l = []
-# for i in range(28):
-#     x = x * 1.777
-#     l.append(x)
-# print(max(l))
-# print(l)
+        return In(RUS_(**self.held))

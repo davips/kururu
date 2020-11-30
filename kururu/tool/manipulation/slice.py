@@ -21,7 +21,6 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 
-import numpy as np
 from akangatu.distep import DIStep
 
 
@@ -44,7 +43,7 @@ class Slice(DIStep):
             last -= 1
 
         if first == last:
-            newfields = {k: data.field(k, context=self)[first].reshape(1, -1) for k in self.fields}
+            newfields = {k: (lambda k_: lambda: data[k_][first].reshape(1, -1))(k) for k in self.fields}
         else:
-            newfields = {k: data.field(k, context=self)[first:last + 1] for k in self.fields}
+            newfields = {k: (lambda k_: lambda: data[k_][first:last + 1])(k) for k in self.fields}
         return data.update(self, **newfields)

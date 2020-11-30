@@ -22,18 +22,15 @@
 #  Relevant employers or funding agencies will be notified accordingly.
 #
 
-from imblearn.over_sampling import RandomOverSampler as ROS
+from unittest import TestCase
 
-from kururu.tool.enhancement.instance.sampling.abs.sampler import Sampler
+from aiuna.step.dataset import Dataset
+
+from kururu.tool.manipulation.slice import Slice
 
 
-class ROverS(Sampler):
-    def __init__(self, strategy, seed):
-        super().__init__(strategy=strategy, seed=seed)
-        self.strategy = strategy
-        self.seed = seed
-
-    def _algorithm_(self):
-        return ROS(sampling_strategy=self.strategy, random_state=self.seed)
-
+class TestSlice(TestCase):
+    def test__process_(self):
+        truncated_iris = (Dataset() * Slice(last=119)).data
+        self.assertEqual(20, truncated_iris.Y_pd.value_counts()["virginica"][0])
 

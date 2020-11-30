@@ -28,7 +28,7 @@ from akangatu.abs.mixin.macro import asMacro
 from akangatu.distep import DIStep
 from akangatu.fieldchecking import Forbid
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
-from kururu.tool.manipulation.copy import Copy
+from kururu.tool.manipulation.copy_ import Copy
 from kururu.tool.stream.internal.accumulator import Accumulator
 from akangatu.abs.mixin.fixedparam import asFixedParam
 

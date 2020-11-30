@@ -20,40 +20,23 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
+#
 
-from aiuna.step.delete import Del
-from sklearn.svm import SVC
+from unittest import TestCase
 
-from akangatu.abs.mixin.macro import asMacro
-from akangatu.operator.unary.inop import In
+from aiuna.step.dataset import Dataset
+
 from kururu.tool.dataflow.autoins import AutoIns
-from kururu.tool.learning.supervised.abs.predictor import Predictor
+from kururu.tool.enhancement.instance.sampling.over.rnd import ROS_
+from kururu.tool.enhancement.instance.sampling.under.rnd import RUS_, RUS
 
 
-class SVMo(Predictor):
-    """  """
+class Test(TestCase):
+    def test__rus_(self):
+        augmented_iris = (Dataset() * ROS_(strategy={"virginica": 100, "versicolor": 50, "setosa": 50})).data
+        self.assertEqual(150, len((augmented_iris >> RUS_).X))
 
-    def __init__(self, inner=None, probability=False, **kwargs):  # TODO complete params explicitly and defaults
-        super().__init__(inner, probability=probability, **kwargs)
-
-    def _algorithm_func(self):
-        tmp = self.config.copy()
-        del tmp["probability"]
-        return lambda: SVC(**tmp)
-
-
-SVM = SVMo
-
-
-class SVMb(asMacro, SVMo):
-    def _step_(self):
-        svm = SVM(**self.held)
-        return svm * In(AutoIns * svm * Del("inner"))
-
-# x = 0.00001
-# l = []
-# for i in range(28):
-#     x = x * 1.777
-#     l.append(x)
-# print(max(l))
-# print(l)
+    def test__rus(self):
+        augmented_iris = (Dataset() * ROS_(strategy={"virginica": 100, "versicolor": 50, "setosa": 50})).data
+        self.assertEqual(200, len((augmented_iris >> AutoIns * RUS).X))  # TODO: inhibit UserWarning
+        self.assertEqual(150, len((augmented_iris >> AutoIns * RUS).inner.X))
