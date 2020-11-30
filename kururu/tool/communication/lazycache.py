@@ -43,13 +43,13 @@ class Cache(asNoOp, DIStep):
     def __init__(self, storage="sqlite", eager_store=True, seed=0):  # TODO: what todo with seed here?
         super().__init__(storage=storage, eager_store=eager_store, seed=seed)
         if storage == "pickle":
-            storage = Pickle()
+            storage = Pickle(close_when_idle=True)
         elif storage == "sqlite":
-            storage = SQLite()
+            storage = SQLite(close_when_idle=True)
         elif storage == "amnesia":
-            storage = Amnesia()
+            storage = Amnesia(close_when_idle=True)
         elif "://" in storage:
-            storage = Tatu(url=storage)
+            storage = Tatu(url=storage, close_when_idle=True)
         elif not isinstance(storage, Storage):
             print("Unknown storage:", self.storage)
             exit()
