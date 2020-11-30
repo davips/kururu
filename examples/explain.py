@@ -5,7 +5,7 @@ from kururu.tool.dataflow.sort import Sort, Sortr
 from kururu.tool.evaluation.split import Split
 from kururu.tool.evaluation.uncertainty import Margin
 from kururu.tool.learning.supervised.classification.svm import SVM
-from kururu.tool.manipulation.copy import Copy
+from kururu.tool.manipulation.copy_ import Copy
 from kururu.tool.manipulation.slice import Slice
 from kururu.tool.vizualization.explain import Explain
 
