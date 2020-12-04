@@ -24,7 +24,7 @@
 from dataclasses import dataclass
 from typing import Iterator
 
-from linalghelper import islazy
+from akangatu.linalghelper import islazy
 
 
 @dataclass

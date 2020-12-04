@@ -32,7 +32,7 @@ from tatu.amnesia import Amnesia
 from tatu.storageinterface import StorageInterface
 from tatu.pickle_ import Pickle
 from tatu.sql.sqlite import SQLite
-from transf.mixin.noop import asNoOp
+from akangatu.transf.mixin.noop import asNoOp
 
 
 class Cache(asNoOp, DIStep):

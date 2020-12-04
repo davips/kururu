@@ -24,6 +24,7 @@
 
 from unittest import TestCase
 
+from aiuna.content.root import Root
 from aiuna.step.dataset import Dataset
 
 from kururu.tool.dataflow.autoins import AutoIns
@@ -33,7 +34,7 @@ from kururu.tool.manipulation.slice import Slice
 
 class Test(TestCase):
     def test__ros_(self):
-        iris = Dataset().data
+        iris = Root >> Dataset()
         truncated_iris = iris >> Slice(last=119)
         rebalanced_iris = truncated_iris >> ROS_
         self.assertEqual(50, rebalanced_iris.Y_pd.value_counts()["virginica"][0])
@@ -41,7 +42,7 @@ class Test(TestCase):
         self.assertEqual(200, len(larger_iris.X))
 
     def test__ros(self):
-        iris = (Dataset() * AutoIns).data
+        iris = Root >> (Dataset() * AutoIns)
         truncated_iris = iris >> Slice(last=119)
         rebalanced_iris = truncated_iris >> ROS
         self.assertEqual(50, rebalanced_iris.inner.Y_pd.value_counts()["virginica"][0])

@@ -27,7 +27,7 @@ from sklearn.preprocessing import OneHotEncoder
 from aiuna.content.data import Data
 from aiuna.content.creation import nominal_idxs
 from akangatu.distep import DIStep
-from transf.mixin.config import asConfigLess
+from akangatu.transf.mixin.config import asConfigLess
 
 
 class Binarize(asConfigLess, DIStep):  # TODO: other fields

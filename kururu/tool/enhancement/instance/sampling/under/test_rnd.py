@@ -24,6 +24,7 @@
 
 from unittest import TestCase
 
+from aiuna.content.root import Root
 from aiuna.step.dataset import Dataset
 
 from kururu.tool.dataflow.autoins import AutoIns
@@ -33,10 +34,10 @@ from kururu.tool.enhancement.instance.sampling.under.rnd import RUS_, RUS
 
 class Test(TestCase):
     def test__rus_(self):
-        augmented_iris = (Dataset() * ROS_(strategy={"virginica": 100, "versicolor": 50, "setosa": 50})).data
+        augmented_iris = Root >> (Dataset() * ROS_(strategy={"virginica": 100, "versicolor": 50, "setosa": 50}))
         self.assertEqual(150, len((augmented_iris >> RUS_).X))
 
     def test__rus(self):
-        augmented_iris = (Dataset() * ROS_(strategy={"virginica": 100, "versicolor": 50, "setosa": 50})).data
+        augmented_iris =  Root >> (Dataset() * ROS_(strategy={"virginica": 100, "versicolor": 50, "setosa": 50}))
         self.assertEqual(200, len((augmented_iris >> AutoIns * RUS).X))  # TODO: inhibit UserWarning
         self.assertEqual(150, len((augmented_iris >> AutoIns * RUS).inner.X))

@@ -8,7 +8,7 @@ from kururu.tool.evaluation.partition import Partition
 from kururu.tool.evaluation.split import Split
 from kururu.tool.learning.supervised.classification.svm import SVM2, SVM
 from kururu.tool.manipulation.slice import Slice
-from transf._ins import Ins
+from akangatu.transf._ins import Ins
 
 print(File("iris.arff").data)
 wf = File("iris.arff") * Split(mode="holdout") * SVM2() * Metric2()

@@ -24,7 +24,7 @@
 # import threading
 #
 # from akangatu.abs.container import Container1
-# # from transf.mixin.noop import asNoOp
+# # from akangatu.transf.mixin.noop import asNoOp
 #
 #
 # class Tag(asNoOp, Container1):

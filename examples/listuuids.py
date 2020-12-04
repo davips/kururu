@@ -5,7 +5,7 @@ from kururu.tool.evaluation.partition import Partition
 from kururu.tool.evaluation.split import Split, Split1
 from kururu.tool.learning.supervised.classification.svm import SVM2
 from kururu.tool.manipulation.slice import Slice
-from transf._ins import Ins
+from akangatu.transf._ins import Ins
 
 data = File("iris.arff").data
 # data = Ins(data).process(data)

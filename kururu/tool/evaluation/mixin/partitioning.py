@@ -23,7 +23,7 @@
 
 from sklearn.model_selection import StratifiedKFold, LeaveOneOut, StratifiedShuffleSplit
 
-from transf.config import globalcache
+from akangatu.transf.config import globalcache
 
 
 class withPartitioning:

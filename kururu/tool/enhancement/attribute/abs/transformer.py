@@ -25,7 +25,7 @@ from abc import ABC, abstractmethod
 
 from aiuna.content.data import Data
 from akangatu.ddstep import DDStep
-from transf.config import globalcache
+from akangatu.transf.config import globalcache
 
 
 class Transformer(DDStep, ABC):

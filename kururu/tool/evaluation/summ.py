@@ -23,7 +23,7 @@
 
 from numpy import mean, array
 
-import linalghelper
+from akangatu import linalghelper
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.distep import DIStep
 from akangatu.fieldchecking import Forbid

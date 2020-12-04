@@ -29,7 +29,7 @@ from akangatu.distep import DIStep
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
-from transf.mixin.config import asUnitset
+from akangatu.transf.mixin.config import asUnitset
 
 
 class Metric(asUnitset, DIStep, withFunctionInspection):

@@ -28,7 +28,7 @@ from akangatu.abs.mixin.macro import asMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.enhancement.attribute.abs.transformer import Transformer
-from transf.config import globalcache
+from akangatu.transf.config import globalcache
 
 
 class PCAo(Transformer):

@@ -8,7 +8,7 @@ from kururu.tool.evaluation.partition import Partition
 from kururu.tool.evaluation.split import Split, Split1
 from kururu.tool.learning.supervised.classification.svm import SVM, SVM2
 from kururu.tool.manipulation.slice import Slice
-from transf._ins import Ins
+from akangatu.transf._ins import Ins
 
 l = ['5ȌșNǰǎǦҪɧʌƁΕÖȺ', '0ĬχŌjӓʅřӛȋφȮͶӸ', '2ΑɸȂȈFʘўȚńϝфոŅ', '2ƪȫȮȘʌĘƞղёŷυƼӸ', '3lթŔeǨѳȆźȺλρŝƹ', '0ÓÞŕǢÔơǨǝķϔҢǬŊ', '3ҳāͿΏŦƙUtԚѝȗКӑ', 'äŐȠъīĺǛíǡңipƝչ']
 uu = UUID.identity
@@ -32,7 +32,7 @@ print("-------------------")
 
 for transf in [SVM(), SVM2(), File("iris.arff"), Metric2(), Metric(), PCA(), PCA1(), Split(), Split1(), Partition(), Slice(), Ins(data)]:
     print(transf.name, end=" ; ")
-    # t = transf(data) if callable(transf) else transf
+    # t = akangatu.transf(data) if callable(akangatu.transf) else akangatu.transf
     t=transf
     if callable(transf):
         data.inner=data

@@ -23,7 +23,7 @@
 
 from abc import ABC, abstractmethod
 
-from transf.config import globalcache
+from akangatu.transf.config import globalcache
 from aiuna.content.data import Data
 from akangatu.ddstep import DDStep
 

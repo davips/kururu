@@ -22,7 +22,7 @@
 #  Relevant employers or funding agencies will be notified accordingly.
 
 from akangatu.distep import DIStep
-from transf.mixin.config import asConfigLess
+from akangatu.transf.mixin.config import asConfigLess
 
 
 class AutoIns(asConfigLess, DIStep):

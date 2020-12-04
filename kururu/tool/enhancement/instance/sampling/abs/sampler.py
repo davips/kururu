@@ -44,7 +44,7 @@
 
 from abc import ABC, abstractmethod
 
-from transf.config import globalcache
+from akangatu.transf.config import globalcache
 
 from akangatu.distep import DIStep
 

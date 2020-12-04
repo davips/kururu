@@ -24,6 +24,7 @@
 
 from unittest import TestCase
 
+from aiuna.content.root import Root
 from aiuna.step.dataset import Dataset
 
 from kururu.tool.manipulation.slice import Slice
@@ -31,6 +32,6 @@ from kururu.tool.manipulation.slice import Slice
 
 class TestSlice(TestCase):
     def test__process_(self):
-        truncated_iris = (Dataset() * Slice(last=119)).data
+        truncated_iris =  Root >> (Dataset() * Slice(last=119))
         self.assertEqual(20, truncated_iris.Y_pd.value_counts()["virginica"][0])
 

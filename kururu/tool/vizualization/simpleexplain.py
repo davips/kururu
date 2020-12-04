@@ -27,7 +27,7 @@
 # from melime.explainers.explainer import Explainer
 # from melime.explainers.visualizations.plot_importance import ExplainGraph
 # from melime.generators.kde_gen import KDEGen
-# # from transf.mixin.noop import asNoOp
+# # from akangatu.transf.mixin.noop import asNoOp
 #
 #
 # # TODO: simplify this class to be independent of the prediction of syntetic examples.

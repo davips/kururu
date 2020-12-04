@@ -29,8 +29,8 @@ from aiuna.content.data import Data
 
 from akangatu.distep import DIStep
 from cruipto.util import flatten
-from transf.mixin.noop import asNoOp
-from transf.mixin.config import asUnitset
+from akangatu.transf.mixin.noop import asNoOp
+from akangatu.transf.mixin.config import asUnitset
 
 
 class AbsLog(asUnitset, DIStep, ABC):
