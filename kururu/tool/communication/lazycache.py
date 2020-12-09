@@ -48,9 +48,11 @@ class Cache(asNoOp, DIStep):
             storage = SQLite(close_when_idle=True)
         elif storage == "amnesia":
             storage = Amnesia(close_when_idle=True)
+        elif isinstance(storage, Storage):
+            pass
         elif "://" in storage:
             storage = Tatu(url=storage, close_when_idle=True)
-        elif not isinstance(storage, Storage):
+        else:
             print("Unknown storage:", self.storage)
             exit()
         if storage.id not in self.storages:
@@ -59,21 +61,19 @@ class Cache(asNoOp, DIStep):
         self.eager_store = eager_store
 
     def _process_(self, data: Data):
-        global c
-        print("bef fetch")
-        if c > 0:
-            raise Exception()
-        c += 1
-        fetched = self.storage.fetch(data, lock=True, lazy=False)
-        print("aft fetch")
+        # global c
+        # if c > 0:
+        #     raise Exception()
+        # c += 1
+        # if self.storage.islocked(data):
+        #     raise Exception("Another pro")
+        fetched = self.storage.fetch(data, lock=True, lazy=False) #TODO: voltar lazy
         if fetched:
             return fetched
-        print("bef store")
         ret = self.storage.store(data, unlock=True, lazy=not self.eager_store)
-        print("aft store")
         return ret
 
     # TODO dar tatu.unlock() dentro do data.getitem se ocorrer alguma exception que interrompa o cacheamento
 
 
-c = 0
+# c = 0

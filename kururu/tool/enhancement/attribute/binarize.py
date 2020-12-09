@@ -40,8 +40,6 @@ class Binarize(asConfigLess, DIStep):  # TODO: other fields
     For conversion from continuous attributes to binary attributes
     (same effect as nominal with two values) see step Discretize."""
     def _process_(self, data: Data):
-        newmatrices = {}
-
         # REMINDER: Binarize will do nothing to numeric datasets, but the uuid still needs to be predictable.
         # So, the provided Data object should be "processed" anyway.
         def func():
@@ -51,7 +49,6 @@ class Binarize(asConfigLess, DIStep):  # TODO: other fields
                 nom = encoder.fit_transform(data.X[:, data_nominal_idxs]).toarray()
                 num = np.delete(data.X, data_nominal_idxs, axis=1).astype(float)
                 return np.column_stack((nom, num))
+            return data.X
 
-        newmatrices["X"] = func
-
-        return data.update(self, **newmatrices)
+        return data.update(self, X=func)
