@@ -46,9 +46,8 @@ class PCAo(Transformer):
         if "n_components=" in msg and "must be between 0 and min(n_samples, n_features)=" in msg:
             return f"n:{self.n} > Xw{data.Xw} or n:{self.n} > Xh{data.Xh}"
 
-    @globalcache
     def _algorithm_func(self):
-        return PCAsk(n_components=self.n, random_state=self.seed)
+        return lambda: PCAsk(n_components=self.n, random_state=self.seed)
 
 
 class PCAb(asMacro, PCAo):

@@ -22,17 +22,17 @@
 #  Relevant employers or funding agencies will be notified accordingly.
 
 import numpy as np
-from aiuna.content.data import Data
 from sklearn.metrics import accuracy_score
 
-from akangatu.distep import DIStep
+from aiuna.content.data import Data
 from akangatu.abs.mixin.macro import asMacro
+from akangatu.distep import DIStep
 from akangatu.operator.unary.inop import In
-from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from akangatu.transf.mixin.config import asUnitset
+from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 
 
-class Metric(asUnitset, DIStep, withFunctionInspection):
+class Metrico(asUnitset, DIStep, withFunctionInspection):
     """Metric over fields.
 
     Only the-higher-the-better functions in Metric, but can be negated:
@@ -52,8 +52,9 @@ class Metric(asUnitset, DIStep, withFunctionInspection):
     """
 
     # noinspection PyDefaultArgument
-    def __init__(self, functions=["accuracy"], target="Y", prediction="Z"):  # TODO:change all default prameters to "mutable"
-        super().__init__(functions=functions,target=target,prediction=prediction)
+    def __init__(self, functions=["accuracy"], target="Y",
+                 prediction="Z"):  # TODO:change all default prameters to "mutable"
+        super().__init__(functions=functions, target=target, prediction=prediction)
         self.functions = functions
         self.target, self.prediction = target, prediction
         self.selected = [self.function_from_name[name] for name in functions]
@@ -64,14 +65,17 @@ class Metric(asUnitset, DIStep, withFunctionInspection):
 
     @staticmethod
     def _fun_accuracy(data, target, prediction):
-        return accuracy_score(data.field(target, context="Metric"), data.field(prediction, context="Metric"))
+        return accuracy_score(data[target], data[prediction])
 
     @staticmethod
     def _fun_history(data, target, prediction):
         return -len(list(data.history))
 
 
-class Metric2(asMacro, Metric):
+Metric = Metrico
+
+
+class Metricb(asMacro, Metric):
     def _step_(self):
         metric = Metric(**self.held)
         return metric * In(metric)

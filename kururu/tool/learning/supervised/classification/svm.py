@@ -47,7 +47,7 @@ SVM = SVMo
 
 class SVMb(asMacro, SVMo):
     def _step_(self):
-        svm = SVM(**self.held)
+        svm = SVMo(**self.held)
         return svm * In(AutoIns * svm * Del("inner"))
 
 # x = 0.00001

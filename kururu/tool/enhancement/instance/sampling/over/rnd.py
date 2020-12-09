@@ -43,6 +43,18 @@ class ROS_(Sampler):
         return lambda: imbROS(sampling_strategy=self.strategy, random_state=self.seed)
 
 
+# class ROS(DDStep):
+#     """Apply random over sampling to process inner data instead of using the outer data."""
+#
+#     def __init__(self, inner=None, strategy="not majority", seed=0):
+#         DDStep.__init__(self, inner, strategy=strategy, seed=seed)
+#         self.strategy = strategy
+#         self.seed = seed
+#
+#     def _process_(self, data):
+#         d = data >> In(ROS_(**self.held))
+#         return data.update(self, **{k: d.field_funcs_m[k] for k in d.changed})
+#
 class ROS(asMacro, DDStep):
     """Apply random over sampling to process inner data instead of using the outer data."""
     def __init__(self, inner=None, strategy="not majority", seed=0):

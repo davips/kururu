@@ -21,18 +21,19 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 
-import traceback
-
 from aiuna.content.data import Data
-from akangatu.container import Container1
 from akangatu.distep import DIStep
+from akangatu.transf.mixin.noop import asNoOp
 from tatu import Tatu
 from tatu.abs.storage import Storage
 from tatu.amnesia import Amnesia
-from tatu.storageinterface import StorageInterface
 from tatu.pickle_ import Pickle
 from tatu.sql.sqlite import SQLite
-from akangatu.transf.mixin.noop import asNoOp
+
+
+def setcache(storage, eager_store=True):
+    from akangatu.transf.config import CACHE
+    CACHE["cache"] = Cache(storage, eager_store=eager_store)
 
 
 class Cache(asNoOp, DIStep):
@@ -67,13 +68,12 @@ class Cache(asNoOp, DIStep):
         # c += 1
         # if self.storage.islocked(data):
         #     raise Exception("Another pro")
-        fetched = self.storage.fetch(data, lock=True, lazy=False) #TODO: voltar lazy
+        fetched = self.storage.fetch(data, lock=True, lazy=False)  # TODO: voltar lazy
         if fetched:
             return fetched
-        ret = self.storage.store(data, unlock=True, lazy=not self.eager_store)
-        return ret
+        self.storage.store(data, unlock=True, lazy=not self.eager_store)
+        return data
 
     # TODO dar tatu.unlock() dentro do data.getitem se ocorrer alguma exception que interrompa o cacheamento
-
 
 # c = 0

@@ -40,7 +40,7 @@ class Transformer(DDStep, ABC):
         """Attribute transformer based on the training set.
 
         This cached method is provided to keep the symmetry with classes Predictor and Sampler."""
-        model = self.algorithm()
+        model = self.algorithm
         model.fit(data.X)
         return model
 
