@@ -45,14 +45,15 @@ by providing straight-forward tools for carefully chosen general concepts:
    - **union** - sets of steps are united by the **+** operator, which returns a *Union* object.
     The implementation of the class Union doesn't follow the math concept of union of sets strictly.
     It can have repeated elements for three reasons: 
-    there is no gain in enforcing such a math requirement;
+    there is no gain in enforcing such math requirement;
     it can be useful in some scenario involving the *stream* field where the repetition is actually needed;
     and, more importantly, it is ordered (this applies to all sets if steps also). 
     Like any Step object, Union has two different use cases:
      1. a set of steps ready to process data, using default values for the omitted parameters, e.g.: 
         - ```python
-          sequence = PCA * SVM(kernel="poly") 
-          result = data >> sequence  # more on `>>` latter
+          ONGOING WORK ....
+          union = MLP + SVM(kernel="poly") 
+          result = data >> ... * union *   # more on `...` and `>>` latter
           ```
      1. a sampleable set of different sequences of steps, e.g.:
         - ```python
