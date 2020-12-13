@@ -24,7 +24,7 @@
 from numpy import mean, array
 
 from akangatu import linalghelper
-from akangatu.abs.mixin.macro import asMacro
+
 from akangatu.distep import DIStep
 from akangatu.fieldchecking import Forbid
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection

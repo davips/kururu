@@ -24,22 +24,30 @@
 from sklearn.decomposition import PCA as PCAsk
 
 from aiuna.step.delete import Del
-from akangatu.abs.mixin.macro import asMacro
+from akangatu.abs.macro import DDMacro
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.enhancement.attribute.abs.transformer import Transformer
-from akangatu.transf.config import globalcache
 
 
-class PCAo(Transformer):
+class _PCA:
+    def __init__(self, inner=None, n=2, seed=0):
+        self._partial_config = locals().copy()
+        del self._partial_config["self"]
+        del self._partial_config["inner"]
+        del self._partial_config["__class__"]
+        super().__init__(inner, config_func=self._config)  # OBSCURE REMINDER: calls Transformer.init / DDMacro.init
+        self.n = n
+        self.seed = seed
+
+    def _config(self):
+        return self._partial_config
+
+
+class PCAo(_PCA, Transformer):
     """Reduce dimensionality by PCA. Use inner data as "training" data, but transform only the outer data.
 
     Hint: use PCA to transform both inner and outer data."""
-
-    def __init__(self, inner=None, n=2, seed=0):
-        self.n = n
-        self.seed = seed
-        super().__init__(inner, n=n, seed=seed)
 
     def translate(self, exception, data):
         msg = str(exception)
@@ -50,16 +58,21 @@ class PCAo(Transformer):
         return lambda: PCAsk(n_components=self.n, random_state=self.seed)
 
 
-class PCAb(asMacro, PCAo):
+class PCAb(_PCA, DDMacro):
     """Apply PCA to transform both inner and outer data. Inner data is used as "training" data."""
 
     def _step_(self):
-        pca = PCAo(**self.held)
+        pca = PCAo(**self._partial_config)  # REMINDER: cannot call held() due to infinite loop on config()
         return pca * In(AutoIns * pca * Del("inner"))
 
+    def _config(self):
+        config = self._partial_config
+        config["step"] = self.step
+        return config
 
-PCA = PCAb
 
+class PCA(PCAb):
+    pass
 
 # l = []
 # for i in range(1, 28):

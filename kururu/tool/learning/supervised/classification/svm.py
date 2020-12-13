@@ -24,7 +24,7 @@
 from aiuna.step.delete import Del
 from sklearn.svm import SVC
 
-from akangatu.abs.mixin.macro import asMacro
+
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.learning.supervised.abs.predictor import Predictor

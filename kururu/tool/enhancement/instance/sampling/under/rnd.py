@@ -24,7 +24,7 @@
 
 from imblearn.under_sampling import RandomUnderSampler as imbRUS
 
-from akangatu.abs.mixin.macro import asMacro
+
 from akangatu.operator.unary.inop import In
 from kururu.tool.enhancement.instance.sampling.abs.sampler import Sampler
 

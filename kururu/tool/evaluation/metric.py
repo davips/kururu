@@ -25,7 +25,7 @@ import numpy as np
 from sklearn.metrics import accuracy_score
 
 from aiuna.content.data import Data
-from akangatu.abs.mixin.macro import asMacro
+
 from akangatu.distep import DIStep
 from akangatu.operator.unary.inop import In
 from akangatu.transf.mixin.config import asUnitset

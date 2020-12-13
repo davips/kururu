@@ -24,7 +24,7 @@
 
 from imblearn.over_sampling import RandomOverSampler as imbROS
 
-from akangatu.abs.mixin.macro import asMacro
+
 from akangatu.ddstep import DDStep
 from akangatu.operator.unary.inop import In
 from kururu.tool.enhancement.instance.sampling.abs.sampler import Sampler

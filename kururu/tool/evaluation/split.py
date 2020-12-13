@@ -23,7 +23,7 @@
 
 from aiuna.content.data import Data
 from akangatu.distep import DIStep
-from akangatu.abs.mixin.macro import asMacro
+
 from akangatu.fieldchecking import Forbid
 from akangatu.operator.unary.inop import In
 from kururu.tool.dataflow.autoins import AutoIns
