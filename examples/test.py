@@ -1,5 +1,5 @@
 from aiuna.step.file import File
-from cruipto.uuid import UUID
+from garoupa.uuid import UUID
 from kururu.tool.dataflow.autoins import AutoIns
 from kururu.tool.dataflow.delin import DelIn
 from kururu.tool.enhancement.attribute.pca import PCA1

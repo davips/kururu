@@ -28,7 +28,7 @@ import numpy as np
 from aiuna.content.data import Data
 
 from akangatu.distep import DIStep
-from cruipto.util import flatten
+from garoupa.util import flatten
 from akangatu.transf.mixin.noop import asNoOp
 from akangatu.transf.mixin.config import asUnitset
 

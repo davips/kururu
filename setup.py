@@ -27,13 +27,13 @@ import kururu
 
 NAME = "kururu"
 
-VERSION = 0.1
+VERSION = "0.20.12a"
 
 AUTHOR = 'Davi Pereira-Santos'
 
-AUTHOR_EMAIL = ''
+AUTHOR_EMAIL = 'dpsabc@gmail.com'
 
-DESCRIPTION = 'Science as data transformation'
+DESCRIPTION = 'Data Science'
 
 with open('README.md', 'r') as fh:
     LONG_DESCRIPTION = fh.read()
@@ -53,7 +53,7 @@ CLASSIFIERS = ['Intended Audience :: Science/Research',
                'Programming Language :: Python :: 3.8']
 
 INSTALL_REQUIRES = [
-    'numpy', 'sklearn', 'liac-arff', 'imblearn'
+    'numpy', 'sklearn', 'liac-arff', 'imblearn', 'tatu'
 ]
 
 EXTRAS_REQUIRE = {

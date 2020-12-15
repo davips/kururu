@@ -1,7 +1,7 @@
 from aiuna.step.file import File
 from akangatu.abs.delimiter import Begin, End
 from akangatu.rev import Rev
-from cruipto.uuid import UUID
+from garoupa.uuid import UUID
 from kururu.tool.enhancement.attribute.pca import PCA1, PCA
 from kururu.tool.evaluation.metric import Metric, Metric2
 from kururu.tool.evaluation.partition import Partition
