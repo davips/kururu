@@ -20,19 +20,19 @@ print(data.X[:2], data.y[:2])
 
 split = Split(mode="holdout")
 print(11111, data.id, data.inner)
-data2 = split << data
+data2 = data >> split
 print(22222, data2.id, data2.inner.id)
 print(data2.X[:2], data2.y[:2])
 
 svm = SVM2()
-data3 = svm << data2
+data3 = data2 >> svm
 print("svm", data3.y[:2], data3.z[:2])
 
 met = Metric2()
-data4 = met << data3
-data = svm(data) << data
+data4 = data3 >> met
+data = data >> svm(data)
 met = Metric()
-result = met << data
+result = data >> met
 print(svm)
 
 print("iris", data.id)
@@ -154,7 +154,7 @@ import numpy as np
 np.random.seed(2)
 p = PCA1(data, n=2).sample()
 print(p, data.X.shape[1])
-d = p << data
+d = data >> p
 tr = d.inner
 print(data.id, "inner                    ", tr and tr.id, "!!!!!!!!!!!!!", d.failure, "        ", d.id)
 # print((PCA * SVM).sample().process(data))
