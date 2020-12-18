@@ -72,11 +72,6 @@ class Cache(asNoOp, DIStep):
         if fetched:
             return fetched
         self.storage.store(data, unlock=True, lazy=not self.eager_store)
-        if data.hasstream:
-            data.field_funcs_m["stream"] = map(
-                lambda d: self.storage.store(d, unlock=True, lazy=not self.eager_store),
-                data.field_funcs_m["stream"]
-            )
         return data
 
     # TODO dar tatu.unlock() dentro do data.getitem se ocorrer alguma exception que interrompa o cacheamento
