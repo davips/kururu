@@ -39,6 +39,7 @@ class Binarize(asConfigLess, DIStep):  # TODO: other fields
 
     For conversion from continuous attributes to binary attributes
     (same effect as nominal with two values) see step Discretize."""
+
     def _process_(self, data: Data):
         # REMINDER: Binarize will do nothing to numeric datasets, but the uuid still needs to be predictable.
         # So, the provided Data object should be "processed" anyway.
@@ -52,3 +53,6 @@ class Binarize(asConfigLess, DIStep):  # TODO: other fields
             return data.X
 
         return data.update(self, X=func)
+
+
+binarize = Binarize()

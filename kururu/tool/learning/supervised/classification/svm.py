@@ -42,7 +42,7 @@ class SVMo(Predictor):
         return lambda: SVC(**tmp)
 
 
-SVM = SVMo
+svm = SVMo()
 
 
 class SVMb(asMacro, SVMo):

@@ -75,3 +75,6 @@ class Split(withPartitioning, asMacro, DIStep):
         internal = In(Split1(stage="train", **self.held))
         external = Split1(stage="test", **self.held)
         return Forbid("inner") * AutoIns * external * internal
+
+
+split = Split()

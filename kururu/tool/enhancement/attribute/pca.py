@@ -58,7 +58,7 @@ class PCAb(asMacro, PCAo):
         return pca * In(AutoIns * pca * Del("inner"))
 
 
-PCA = PCAb
+pca = PCAb()
 
 
 # l = []

@@ -5,6 +5,7 @@
 # Installation
 
 # Examples
+<<evaluation>>
 
 # Essential concepts
 The kururu framework simplifies data-related tasks (like data science) 

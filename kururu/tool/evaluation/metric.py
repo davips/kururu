@@ -72,10 +72,10 @@ class Metrico(asUnitset, DIStep, withFunctionInspection):
         return -len(list(data.history))
 
 
-Metric = Metrico
+metric = Metrico
 
 
-class Metricb(asMacro, Metric):
+class Metricb(asMacro, Metrico):
     def _step_(self):
-        metric = Metric(**self.held)
+        metric = Metrico(**self.held)
         return metric * In(metric)
