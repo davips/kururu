@@ -42,7 +42,7 @@ by providing straight-forward tools for carefully chosen general concepts:
               ```
         1. a sampleable set of different sequences of steps, e.g.:
             - ```python
-              sequences = PCA * SVM(kernel="poly")  # take the subset of all combinations between all PCAs and polynomial kernel SVMs
+              sequences = pca * svm(kernel="poly")  # take the subset of all combinations between all PCAs and polynomial kernel SVMs
               sequence = ~sequences  # sample a sequence randomly, more on `~` latter
               result = data >> sequence
               ```
@@ -59,12 +59,12 @@ by providing straight-forward tools for carefully chosen general concepts:
      1. a set of steps ready to process data, using default values for the omitted parameters, e.g.: 
         - ```python
           ONGOING WORK ....
-          union = MLP + SVM(kernel="poly") 
+          union = mlp + svm(kernel="poly") 
           result = data >> ... * union *   # more on `...` and `>>` latter
           ```
      1. a sampleable set of different sequences of steps, e.g.:
         - ```python
-          sequences = PCA * SVM(kernel="poly")  # take the subset of all combinations between all PCAs and polynomial kernel SVMs
+          sequences = pca * svm(kernel="poly")  # take the subset of all combinations between all PCAs and polynomial kernel SVMs
           sequence = ~sequences  # sample a sequence randomly, more on `~` latter
           result = data >> sequence
           ```
@@ -131,8 +131,8 @@ request. The software architecture was planned taking that into account. It prov
 the implementer/IDE, and each repository with a specific well-defined purpose.
 
 # Grants
-
-Approximately 1/2 of the effort spent in the present code was kindly supported by Fapesp under grant number ...
+Part of the effort spent in the present code was kindly supported by Fapesp under supervision of
+Prof. André C. P. L. F. de Carvalho at CEPID-CeMEAI (Grants 2013/07375-0 – 2019/01735-0).
 
 # History
 
