@@ -1,4 +1,5 @@
 # kururu - data science in the classroom
+**WARNING: This project will undergo major changes in the next rewrite.**
 
 <a title="CostaPPPR / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:Sapo_Cururu-DISC_1328.jpg"><img width="256" alt="Sapo Cururu-DISC 1328" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Sapo_Cururu-DISC_1328.jpg/256px-Sapo_Cururu-DISC_1328.jpg"></a>
 
@@ -11,38 +12,43 @@
 The kururu framework simplifies data-related tasks (like data science) 
 by providing straight-forward tools for carefully chosen general concepts:
 1. **step** - kururu unifies all data-related processes under the concept of (data science) *step*
-   - steps are instances of Python classes derived from Step
-   - steps can be partially configured (e.g., `SVM(kernel="poly")`) <br>
-              or not configured at all (e.g., `SVM()` or `SVM` for short), <br>
-    which has two different meanings, depending on the use case:
-     1. a step ready to process data, using default values for the omitted parameters, e.g.: 
-        - ```python
-          svm = SVM(kernel="poly")
-          result = data >> svm  # more on `>>` latter
-          ```
-     1. a sampleable (ordered<sup>1</sup>) set of different steps, e.g.:
-        - ```python
-          svms = SVM(kernel="poly")  # take the subset of all polynomial kernel SVMs
-          svm = ~svms  # sample a single configuration randomly, more on `~` latter
-          result = data >> svm
-          ```
-1. **data** - the library aiuna (which is used by kururu) represents all input to (and output from) each step as a Data Python object
-   - when in a machine learning context, this includes both training and test sets, and the results as well
-   - *inner/outer* - steps that process two data sets expect the (*outer*) Data object to contain an *inner* data field 
-   - *stream* - steps that process several data sets (e.g., partitioned or streamed) at once expect the *outer* data to contain a *stream* field 
+    - steps are instances of Python classes derived from Step
+    - steps can be partially configured (e.g., `svm(kernel="poly")`) <br>
+      or not configured at all (e.g., `svm()` or `svm` for short), <br>
+      which has two different meanings, depending on the use case:
+        1. a step ready to process data, using default values for the omitted parameters, e.g.:
+            - ```python
+              result = data >> svm(kernel="poly")  # more on `>>` latter
+              ```
+        1. a sampleable (ordered<sup>1</sup>) set of different steps, e.g.:
+            - ```python
+              svms = svm(kernel="poly")  # take the subset of all polynomial kernel SVMs
+              svm0 = ~svms  # sample a single configuration randomly, more on `~` latter
+              result = data >> svm0
+              ```
+1. **data** - all input to (and output from) each step is a Data object
+    - when in a machine learning context, this includes both training and test sets, and the results as well
+    - *inner/outer* - steps that process two data sets expect the (*outer*) Data object to contain an *inner* data field
+    - *stream* - steps that process several data sets (e.g., partitioned or streamed) at once expect the *outer* data to
+      contain a *stream* field
 1. **operator** - steps are combined by operators and applied to Data objects through operators
-   - **product** - steps are chained by the **&ast;** operator, which, analogously to the previous *step* definition, has two different meanings, depending on the use case:
-     1. a sequence of steps (i.e., a *Product* object) ready to process data, using default values for the omitted parameters, e.g.: 
-        - ```python
-          sequence = PCA * SVM(kernel="poly") 
-          result = data >> sequence  # more on `>>` latter
-          ```
-     1. a sampleable set of different sequences of steps, e.g.:
-        - ```python
-          sequences = PCA * SVM(kernel="poly")  # take the subset of all combinations between all PCAs and polynomial kernel SVMs
-          sequence = ~sequences  # sample a sequence randomly, more on `~` latter
-          result = data >> sequence
-          ```
+    - **product** - steps are chained by the **&ast;** operator, which, analogously to the previous *step* definition,
+      has two different meanings, depending on the use case:
+        1. a sequence of steps (i.e., a *Product* object) ready to process data, using default values for the omitted
+           parameters, e.g.:
+            - ```python
+              sequence = pca * svm(kernel="poly") 
+              result = data >> sequence  # more on `>>` latter
+              ```
+        1. a sampleable set of different sequences of steps, e.g.:
+            - ```python
+              sequences = PCA * SVM(kernel="poly")  # take the subset of all combinations between all PCAs and polynomial kernel SVMs
+              sequence = ~sequences  # sample a sequence randomly, more on `~` latter
+              result = data >> sequence
+              ```
+
+**ONGOING WORK FROM HERE UNTIL THE END OF THE PAGE....**
+
    - **union** - sets of steps are united by the **+** operator, which returns a *Union* object.
     The implementation of the class Union doesn't follow the math concept of union of sets strictly.
     It can have repeated elements for three reasons: 
@@ -117,24 +123,23 @@ Suffixes: ...
 Reserved names: ...
 
 # Contribution
-Nothing clear yet, but one of the ways one can contribute is by creating their own repository (to be listed here as a partner), 
-using this repository (and/or other related ones) as a dependence.
-Monkey-patch can be used if one needs to urgently integrate a module inside the same class tree used here,
-or ask for access to this repository, or submit a pull request.
-The software architecture was planned taking that into account.
-It provides clear interface-classes to guide the implementer/IDE,
-and each repository with a specific well-defined purpose.
+
+Nothing clear yet, but one of the ways one can contribute is by creating their own repository (to be listed here as a
+partner), using this repository (and/or other related ones) as a dependence. Monkey-patch can be used if one needs to
+urgently integrate a module inside the same class tree used here, or ask for access to this repository, or submit a pull
+request. The software architecture was planned taking that into account. It provides clear interface-classes to guide
+the implementer/IDE, and each repository with a specific well-defined purpose.
 
 # Grants
-Approximately 1/3 of the effort spent here was kindly supported by Fapesp under grant number ...
+
+Approximately 1/2 of the effort spent in the present code was kindly supported by Fapesp under grant number ...
 
 # History
-Except dependencies like sklearn and other libraries, 
-the novel ideias presented here are a result of a years-long process of drafts, 
-thinking, trial/error and rewrittings from scratch in several languages from Delphi, 
-passing through Haskell, Java and Scala to Python. 
-The fundamental concepts were lightly borrowed from basic category theory concepts 
-like algebraic data structures that permeate many recent tendencies, e.g., in programming language design. 
+
+Except dependencies like sklearn and other libraries, the novel ideias presented here are a result of a years-long
+process of drafts, thinking, trial/error and rewrittings from scratch in several languages from Delphi, passing through
+Haskell, Java and Scala to Python. The fundamental concepts were lightly borrowed from basic category theory concepts
+like algebraic data structures that permeate many recent tendencies, e.g., in programming language design.
 
 For code (and academic) details refer to the following projects (few of them are usable by now):
 
@@ -142,16 +147,20 @@ For code (and academic) details refer to the following projects (few of them are
 
 2006  [Multicore NN: there was no widespread use of git at that time / retroactive repo yet to be created]
 
-2013  Functional language parser/interpreter  https://github.com/davips/lamdheal-j
+2013 Functional language parser/interpreter  https://github.com/davips/lamdheal-j
 
-2014  Machine learning library including Weka algorithms, optimized immutable data structure and models, hand-made BLAS/LAPACK neural networks, transparent distributed processing (in conjunction with active-learning-scala), plotting, evaluation, early replicability   https://github.com/davips/mls
+2014 Machine learning library including Weka algorithms, optimized immutable data structure and models, hand-made
+BLAS/LAPACK neural networks, transparent distributed processing (in conjunction with active-learning-scala), plotting,
+evaluation, early replicability   https://github.com/davips/mls
 
-2015  Active learning library   https://github.com/davips/active-learning-scala
+2015 Active learning library   https://github.com/davips/active-learning-scala
 
-2016  Thesis and dataset generation and visualization   https://github.com/davips/tese    https://github.com/davips/knowledge-boundary    https://github.com/davips/image2arff
+2016 Thesis and dataset generation and
+visualization   https://github.com/davips/tese    https://github.com/davips/knowledge-boundary    https://github.com/davips/image2arff
 
-2018  Gaussian processses   https://github.com/davips/surface
+2018 Gaussian processses   https://github.com/davips/surface
 
-2019  Client to generate reports from stored results  https://github.com/davips/mysql2csv
+2019 Client to generate reports from stored results  https://github.com/davips/mysql2csv
 
-2020  Python project where previous attempts and evolving ideias were tested    https://github.com/davips/pjml-may_archived
+2020 Python project where previous attempts and evolving ideias were
+tested    https://github.com/davips/pjml-may_archived

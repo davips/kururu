@@ -6,13 +6,12 @@
 # Installation
 
 # Examples
-
 <details>
 <summary>Evaluated training</summary>
 <p>
 
 ```python3
-# Import available tools. Tip: when working on a less exploratory code (e.g., a library) you may want to avoid using "import *".
+
 from aiuna import *
 from kururu import *
 
@@ -34,28 +33,24 @@ print(d2.r)
 </details>
 
 # Essential concepts
-
-The kururu framework simplifies data-related tasks (like data science)
+The kururu framework simplifies data-related tasks (like data science) 
 by providing straight-forward tools for carefully chosen general concepts:
-
 1. **step** - kururu unifies all data-related processes under the concept of (data science) *step*
     - steps are instances of Python classes derived from Step
-    - steps can be partially configured (e.g., `SVM(kernel="poly")`) <br>
-      or not configured at all (e.g., `SVM()` or `SVM` for short), <br>
+    - steps can be partially configured (e.g., `svm(kernel="poly")`) <br>
+      or not configured at all (e.g., `svm()` or `svm` for short), <br>
       which has two different meanings, depending on the use case:
         1. a step ready to process data, using default values for the omitted parameters, e.g.:
             - ```python
-          svm = SVM(kernel="poly")
-          result = data >> svm  # more on `>>` latter
-          ```
+              result = data >> svm(kernel="poly")  # more on `>>` latter
+              ```
         1. a sampleable (ordered<sup>1</sup>) set of different steps, e.g.:
             - ```python
-          svms = SVM(kernel="poly")  # take the subset of all polynomial kernel SVMs
-          svm = ~svms  # sample a single configuration randomly, more on `~` latter
-          result = data >> svm
-          ```
-1. **data** - the library aiuna (which is used by kururu) represents all input to (and output from) each step as a Data
-   Python object
+              svms = svm(kernel="poly")  # take the subset of all polynomial kernel SVMs
+              svm0 = ~svms  # sample a single configuration randomly, more on `~` latter
+              result = data >> svm0
+              ```
+1. **data** - all input to (and output from) each step is a Data object
     - when in a machine learning context, this includes both training and test sets, and the results as well
     - *inner/outer* - steps that process two data sets expect the (*outer*) Data object to contain an *inner* data field
     - *stream* - steps that process several data sets (e.g., partitioned or streamed) at once expect the *outer* data to
@@ -66,50 +61,52 @@ by providing straight-forward tools for carefully chosen general concepts:
         1. a sequence of steps (i.e., a *Product* object) ready to process data, using default values for the omitted
            parameters, e.g.:
             - ```python
-          sequence = PCA * SVM(kernel="poly") 
-          result = data >> sequence  # more on `>>` latter
-          ```
+              sequence = pca * svm(kernel="poly") 
+              result = data >> sequence  # more on `>>` latter
+              ```
         1. a sampleable set of different sequences of steps, e.g.:
             - ```python
-          sequences = PCA * SVM(kernel="poly")  # take the subset of all combinations between all PCAs and polynomial kernel SVMs
-          sequence = ~sequences  # sample a sequence randomly, more on `~` latter
-          result = data >> sequence
-          ```
-    - **union** - sets of steps are united by the **+** operator, which returns a *Union* object. The implementation of
-      the class Union doesn't follow the math concept of union of sets strictly. It can have repeated elements for three
-      reasons:
-      there is no gain in enforcing such math requirement; it can be useful in some scenario involving the *stream*
-      field where the repetition is actually needed; and, more importantly, it is ordered (this applies to all sets if
-      steps also). Like any Step object, Union has two different use cases:
-        1. a set of steps ready to process data, using default values for the omitted parameters, e.g.:
-            - ```python
+              sequences = PCA * SVM(kernel="poly")  # take the subset of all combinations between all PCAs and polynomial kernel SVMs
+              sequence = ~sequences  # sample a sequence randomly, more on `~` latter
+              result = data >> sequence
+              ```
+
+**ONGOING WORK FROM HERE UNTIL THE END OF THE PAGE....**
+
+   - **union** - sets of steps are united by the **+** operator, which returns a *Union* object.
+    The implementation of the class Union doesn't follow the math concept of union of sets strictly.
+    It can have repeated elements for three reasons: 
+    there is no gain in enforcing such math requirement;
+    it can be useful in some scenario involving the *stream* field where the repetition is actually needed;
+    and, more importantly, it is ordered (this applies to all sets if steps also). 
+    Like any Step object, Union has two different use cases:
+     1. a set of steps ready to process data, using default values for the omitted parameters, e.g.: 
+        - ```python
           ONGOING WORK ....
           union = MLP + SVM(kernel="poly") 
           result = data >> ... * union *   # more on `...` and `>>` latter
           ```
-        1. a sampleable set of different sequences of steps, e.g.:
-            - ```python
+     1. a sampleable set of different sequences of steps, e.g.:
+        - ```python
           sequences = PCA * SVM(kernel="poly")  # take the subset of all combinations between all PCAs and polynomial kernel SVMs
           sequence = ~sequences  # sample a sequence randomly, more on `~` latter
           result = data >> sequence
           ```
-
-<sup>1</sup> *Not important for the context, but it is worth to mention it is an ordered set, because the mathematical
-definition of sets has no ordering. We use the term "set" instead of list to avoid the need to explicitly borrow all the
-needed concepts related to set operations.*
+<sup>1</sup> *Not important for the context, but it is worth to mention it is an ordered set, 
+because the mathematical definition of sets has no ordering.
+We use the term "set" instead of list to avoid the need to explicitly borrow all the needed
+concepts related to set operations.*
 
 # Data exploration versus machine learning
-
-Whether in a console (e.g., *ipython*) or a temporary script (e.g., *jupyter notebooks*), sometimes one needs to easily
-manipulate data, or to easily set up a machine learning workflow. To fit the needs of both distinct use cases (lightly
-leaning towards the writing of workflows), kururu provides step suffixes. Some representative examples are given in the
-following table where
-
+Whether in a console (e.g., *ipython*) or a temporary script (e.g., *jupyter notebooks*), sometimes one needs to easily manipulate data, 
+or to easily set up a machine learning workflow.
+To fit the needs of both distinct use cases (lightly leaning towards the writing of workflows), kururu provides step suffixes.
+Some representative examples are given in the following table where
 - **XXX_** means the step XXX will be trained and tested on outer<sup>2</sup> data (useful for data exploration);
 - in all other cases, XXX will be trained on inner data:
-    - **XXXi** means XXX tested on **inner** data
-    - **XXXo** means XXX tested on **outer** data
-    - **XXXb** means XXX tested on both **inner** and **outer** data
+  - **XXXi** means XXX tested on **inner** data 
+  - **XXXo** means XXX tested on **outer** data 
+  - **XXXb** means XXX tested on both **inner** and **outer** data 
 
 Use case            | Name                          | Shorthand <br>(if any) | Suffixed Form | Training set  | Test set(s)   | 
  ---                | ---                           | ---           |  ---          | ---           | ---           |
@@ -118,11 +115,10 @@ machine learning    | Noise Reduction               | NR            | NRi       
 machine learning    | Support Vector Machines       | SVM           | SVMo          | inner         | outer         |
 machine learning    | Principal Component Analisys  | PCA           | PCAb          | inner         | both          |
 
-<sup>2</sup> *Please note that, to simplify the terminology across the documentation, the Data object is called "outer"
-even if it has no inner field.*
-
-Finally, for completeness, the other meaningful versions of the steps presented in the previous table are now also
-included as follows.
+<sup>2</sup> *Please note that, to simplify the terminology across the documentation, 
+the Data object is called "outer" even if it has no inner field.* 
+   
+Finally, for completeness, the other meaningful versions of the steps presented in the previous table are now also included as follows.
 
 Use case            | Name                          | Class to use  | Training set  | Test set(s)   | 
  ---                | ---                           | ---           |  ---          | ---           |
@@ -133,14 +129,16 @@ machine learning    | Noise Reduction<sup>3</sup>   | NR            | inner     
 machine learning    | Support Vector Machines       | SVM           | inner         | outer         |
 machine learning    | Support Vector Machines       | SVMb          | inner         | both          |
 
-<sup>3</sup> *Some of the steps (e.g., NR) may not implement the XXXb (e.g., NRb) version when it is not applicable.*
 
-# Implementing custom Step classes
+<sup>3</sup> *Some of the steps (e.g., NR) may not implement the XXXb (e.g., NRb) version 
+when it is not applicable.* 
 
-All fields that update a Data object should be lazy, i.e. should be a 'callable' without args. An easy way to do that is
-to put `lambda:` before the value intended to be returned. However, usually the return value is dependent upon fields
-from a previous Data object. They should be accessed only from within the callable/lambda for a proper (iterator-safe)
-implementation. Example:
+# Implementing custom Step classes 
+All fields that update a Data object should be lazy, i.e. should be a 'callable' without args.
+An easy way to do that is to put `lambda:` before the value intended to be returned.
+However, usually the return value is dependent upon fields from a previous Data object.
+They should be accessed only from within the callable/lambda for a proper (iterator-safe) implementation.
+Example:
 <details>
 <summary>Creating a custom step</summary>
 <p>
@@ -175,9 +173,9 @@ class MyAdditionStep(DIStep):
 </details>  
 
 # Field name rules
-
-A field named with a single letter has a lower case shortcut for automatic conversion from matrix to scalar/vector and
-vice versa. Suffixes: ... Reserved names: ...
+A field named with a single letter has a lower case shortcut for automatic conversion from matrix to scalar/vector and vice versa.
+Suffixes: ...
+Reserved names: ...
 
 # Contribution
 
@@ -189,7 +187,7 @@ the implementer/IDE, and each repository with a specific well-defined purpose.
 
 # Grants
 
-Approximately 1/3 of the effort spent here was kindly supported by Fapesp under grant number ...
+Approximately 1/2 of the effort spent in the present code was kindly supported by Fapesp under grant number ...
 
 # History
 
