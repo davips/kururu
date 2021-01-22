@@ -56,7 +56,7 @@ class Sampler(DIStep, ABC):
                     "Y": lambda: self.sampled(data)[1]}
         return data.update(self, **matrices)
 
-    @globalcache
+    # @globalcache
     def sampled(self, data):
         """Sampled version of matrices.
 

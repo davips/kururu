@@ -44,7 +44,7 @@ class withPartitioning:
         self.splits = config["splits"]
         self.fields = config["fields"].split(",")
 
-    @globalcache
+    # @globalcache
     def partitionings(self, data):
         X, y = data.Xy  # TODO: add other scenarios beyond classification?
         return list(self.algorithm.split(X=X, y=y))

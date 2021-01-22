@@ -35,7 +35,7 @@ class Transformer(DDStep, ABC):
         newX = lambda: self.model(data.inner).transform(data.X)
         return data.update(self, X=newX)
 
-    @globalcache
+    # @globalcache
     def model(self, data):
         """Attribute transformer based on the training set.
 

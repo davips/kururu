@@ -37,7 +37,7 @@ class Predictor(DDStep, ABC):
             matrices["P"] = lambda: self.model(data.inner).predict_proba(data.X)
         return data.update(self, **matrices)
 
-    @globalcache
+    # @globalcache
     def model(self, data):
         """Predictor model induced on the training set.
 
