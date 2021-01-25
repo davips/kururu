@@ -1,3 +1,6 @@
+![test](https://github.com/davips/kururu/workflows/test/badge.svg)
+[![codecov](https://codecov.io/gh/davips/kururu/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/kururu)
+
 # kururu - data science in the classroom
 **WARNING: This project will undergo major changes in the next rewrite.**
 
@@ -6,8 +9,8 @@
 # Installation
 
 # Examples
+**Evaluated training**
 <details>
-<summary>Evaluated training</summary>
 <p>
 
 ```python3
@@ -23,11 +26,11 @@ steps = binarize * split * pca * svm * metric
 # After the Data object goes through the steps, its last version has the test accuracy value at 'r'.
 d2 = d >> steps
 print(d2.r)
+"""
+[0.56698565]
+"""
 ```
 
-```
-[0.56698565]
-```
 
 </p>
 </details>
@@ -139,8 +142,8 @@ An easy way to do that is to put `lambda:` before the value intended to be retur
 However, usually the return value is dependent upon fields from a previous Data object.
 They should be accessed only from within the callable/lambda for a proper (iterator-safe) implementation.
 Example:
+**Creating a custom step**
 <details>
-<summary>Creating a custom step</summary>
 <p>
 
 ```python3
@@ -166,8 +169,6 @@ class MyAdditionStep(DIStep):
 
 ```
 
-```
-```
 
 </p>
 </details>  

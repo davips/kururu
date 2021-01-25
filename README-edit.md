@@ -1,3 +1,6 @@
+![test](https://github.com/davips/kururu/workflows/test/badge.svg)
+[![codecov](https://codecov.io/gh/davips/kururu/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/kururu)
+
 # kururu - data science in the classroom
 **WARNING: This project will undergo major changes in the next rewrite.**
 

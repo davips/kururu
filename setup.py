@@ -23,8 +23,6 @@
 
 import setuptools
 
-import kururu
-
 NAME = "kururu"
 
 VERSION = "0.2101.0"
@@ -77,6 +75,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     setup_requires=SETUP_REQUIRES,
     url=URL,
+    # scripts=['xxxxx']
 )
 
-package_dir = {'': 'kururu'}  # For IDEs like Intellij to recognize the package.
+package_dir = {'': 'kururu'}  # So IDEs (e.g. Intellij) can recognize the working dir when running with ctr+shift+F10.

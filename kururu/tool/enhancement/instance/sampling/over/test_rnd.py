@@ -24,6 +24,8 @@
 
 from unittest import TestCase
 
+from pandas import DataFrame
+
 from aiuna.content.root import Root
 from aiuna.step.dataset import Dataset
 
@@ -37,7 +39,7 @@ class Test(TestCase):
         iris = Root >> Dataset()
         truncated_iris = iris >> Slice(last=119)
         rebalanced_iris = truncated_iris >> ROS_
-        self.assertEqual(50, rebalanced_iris.Y_pd.value_counts()["virginica"][0])
+        self.assertEqual(50, DataFrame(rebalanced_iris.Y).value_counts()["virginica"][0])
         larger_iris = iris >> ROS_(strategy={"virginica": 100, "versicolor": 50, "setosa": 50})
         self.assertEqual(200, len(larger_iris.X))
 
@@ -45,6 +47,6 @@ class Test(TestCase):
         iris = Root >> (Dataset() * AutoIns)
         truncated_iris = iris >> Slice(last=119)
         rebalanced_iris = truncated_iris >> ROS
-        self.assertEqual(50, rebalanced_iris.inner.Y_pd.value_counts()["virginica"][0])
+        self.assertEqual(50, DataFrame(rebalanced_iris.inner.Y).value_counts()["virginica"][0])
         larger_iris = iris >> ROS(strategy={"virginica": 100, "versicolor": 50, "setosa": 50})
         self.assertEqual(200, len(larger_iris.inner.X))

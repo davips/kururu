@@ -33,7 +33,7 @@ def set_leaf(tree, branches, leaf):
     Example:
     >>> t = {}
     >>> set_leaf(t, ['b1','b2','b3'], 'new_leaf')
-    >>> print t
+    >>> print(t)
     {'b1': {'b2': {'b3': 'new_leaf'}}}
 
     https://stackoverflow.com/a/12389499/9681577
