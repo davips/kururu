@@ -29,5 +29,6 @@ class Hand(DIStep):
         super().__init__(field=field)
 
     def _process_(self, data):
-        dic = {self.field: value}
-        return data.update(self, **dic)
+        # dic = {self.field: value}
+        # return data.update(self, **dic)
+        raise NotImplemented()
