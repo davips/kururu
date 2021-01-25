@@ -27,7 +27,7 @@ import kururu
 
 NAME = "kururu"
 
-VERSION = "0.20.12a"
+VERSION = "0.2101.0"
 
 AUTHOR = 'Davi Pereira-Santos'
 
