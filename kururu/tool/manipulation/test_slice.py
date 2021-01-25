@@ -35,4 +35,4 @@ from kururu.tool.manipulation.slice import Slice
 class TestSlice(TestCase):
     def test__process_(self):
         truncated_iris = Root >> (Dataset() * Slice(last=119))
-        self.assertEqual(20, DataFrame(truncated_iris.Y).value_counts()["virginica"][0])
+        self.assertEqual(20, DataFrame(truncated_iris.y).value_counts()["virginica"])
