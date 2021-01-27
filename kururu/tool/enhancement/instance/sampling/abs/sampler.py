@@ -44,6 +44,8 @@
 
 from abc import ABC, abstractmethod
 
+from sklearn.base import BaseEstimator
+
 from akangatu.transf.config import globalcache
 
 from akangatu.distep import DIStep
@@ -61,7 +63,10 @@ class Sampler(DIStep, ABC):
         """Sampled version of matrices.
 
         This cached method is needed because more than one matrix is calculated lazily inside process()."""
-        return self.algorithm.fit_resample(*data.Xy)
+        if isinstance(self.algorithm, BaseEstimator):
+            return self.algorithm.fit_resample(*data.Xy)
+        else:
+            return self.algorithm(*data.Xy)
 
     @property
     def algorithm(self):
