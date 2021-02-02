@@ -36,13 +36,18 @@ def setcache(storage, eager_store=True):
     CACHE["cache"] = Cache(storage, eager_store=eager_store)
 
 
+def closecache():
+    from akangatu.transf.config import CACHE
+    CACHE["cache"].storage.close()
+
+
 class Cache(asNoOp, DIStep):
     storages = {}
 
     #     ???? ver se vai haver cache-container.
     #     o único motivo seria caso a montagem dos campos lazy tenha muito overhead
     def __init__(self, storage="sqlite", eager_store=True, seed=0):  # TODO: what todo with seed here?
-        super().__init__(storage=storage, eager_store=eager_store, seed=seed)
+        DIStep.__init__(self, storage=storage, eager_store=eager_store, seed=seed)
         if storage == "pickle":
             storage = Pickle(close_when_idle=True)
         elif storage == "sqlite":
