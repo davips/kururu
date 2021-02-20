@@ -21,7 +21,7 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 
-from functools import lru_cache, cached_property
+from functools import lru_cache
 
 
 class withFunctionInspection:
