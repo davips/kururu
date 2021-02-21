@@ -44,7 +44,7 @@ class PCAo(Transformer):
     def translate(self, exception, data):
         msg = str(exception)
         if "n_components=" in msg and "must be between 0 and min(n_samples, n_features)=" in msg:
-            return f"n:{self.n} > Xw{data.Xw} or n:{self.n} > Xh{data.Xh}"
+            return f"n:{self.n}"  # > Xw({data.X.shape[1]}) or n:{self.n} > Xh({data.X.shape[0]})"
 
     def _algorithm_func(self):
         return lambda: PCAsk(n_components=self.n, random_state=self.seed)
@@ -59,7 +59,6 @@ class PCAb(asMacro, PCAo):
 
 
 pca = PCAb()
-
 
 # l = []
 # for i in range(1, 28):
