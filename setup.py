@@ -25,7 +25,7 @@ import setuptools
 
 NAME = "kururu"
 
-VERSION = "0.2102.9"
+VERSION = "0.2102.10"
 
 AUTHOR = 'Davi Pereira-Santos'
 
