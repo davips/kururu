@@ -47,7 +47,7 @@ class Cache(asNoOp, DIStep):
     #     ???? ver se vai haver cache-container.
     #     o único motivo seria caso a montagem dos campos lazy tenha muito overhead
     def __init__(self, storage="sqlite", eager_store=True, ignorelock=True, seed=0):  # TODO: what todo with seed here?
-        DIStep.__init__(self, storage=storage, eager_store=eager_store, seed=seed)
+        DIStep.__init__(self, storage=storage, eager_store=eager_store, ignorelock=ignorelock, seed=seed)
         if storage == "pickle":
             storage = Pickle(close_when_idle=True)
         elif storage == "sqlite":
@@ -59,15 +59,16 @@ class Cache(asNoOp, DIStep):
         elif "://" in storage:
             storage = Tatu(url=storage, close_when_idle=True)
         else:
-            print("Unknown storage:", self.storage)
+            print("Unknown storage:", storage)
             exit()
         if storage.id not in self.storages:
             self.storages[storage.id] = storage
         self.storage: Storage = self.storages[storage.id]
         self.eager_store = eager_store
+        self.ignorelock = ignorelock
 
     def _process_(self, data: Data):
-        fetched = self.storage.fetch(data, lock=True, ignorelock=True)
+        fetched = self.storage.fetch(data, lock=True, ignorelock=self.ignorelock)
         if fetched:
             return fetched
         self.storage.store(data, unlock=True, lazy=not self.eager_store)
