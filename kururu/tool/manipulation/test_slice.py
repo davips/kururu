@@ -28,11 +28,10 @@ from pandas import DataFrame
 
 from aiuna.content.root import Root
 from aiuna.step.dataset import Dataset
-
 from kururu.tool.manipulation.slice import Slice
 
 
 class TestSlice(TestCase):
     def test__process_(self):
-        truncated_iris = Root >> (Dataset() * Slice(last=119))
+        truncated_iris = Root >> (Dataset() * Slice(code=":120"))
         self.assertEqual(20, DataFrame(truncated_iris.y).value_counts()["virginica"])

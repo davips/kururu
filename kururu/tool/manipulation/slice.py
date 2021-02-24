@@ -27,23 +27,13 @@ from akangatu.distep import DIStep
 class Slice(DIStep):
     """Select rows(or columns) inside a given interval, including limits."""
 
-    def __init__(self, first=0, last=5, fields="X,Y"):
+    def __init__(self, code=":5", fields="X,Y"):
         # REMINDER: super call with locals lead to infinite loop
-        super().__init__(first=first, last=last, fields=fields)
-        self.first, self.last = first, last
+        super().__init__(code=code, fields=fields)
+        # https://stackoverflow.com/a/51105983/9681577
+        self.slice = slice(*map(lambda x: int(x.strip()) if x.strip() else None, code.split(':')))
         self.fields = fields.split(",")
 
     def _process_(self, data):
-        first = self.first
-        last = self.last
-        if first < 0:
-            if last >= 0:
-                print("First cannot be negative while last is non negative:", first, last)
-            first -= 1
-            last -= 1
-
-        if first == last:
-            newfields = {k: (lambda k_: lambda: data[k_][first].reshape(1, -1))(k) for k in self.fields}
-        else:
-            newfields = {k: (lambda k_: lambda: data[k_][first:last + 1])(k) for k in self.fields}
+        newfields = {k: (lambda k_: lambda: data[k_][self.slice])(k) for k in self.fields}
         return data.update(self, **newfields)
