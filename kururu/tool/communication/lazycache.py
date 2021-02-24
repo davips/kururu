@@ -74,7 +74,7 @@ class Cache(asNoOp, DIStep):
         fetched = self.storage.fetch(data, lock=True, ignorelock=self.ignorelock)
         if fetched:
             return fetched
-        self.storage.store(data, unlock=True, lazy=not self.eager_store)
+        self.storage.store(data, unlock=True, lazy=not self.eager_store, ignoredup=True)  # TODO: ignoredup?
         return data
 
     # TODO dar tatu.unlock() dentro do data.getitem se ocorrer alguma exception que interrompa o cacheamento
