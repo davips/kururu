@@ -59,6 +59,7 @@ class Cache(asNoOp, DIStep):
         elif "://" in storage:
             storage = Tatu(url=storage, close_when_idle=True)
         else:
+            print("Unknown storage:", type(storage))
             print("Unknown storage:", storage)
             exit()
         if storage.id not in self.storages:
