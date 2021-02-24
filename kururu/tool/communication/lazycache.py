@@ -67,6 +67,7 @@ class Cache(asNoOp, DIStep):
         self.storage: Storage = self.storages[storage.id]
         self.eager_store = eager_store
         self.ignorelock = ignorelock
+        setcache(self.storage)
 
     def _process_(self, data: Data):
         fetched = self.storage.fetch(data, lock=True, ignorelock=self.ignorelock)
