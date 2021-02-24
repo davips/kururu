@@ -21,9 +21,6 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 #
-from functools import partial
-
-from imblearn.under_sampling import RandomUnderSampler as imbRUS
 from sklearn.utils import resample
 
 from akangatu.abs.mixin.macro import asMacro
@@ -34,15 +31,19 @@ from kururu.tool.enhancement.instance.sampling.abs.sampler import Sampler
 class Sample_(Sampler):
     """Reduce the occurrence of all classes proportionally (or not)."""
 
-    def __init__(self, n=100, replace=False, seed=0):
-        super().__init__(n=n, replace=replace, seed=seed)
+    def __init__(self, n=100, replace=False, seed=0, ignore_badarg=False):
+        super().__init__(n=n, replace=replace, seed=seed, ignore_badarg=ignore_badarg)
         self.n = n
         self.replace = replace
         self.seed = seed
+        self.ignore_badarg = ignore_badarg
 
     def _algorithm_func(self):
-        return lambda: \
-            lambda X, y: resample(X, y, n_samples=self.n, stratify=y, replace=self.replace, random_state=self.seed)
+        def f(X, y):
+            n = min(self.n, X.shape[0]) if self.ignore_badarg else self.n
+            return resample(X, y, n_samples=n, stratify=y, replace=self.replace, random_state=self.seed)
+
+        return lambda: f
 
 
 class Sample(asMacro, Sample_):
