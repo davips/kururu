@@ -28,10 +28,14 @@ class Slice(DIStep):
     """Select rows(or columns) inside a given interval, including limits."""
 
     def __init__(self, code=":5", fields="X,Y"):
-        # REMINDER: super call with locals lead to infinite loop
+        # REMINDER: super call with locals leads to infinite loop
         super().__init__(code=code, fields=fields)
+
         # https://stackoverflow.com/a/51105983/9681577
-        self.slice = slice(*map(lambda x: int(x.strip()) if x.strip() else None, code.split(':')))
+        def toslice(txt):
+            return slice(*map(lambda x: int(x.strip()) if x.strip() else None, txt.split(':')))
+
+        self.slice = [toslice(txt) for txt in code.split(",")]
         self.fields = fields.split(",")
 
     def _process_(self, data):
