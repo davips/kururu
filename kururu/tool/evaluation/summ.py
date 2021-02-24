@@ -61,7 +61,7 @@ class Summ(asFixedParam, DIStep, withFunctionInspection):
             return {"data": data_, "inc": linalghelper.mat2vec(v)}
 
         def end_func(acc):
-            return [array(f(acc)) for f in self.selected]
+            return array([f(acc) for f in self.selected])
 
         iterator = Accumulator(lambda: data.stream, start=[], step_func=step_func, end_func=end_func)
         # _S indicates that field S after Reduce will trigger stream concumption and call S
