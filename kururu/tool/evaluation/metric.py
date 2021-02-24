@@ -61,7 +61,7 @@ class Metrico(asUnitset, DIStep, withFunctionInspection):
 
     def _process_(self, data: Data):
         newr = lambda: np.array([f(data, self.target, self.prediction) for f in self.selected])
-        return data.update(self, r=newr)
+        return data.update(self, R=newr)
 
     @staticmethod
     def _fun_accuracy(data, target, prediction):

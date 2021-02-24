@@ -24,13 +24,13 @@
 from numpy import mean, array
 
 from akangatu import linalghelper
+from akangatu.abs.mixin.fixedparam import asFixedParam
 from akangatu.abs.mixin.macro import asMacro
 from akangatu.distep import DIStep
 from akangatu.fieldchecking import Forbid
 from kururu.tool.evaluation.mixin.functioninspection import withFunctionInspection
 from kururu.tool.manipulation.copy_ import Copy
 from kururu.tool.stream.internal.accumulator import Accumulator
-from akangatu.abs.mixin.fixedparam import asFixedParam
 
 
 class Summ(asFixedParam, DIStep, withFunctionInspection):
@@ -55,16 +55,17 @@ class Summ(asFixedParam, DIStep, withFunctionInspection):
 
         def step_func(data_, acc):
             if self.stage == "train":
-                v = data_.inner.field(self.field, context=self)
+                v = data_.inner[self.field]
             else:
-                v = data_.field(self.field, context=self)
+                v = data_[self.field]
             return {"data": data_, "inc": linalghelper.mat2vec(v)}
 
         def end_func(acc):
             return [array(f(acc)) for f in self.selected]
 
         iterator = Accumulator(lambda: data.stream, start=[], step_func=step_func, end_func=end_func)
-        return data.update(self, stream=lambda: iterator, S=lambda: iterator.result)
+        # _S indicates that field S after Reduce will trigger stream concumption and call S
+        return data.update(self, stream=lambda: iterator, _S=lambda: iterator.result)
 
     @staticmethod
     def _fun_mean(values):

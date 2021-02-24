@@ -67,7 +67,7 @@ class Accumulator(Iterator):
         self.iterator = self.iterator() if islazy(self.iterator) else self.iterator
         try:
             for data in self.iterator:
-                dic={"data":data}
+                dic = {"data": data}
                 if not self.stream_exception:
                     dic = self.step_func(data, acc)
                     # if step is XXXXX:

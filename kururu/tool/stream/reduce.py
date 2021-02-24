@@ -40,23 +40,37 @@ class Reduce(asConfigLess, DIStep):
                     print(frameinfo.f_back.f_code.co_filename, " Line:", frameinfo.f_back.f_lineno)
                     print(*arg)
 
-                debug_print("\nHistory: " + str(data.history) + f"\n{self.name} needs a Data object containing a stream.")
+                debug_print(
+                    "\nHistory: " + str(data.history) + f"\n{self.name} needs a Data object containing a stream.")
                 print("Missing stream inside", data.id)
                 exit()
 
-            # print("começa redu")
             failures = []  # TODO:checar se falhados estão sendo tratados/interrompidos no Step (caso geral)
             for d in data.stream:
                 # print("consome", d.id)
                 if d.failure:
-                    print("falhou", d.failure)
+                    print("Failure:", d.failure)
                     failures.append(d.failure)
-            print("terminou")
             if failures:
                 raise FailureAtStream(data.failed([], "; ".join(failures)))
             return
 
-        return data.update(self, stream=consume)
+        def f(lazyval):
+            def func():
+                consume()
+                return lazyval()
+
+            return func
+
+        dic = {}
+        for k, v in data.field_funcs_m.items():
+            if k.startswith("_"):
+                dic[k[1:]] = f(v)
+                dic[k] = None
+            elif k == "stream":
+                dic[k] = None
+
+        return data.update(self, **dic)
 
     def translate(self, exception, data):
         if isinstance(exception, FailureAtStream):

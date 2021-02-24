@@ -35,7 +35,7 @@ class Slice(DIStep):
         def toslice(txt):
             return slice(*map(lambda x: int(x.strip()) if x.strip() else None, txt.split(':')))
 
-        self.slice = [toslice(txt) for txt in code.split(",")]
+        self.slice = tuple(toslice(txt) for txt in code.split(","))
         self.fields = fields.split(",")
 
     def _process_(self, data):
