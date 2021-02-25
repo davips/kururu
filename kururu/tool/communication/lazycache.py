@@ -42,7 +42,7 @@ def closecache():
 
 
 class Cache(asNoOp, DIStep):
-    storages = {}
+    # storages = {}
 
     #     ???? ver se vai haver cache-container.
     #     o único motivo seria caso a montagem dos campos lazy tenha muito overhead
@@ -62,9 +62,10 @@ class Cache(asNoOp, DIStep):
             print("Unknown storage:", type(storage))
             print("Unknown storage:", storage)
             exit()
-        if storage.id not in self.storages:
-            self.storages[storage.id] = storage
-        self.storage: Storage = self.storages[storage.id]
+        # if storage.id not in self.storages:
+        #     self.storages[storage.id] = storage
+        # self.storage: Storage = self.storages[storage.id]
+        self.storage: Storage = storage
         self.eager_store = eager_store
         self.ignorelock = ignorelock
         if _setcache:
