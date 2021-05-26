@@ -214,7 +214,7 @@ evaluation, early replicability   https://github.com/davips/mls
 2016 Thesis and dataset generation and
 visualization   https://github.com/davips/tese    https://github.com/davips/knowledge-boundary    https://github.com/davips/image2arff
 
-2018 Gaussian processses   https://github.com/davips/surface
+2018 Gaussian processes   https://github.com/davips/surface
 
 2019 Client to generate reports from stored results  https://github.com/davips/mysql2csv
 
