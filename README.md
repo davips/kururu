@@ -1,8 +1,9 @@
 ![test](https://github.com/davips/kururu/workflows/test/badge.svg)
 [![codecov](https://codecov.io/gh/davips/kururu/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/kururu)
 
+# [obsolete, currently in use only by the prototipic version of Oka repo] 
+
 # kururu - data science in the classroom
-**WARNING: This project will undergo major changes in the next rewrite.**
 
 <a title="CostaPPPR / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:Sapo_Cururu-DISC_1328.jpg"><img width="256" alt="Sapo Cururu-DISC 1328" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Sapo_Cururu-DISC_1328.jpg/256px-Sapo_Cururu-DISC_1328.jpg"></a>
 
